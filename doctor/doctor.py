@@ -12,6 +12,18 @@ from typing import (
   Union,
 )
 
+
+class TeXDefaults():
+  """
+  """
+  def __init__(
+    self,
+    pluto_blue: str = "\color{ONSblue}",
+    pluto_green: str = "\color{ONSgreen}"
+  ):
+    self.pluto_blue = pluto_blue
+    self.pluto_green = pluto_green
+
 class TabularBuilder():
   """
   Comprehensive table builder that outputs LaTeX markup
