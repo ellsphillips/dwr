@@ -1,0 +1,58 @@
+\noindent\begin{tikzpicture}[
+		hatch distance/.store in=\hatchdistance,
+		hatch distance=10pt,
+		hatch thickness/.store in=\hatchthickness,
+		hatch thickness=2pt
+	]
+	%
+	\begin{axis}[%
+		% Abstract
+			axis x line=bottom,
+			axis y line=middle,
+			axis line style={-stealth, shorten >=-2mm},
+			hide obscured x ticks=false,
+			x label style={at={(axis description cs:.5,-.1)},anchor=north},
+			y label style={at={(axis description cs:-.075,.5)},rotate=90,anchor=south},
+			axis on top,
+			width=.975\textwidth,
+			height=\axisdefaultheight,
+			legend style={at={(1,1)},anchor=north east,font=\small,line width=1pt,mark size=.6pt,rounded corners=1pt},
+		% Fitting data to boundaries
+			clip mode=individual,
+			enlarge y limits={abs=0.4pt},
+		% Variables
+			xlabel={Time (weeks)},
+			ylabel={Independent variable},
+			xmin=0,
+		]
+		
+		\addplot[
+			gray!25,
+			quiver={v=\thisrow{difference}},
+			forget plot
+		] table[x=time, y=data1] {src/graphs/timeseries.dat};
+		
+		\addplot[
+			ONSblue,
+			thick,
+			mark=none
+		] table[x=time, y=data1] {src/graphs/timeseries.dat};
+		\addlegendentry{data1}
+		
+		\addplot[
+			ONSgreen,
+			thick,
+			mark=none
+		] table[x=time, y=data2] {src/graphs/timeseries.dat};
+		\addlegendentry{data2}
+		
+		\draw[
+			pattern=flexible hatch,
+			hatch distance=10pt,
+			hatch thickness=.5pt,
+			pattern color = ONSpink!20,
+			draw = none
+		]
+		(0, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (43, \pgfkeysvalueof{/pgfplots/ymax});
+	\end{axis}
+\end{tikzpicture}
