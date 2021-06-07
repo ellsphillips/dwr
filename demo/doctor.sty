@@ -1,0 +1,291 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pluto}[2021/01/25 version 1.0]
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage[]{tcolorbox}
+\usepackage[english]{babel}
+\usepackage[document]{ragged2e}
+\usepackage{tkz-euclide}
+%\usetkzobj{all}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{fp}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{varwidth}
+\usepackage{blindtext}
+\usepackage[
+	a4paper,
+	left=2.5cm,
+	right=2.5cm,
+	bottom=3cm,
+	top=4cm
+]{geometry}
+
+\usepackage{framed}
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{intersections}
+\pgfplotsset{compat=1.12}
+
+\RequirePackage{amsmath}
+\RequirePackage[absolute]{textpos}
+\RequirePackage{tikz}
+\RequirePackage{tkz-euclide}
+\RequirePackage{fancyhdr}
+\RequirePackage{xkeyval}
+\RequirePackage{alphalph}
+\RequirePackage{ifthen}
+\RequirePackage{appendix}
+\RequirePackage{titletoc}
+\RequirePackage{etoolbox}
+\AtBeginEnvironment{appendices}{%
+  \addtocontents{toc}{\protect\gdef\protect\@chapapp{\protect\appendixname}}%\appendixname
+}
+
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{dcolumn}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{ctable}
+\usepackage{xltabular}
+
+\newcommand{\dashrule}[1][black]{%
+	\color{#1}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}\xleaders\hbox{\rule{4pt}{0pt}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}}\hfill\kern0pt%
+}
+\newcommand{\rulecolor}[1]{%
+	\def\CT@arc@{\color{#1}}%
+}
+
+
+\usepackage{underscore}
+
+\RequirePackage{assoccnt}
+\RequirePackage{totcount}
+\newtotcounter{totalchapters}
+\regtotcounter{chapter}
+\DeclareAssociatedCounters{chapter}{totalchapters} % Associate the driven counter `totalchapters` to the master counter `chapter`
+
+%%%%%%%%%%%%%%%% hyperref
+\usepackage{lipsum}
+\usepackage[verbose]{hyperref}
+\hypersetup{hidelinks}
+\addto\extrasenglish{
+	\def\sectionautorefname{Section}
+	\def\chapterautorefname{Chapter}
+}
+\setlength{\XeTeXLinkMargin}{-1pt}
+
+\newcommand{\refer}[1]{
+	\hspace{-.15em}\textcolor{ONSblue}{\bfseries Figure\ref{#1}}\hspace{-.4em}
+}
+
+\usepackage[]{helvet}
+\fontfamily{phv}\selectfont
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\definecolor{ONSgreen}{RGB}{168, 189, 58} % #a8bd3a
+\definecolor{ONSblue}{RGB}{0, 61, 89} % #003d59
+\definecolor{ONSpink}{RGB}{206, 53, 135} % #ce3587
+\definecolor{ONSorange}{RGB}{216, 66, 39} % #d84227
+\definecolor{ONSyellow}{RGB}{226, 188, 34} % #e2bc22
+
+\definecolor{XLSpeach}{RGB}{252, 228, 214} % #fce4d6
+
+\definecolor{LightGrey}{RGB}{245, 245, 245}
+\definecolor{MidGrey}{RGB}{230, 230, 230}
+\definecolor{DarkGrey}{RGB}{100, 100, 100}
+\definecolor{LightBlue}{RGB}{206, 225, 255} 
+\definecolor{LightGreen}{RGB}{210, 255, 206}
+\definecolor{ExeterBlue}{RGB}{37, 85, 158} 
+\definecolor{ExeterGreen}{RGB}{0, 155, 15}
+\definecolor{ExeterPurple}{RGB}{167, 66, 244} 
+\definecolor{LightPurple}{RGB}{240, 221, 255}
+\definecolor{ExeterOrange}{RGB}{255, 165, 30}
+\definecolor{LightOrange}{RGB}{255, 235, 206}
+\definecolor{ExeterRed}{RGB}{191, 30, 30}
+
+
+\usepackage{emptypage}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{0}% change to -1 if you don't want page numbers additive
+	\newpage
+}
+
+
+
+%%% Conditional table column highlighting
+
+\usepackage{collcell}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{hhline}
+
+
+
+\def\mcol{\multicolumn}
+
+\def\columnhighlightstyle{
+	\bfseries\itshape
+	\color{purple}
+}
+
+
+
+% Highlighting if particular value
+
+\newcommand{\columnhighlight}[3]{
+	\ifnum#1#2#3
+	\columnhighlightstyle #3
+	\else
+	#3
+	\fi
+}
+
+\newcolumntype{H}[3]{
+	>{
+		\def\wrapper{\columnhighlight{#1}{#2}}
+		\collectcell\wrapper
+	}
+	#3
+	<{
+		\endcollectcell
+	}
+}
+
+
+
+% Replace cell contents
+
+\newcommand{\columnnan}[2]{
+	\ifdim #1 pt>#2 pt
+		\textcolor{black!40}{NaN}
+	\else
+		\centering\arraybackslash\cellcolor{ONSblue!5}\textcolor{ONSblue}{\bfseries#2}
+	\fi
+}
+
+%\newcolumntype{N}[2]{
+%	>{
+%		\def\wrapper{\columnnan{#1}}
+%		\collectcell\wrapper
+%	}
+%	#2
+%	<{
+%		\endcollectcell
+%	}
+%}
+
+
+
+% Apply gradients across columns
+
+%The min, mid and max values
+\newcommand*{\MinNumber}{0.0}%
+\newcommand*{\MidNumber}{0.5}%
+\newcommand*{\MaxNumber}{1.0}%
+
+\colorlet{mincolor}{ONSblue}
+\colorlet{midcolor}{ONSgreen}
+\colorlet{maxcolor}{ONSyellow}
+
+%Apply the gradient macro
+\newcommand{\CellValue}{}
+\newcommand{\ApplyGradient}[1]{%
+	\ifdim #1 pt > \MidNumber pt
+		\pgfmathsetmacro{\PercentColor}{max(min(100.0*(#1 - \MidNumber)/(\MaxNumber-\MidNumber),100.0),0.00)} %
+		\renewcommand{\CellValue}{\PercentColor}
+		\colorbox{maxcolor!\PercentColor!midcolor}{\bfseries\textcolor{maxcolor!\PercentColor!midcolor}{\rule{4em}{1mm}}\color{white}#1}%
+	\else
+		\pgfmathsetmacro{\PercentColor}{max(min(100.0*(\MidNumber - #1)/(\MidNumber-\MinNumber),100.0),0.00)} %
+		\renewcommand{\CellValue}{\PercentColor}
+		\colorbox{mincolor!\PercentColor!midcolor}{\bfseries\textcolor{mincolor!\PercentColor!midcolor}{\rule{4em}{1mm}}\color{white}#1}
+	\fi
+}
+
+\newcolumntype{G}{
+	>{%
+		\collectcell\ApplyGradient%
+	}%
+	r
+	<{%
+		\endcollectcell%
+%		\cellcolor{red}%
+	}%
+}
+%\renewcommand{\arraystretch}{0}
+\setlength{\fboxsep}{2mm} % box size
+%\setlength{\tabcolsep}{0pt}
+
+
+
+\newenvironment{plutotable}[5]{
+	\small
+	\rowcolors{3}{gray!5}{}
+	\renewcommand{\arraystretch}{1.25}
+	\xltabular{\linewidth}{#2}
+	\rowcolor{white}\caption{#4}\label{table:#5} \\%
+	\toprule%
+	\rowcolor{white}#3%
+	\specialrule{.05em}{.05em}{.05em}%
+	\endfirsthead%
+	
+	\rowcolor{white}\caption[]{#4 (cont.)} \\%
+	\rowcolor{white}\multicolumn{#1}{c}{
+		\raisebox{.15em}{\resizebox{0.95\textwidth}{!}{\makebox[\textwidth]{\dashrule[black]}}}
+	} \\%
+	\rowcolor{white}#3%
+	\specialrule{.05em}{.05em}{.05em}
+	\endhead%
+	
+	\rowcolor{white}\multicolumn{#1}{r}{%
+		\multirow{2}{*}{%
+			\parbox{0.95\textwidth}{%
+				\raisebox{.15em}{\resizebox{0.95\textwidth}{!}{\makebox[\textwidth]{\dashrule[black]}}}
+				\raggedleft\footnotesize\textit{Continued on next page}
+			}
+		}
+	}
+	\endfoot%
+	
+	\bottomrule%
+	\endlastfoot%
+}{
+	\endxltabular
+}
+
+
+
+
+
+
+
+
+%%% Graphs
+
+\makeatletter
+\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+{\pgfpoint{\hatchdistance-1pt}{\hatchdistance-1pt}}%
+{
+	\pgfsetcolor{\tikz@pattern@color}
+	\pgfsetlinewidth{\hatchthickness}
+	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+	\pgfusepath{stroke}
+}
