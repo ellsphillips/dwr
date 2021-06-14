@@ -1,5 +1,4 @@
 import os
-import re
 import pandas as pd
 import numpy as np
 from typing import (
@@ -37,7 +36,7 @@ class PlotBuilder():
   def say_hello(self):
     print(self.input_string)
 
-class TabularBuilder():
+class TabularBuilder:
   """
   Comprehensive table builder that outputs LaTeX markup
   from Python data input.
@@ -325,7 +324,7 @@ def main():
     {
       'Numbers': [np.random.randint(0, 100) for i in range (10)],
       'More numbers': [np.random.randint(0, 100) for i in range (10)],
-      'Text': [word for word in "Lorem ipsum dolor sit amet consectetur adipiscing elit Curabitur nec".split()],
+      'Text': "Lorem ipsum dolor sit amet consectetur adipiscing elit Curabitur nec".split(),
       'Mash': [
         "iswdufvbouwesdbnvg",
         "abc",
@@ -349,9 +348,9 @@ def main():
     label="tabledemo"
   )
 
-  # print(table.get_result())
+  print(table.get_result())
 
-  table.write_to("tables/mixed")
+  # table.write_to("tables/mixed")
 
 
 if __name__ == "__main__":
