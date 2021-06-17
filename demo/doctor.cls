@@ -30,7 +30,7 @@
 \newcommand*{\fontdir}[1][fonts/]{\def\@fontdir{#1}}
 \fontdir
 
-\usepackage[]{helvet}
+\RequirePackage[]{helvet}
 \fontfamily{phv}\selectfont
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -40,23 +40,22 @@
 % 3rd party packages
 % -------------------------------------------------------------------------------
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage{gensymb}
-\usepackage[english]{babel}
-\usepackage[document]{ragged2e}
-\usepackage{float}
-\usepackage{bm}
-\usepackage{amsfonts}
-\usepackage{cancel}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{fp}
-\usepackage{epstopdf}
-\usepackage{varwidth}
-\usepackage{blindtext}
-\usepackage[
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{gensymb}
+\RequirePackage[english]{babel}
+\RequirePackage[document]{ragged2e}
+\RequirePackage{float}
+\RequirePackage{bm}
+\RequirePackage{amsfonts}
+\RequirePackage{cancel}
+\RequirePackage{varwidth}
+\RequirePackage{blindtext}
+\RequirePackage{underscore}
+\RequirePackage{lipsum}
+
+\RequirePackage[
 	a4paper,
 	left=2.5cm,
 	right=2.5cm,
@@ -64,8 +63,11 @@
 	top=4cm
 ]{geometry}
 
-\usepackage{framed}
-
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{fp}
+\RequirePackage{epstopdf}
+\RequirePackage{framed}
 \RequirePackage{amsmath}
 \RequirePackage[absolute]{textpos}
 \RequirePackage{fancyhdr}
@@ -76,11 +78,6 @@
 \RequirePackage{titletoc}
 \RequirePackage{etoolbox}
 
-
-
-\usepackage{underscore}
-\usepackage{lipsum}
-
 %\RequirePackage{assoccnt}
 %\RequirePackage{totcount}
 %\newtotcounter{totalchapters}
@@ -89,8 +86,8 @@
 
 
 
-\usepackage{emptypage}
-\usepackage{afterpage}
+\RequirePackage{emptypage}
+\RequirePackage{afterpage}
 
 \newcommand\blankpage{%
 	\null
@@ -105,7 +102,7 @@
 % Hyperlink configuration
 % -------------------------------------------------------------------------------
 
-\usepackage[verbose]{hyperref}
+\RequirePackage[verbose]{hyperref}
 
 \hypersetup{hidelinks}
 \addto\extrasenglish{
@@ -124,10 +121,10 @@
 % Graphics and helper functions
 % -------------------------------------------------------------------------------
 
-\usepackage[]{tcolorbox}
+\RequirePackage[]{tcolorbox}
 \RequirePackage{tikz}
-\usepackage{tkz-euclide}
-\usepackage{pgfplots}
+\RequirePackage{tkz-euclide}
+\RequirePackage{pgfplots}
 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{intersections}
@@ -139,17 +136,17 @@
 % Tables and helper functions
 % -------------------------------------------------------------------------------
 
-\usepackage{collcell}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{colortbl}
-\usepackage{hhline}
-\usepackage{dcolumn}
-\usepackage{tabularx}
-\usepackage{ctable}
-\usepackage{xltabular}
+\RequirePackage{collcell}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{colortbl}
+\RequirePackage{hhline}
+\RequirePackage{dcolumn}
+\RequirePackage{tabularx}
+\RequirePackage{ctable}
+\RequirePackage{xltabular}
 
 \newcommand{\dashrule}[1][black]{%
 	\color{#1}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}\xleaders\hbox{\rule{4pt}{0pt}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}}\hfill\kern0pt%
@@ -158,7 +155,7 @@
 	\def\CT@arc@{\color{#1}}%
 }
 
-\usepackage{silence}
+\RequirePackage{silence}
 \WarningFilter{ctable}{Transparency disabled:}
 
 
