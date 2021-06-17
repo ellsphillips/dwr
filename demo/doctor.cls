@@ -1,22 +1,46 @@
+%% Start of file `doctor.cls'.
+%% Copyright 2021 Elliott Phillips <elliott.phillips@ons.gov.uk>
+%
+
+% -------------------------------------------------------------------------------
+% Class options
+% -------------------------------------------------------------------------------
+
+\ProvidesClass{doctor}[2021/01/25 Documentation standard for automated monthly report generation]
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{pluto}[2021/01/25 version 1.0]
+\DeclareOption{draft}{\setlength\overfullrule{5pt}}
+\DeclareOption{final}{\setlength\overfullrule{0pt}}
+\DeclareOption*{
+	\PassOptionsToClass{\CurrentOption}{book}
+}
+\ProcessOptions\relax
+
+\PassOptionsToPackage{table}{xcolor}
+
+\LoadClass[11pt,oneside]{book}
+
+
+
+% -------------------------------------------------------------------------------
+% 3rd party packages
+% -------------------------------------------------------------------------------
+
+\usepackage{silence}
+\WarningFilter{ctable}{Transparency disabled:}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{gensymb}
-\usepackage[]{tcolorbox}
 \usepackage[english]{babel}
 \usepackage[document]{ragged2e}
-\usepackage{tkz-euclide}
-%\usetkzobj{all}
 \usepackage{float}
 \usepackage{bm}
 \usepackage{amsfonts}
 \usepackage{cancel}
+\usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fp}
-\usepackage{pgfplots}
 \usepackage{epstopdf}
 \usepackage{varwidth}
 \usepackage{blindtext}
@@ -30,14 +54,8 @@
 
 \usepackage{framed}
 
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{intersections}
-\pgfplotsset{compat=1.12}
-
 \RequirePackage{amsmath}
 \RequirePackage[absolute]{textpos}
-\RequirePackage{tikz}
-\RequirePackage{tkz-euclide}
 \RequirePackage{fancyhdr}
 \RequirePackage{xkeyval}
 \RequirePackage{alphalph}
@@ -45,14 +63,39 @@
 \RequirePackage{appendix}
 \RequirePackage{titletoc}
 \RequirePackage{etoolbox}
-\AtBeginEnvironment{appendices}{%
-  \addtocontents{toc}{\protect\gdef\protect\@chapapp{\protect\appendixname}}%\appendixname
-}
 
+
+
+\usepackage[]{tcolorbox}
+\RequirePackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{pgfplots}
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{intersections}
+\pgfplotsset{compat=1.12}
+
+
+
+\usepackage{underscore}
+\usepackage{lipsum}
+
+%\RequirePackage{assoccnt}
+%\RequirePackage{totcount}
+%\newtotcounter{totalchapters}
+%\regtotcounter{chapter}
+%\DeclareAssociatedCounters{chapter}{totalchapters}
+
+
+
+\usepackage{collcell}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
 \usepackage{multicol}
 \usepackage{colortbl}
+\usepackage{hhline}
 \usepackage{dcolumn}
-\usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{ctable}
 \usepackage{xltabular}
@@ -65,17 +108,21 @@
 }
 
 
-\usepackage{underscore}
 
-\RequirePackage{assoccnt}
-\RequirePackage{totcount}
-\newtotcounter{totalchapters}
-\regtotcounter{chapter}
-\DeclareAssociatedCounters{chapter}{totalchapters} % Associate the driven counter `totalchapters` to the master counter `chapter`
+\usepackage{emptypage}
+\usepackage{afterpage}
 
-%%%%%%%%%%%%%%%% hyperref
-\usepackage{lipsum}
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{0}% change to -1 if you don't want page numbers additive
+	\newpage
+}
+
+
+
 \usepackage[verbose]{hyperref}
+
 \hypersetup{hidelinks}
 \addto\extrasenglish{
 	\def\sectionautorefname{Section}
@@ -87,10 +134,24 @@
 	\hspace{-.15em}\textcolor{ONSblue}{\bfseries Figure\ref{#1}}\hspace{-.4em}
 }
 
+
+
+% -------------------------------------------------------------------------------
+% Directory locations configuration
+% -------------------------------------------------------------------------------
+% Configure a directory location for fonts(default: 'fonts/')
+\newcommand*{\fontdir}[1][fonts/]{\def\@fontdir{#1}}
+\fontdir
+
 \usepackage[]{helvet}
 \fontfamily{phv}\selectfont
 \renewcommand{\familydefault}{\sfdefault}
 
+
+
+% -------------------------------------------------------------------------------
+% Colour schema
+% -------------------------------------------------------------------------------
 
 \definecolor{ONSgreen}{RGB}{168, 189, 58} % #a8bd3a
 \definecolor{ONSblue}{RGB}{0, 61, 89} % #003d59
@@ -114,126 +175,12 @@
 \definecolor{ExeterRed}{RGB}{191, 30, 30}
 
 
-\usepackage{emptypage}
-\usepackage{afterpage}
-\newcommand\blankpage{%
-	\null
-	\thispagestyle{empty}%
-	\addtocounter{page}{0}% change to -1 if you don't want page numbers additive
-	\newpage
-}
 
+% -------------------------------------------------------------------------------
+% Envrionments
+% -------------------------------------------------------------------------------
 
-
-%%% Conditional table column highlighting
-
-\usepackage{collcell}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{xcolor}
-\usepackage{multirow}
-\usepackage{colortbl}
-\usepackage{hhline}
-
-
-
-\def\mcol{\multicolumn}
-
-\def\columnhighlightstyle{
-	\bfseries\itshape
-	\color{purple}
-}
-
-
-
-% Highlighting if particular value
-
-\newcommand{\columnhighlight}[3]{
-	\ifnum#1#2#3
-	\columnhighlightstyle #3
-	\else
-	#3
-	\fi
-}
-
-\newcolumntype{H}[3]{
-	>{
-		\def\wrapper{\columnhighlight{#1}{#2}}
-		\collectcell\wrapper
-	}
-	#3
-	<{
-		\endcollectcell
-	}
-}
-
-
-
-% Replace cell contents
-
-\newcommand{\columnnan}[2]{
-	\ifdim #1 pt>#2 pt
-		\textcolor{black!40}{NaN}
-	\else
-		\centering\arraybackslash\cellcolor{ONSblue!5}\textcolor{ONSblue}{\bfseries#2}
-	\fi
-}
-
-%\newcolumntype{N}[2]{
-%	>{
-%		\def\wrapper{\columnnan{#1}}
-%		\collectcell\wrapper
-%	}
-%	#2
-%	<{
-%		\endcollectcell
-%	}
-%}
-
-
-
-% Apply gradients across columns
-
-%The min, mid and max values
-\newcommand*{\MinNumber}{0.0}%
-\newcommand*{\MidNumber}{0.5}%
-\newcommand*{\MaxNumber}{1.0}%
-
-\colorlet{mincolor}{ONSblue}
-\colorlet{midcolor}{ONSgreen}
-\colorlet{maxcolor}{ONSyellow}
-
-%Apply the gradient macro
-\newcommand{\CellValue}{}
-\newcommand{\ApplyGradient}[1]{%
-	\ifdim #1 pt > \MidNumber pt
-		\pgfmathsetmacro{\PercentColor}{max(min(100.0*(#1 - \MidNumber)/(\MaxNumber-\MidNumber),100.0),0.00)} %
-		\renewcommand{\CellValue}{\PercentColor}
-		\colorbox{maxcolor!\PercentColor!midcolor}{\bfseries\textcolor{maxcolor!\PercentColor!midcolor}{\rule{4em}{1mm}}\color{white}#1}%
-	\else
-		\pgfmathsetmacro{\PercentColor}{max(min(100.0*(\MidNumber - #1)/(\MidNumber-\MinNumber),100.0),0.00)} %
-		\renewcommand{\CellValue}{\PercentColor}
-		\colorbox{mincolor!\PercentColor!midcolor}{\bfseries\textcolor{mincolor!\PercentColor!midcolor}{\rule{4em}{1mm}}\color{white}#1}
-	\fi
-}
-
-\newcolumntype{G}{
-	>{%
-		\collectcell\ApplyGradient%
-	}%
-	r
-	<{%
-		\endcollectcell%
-%		\cellcolor{red}%
-	}%
-}
-%\renewcommand{\arraystretch}{0}
-\setlength{\fboxsep}{2mm} % box size
-%\setlength{\tabcolsep}{0pt}
-
-
-
-\newenvironment{plutotable}[5]{
+\newenvironment{doctor-table}[5]{
 	\small
 	\rowcolors{3}{gray!5}{}
 	\renewcommand{\arraystretch}{1.25}
@@ -270,12 +217,9 @@
 
 
 
-
-
-
-
-
-%%% Graphs
+% -------------------------------------------------------------------------------
+% Environment macros
+% -------------------------------------------------------------------------------
 
 \makeatletter
 \pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
@@ -289,3 +233,7 @@
 	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
 	\pgfusepath{stroke}
 }
+
+
+
+%% End of file `doctor.cls'.
