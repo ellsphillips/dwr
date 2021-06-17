@@ -12,16 +12,23 @@ from typing import (
 )
 
 
-class TeXDefaults():
+class Doctor:
   """
+  Put on the LaTeX gloves.
   """
   def __init__(
     self,
-    pluto_blue: str = "\color{ONSblue}",
-    pluto_green: str = "\color{ONSgreen}"
+    data_object: Union[pd.DataFrame, list] = None
   ):
-    self.pluto_blue = pluto_blue
-    self.pluto_green = pluto_green
+    self.data_object = data_object
+
+  def select_builder(self):
+    """
+    Select the appropraite TeX builder for Python data.
+    """
+    if self.data_object is "table":
+        return TabularBuilder
+    return PlotBuilder
 
 
 class PlotBuilder():
