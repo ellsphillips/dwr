@@ -9,3 +9,4 @@ class PlotBuilder():
 
   def say_hello(self):
     print(self.input_string)
+    

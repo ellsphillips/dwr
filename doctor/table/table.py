@@ -1,3 +1,11 @@
+import os
+import pandas as pd
+import numpy as np
+from typing import (
+  List,
+  Optional
+)
+
 class TabularBuilder:
   """
   Comprehensive table builder that outputs LaTeX markup
@@ -13,7 +21,7 @@ class TabularBuilder:
 
   def __init__(
     self,
-    dataframe: pd.DataFrame,
+    dataframe: pd.DataFrame = None,
     column_format: Optional[str] = None,
     caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",
     short_caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",

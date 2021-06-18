@@ -23,10 +23,4 @@ def build(
   """
   Select the appropraite TeX builder for Python data.
   """
-  if data_object is "table":
-      return TabularBuilder
-  return PlotBuilder
-
-
-
-
+  pass
