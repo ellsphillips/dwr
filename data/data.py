@@ -6,28 +6,28 @@ from typing import (
 )
 
 def numerical(
-  shape: Tuple[int, int]
+  shape: Tuple[int, int] = (10, 10)
 ) -> pd.DataFrame:
   return pd.DataFrame(
-    lognuniform(size=shape).astype(int),
+    lognuniform(size=shape),
     columns=["col" + str(i + 1) for i in range(shape[1])]
   )
 
 def mixed():
   return pd.DataFrame(
     {
-      'Numbers': [np.random.randint(0, 100) for i in range (10)],
-      'More numbers': [np.random.randint(0, 100) for i in range (10)],
-      'Text': "Lorem ipsum dolor sit amet consectetur adipiscing elit Curabitur nec".split(),
+      'Numbers': [lognuniform() for _ in range(10)],
+      'More numbers': [lognuniform() for _ in range(10)],
+      'Text': lorem(10),
       'Mash': [
-        "iswdufvbouwesdbnvg",
+        "iswdufvbouwesdb",
         "abc",
         "sdvcsdv",
         "sdvdssdvdvvn",
         "yumyumyum",
         "wqoe",
         "qphjpgh",
-        "owperjgpowegjwjggg",
+        "owperjgpowegjwjgwh",
         "wepogjwpeog",
         "oi"
       ]
@@ -35,10 +35,10 @@ def mixed():
   )
 
 def lognuniform(low=0, high=10, size=None, base=np.e):
-  return np.power(base, np.random.uniform(low, high, size))
+  return np.power(base, np.random.uniform(low, high, size)).astype(int)
 
 def lorem(count: int) -> list:
-  return ["Lorem", "Ipsum", random.choices(dummy_text, count - 2)]
+  return ["Lorem", "ipsum", *random.choices(dummy_text.split(), k=count - 2)]
 
 
 dummy_text = """
