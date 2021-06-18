@@ -12,7 +12,7 @@ from typing import (
 )
 
 
-class Doctor:
+class TestClass:
   """
   Put on the LaTeX gloves.
   """
