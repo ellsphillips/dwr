@@ -103,15 +103,13 @@ class TabularBuilder:
     """
     markup = ">{{\\raggedleft\\arraybackslash\\hsize=\\hsize}}X"
 
-    if self.caption:
-      return "".join(
-        [
-          f"{self.tab_space}" + "{% Column format\n",
-          f"{self.tab_space * 2}{markup}\n" * self.dataframe.shape[1],
-          f"{self.tab_space}" + "}"
-        ]
-      )
-    return ""
+    return "".join(
+      [
+        f"{self.tab_space}" + "{% Column format\n",
+        f"{self.tab_space * 2}{markup}\n" * self.dataframe.shape[1],
+        f"{self.tab_space}" + "}"
+      ]
+    )
 
   @property
   def table_column_headers(self) -> str:
@@ -124,21 +122,18 @@ class TabularBuilder:
         colm \\
       }
     """
-    if self.caption:
-      return "".join(
-        [
-          "{% Column headers\n",
-          " &\n".join(
-            [
-              f"{self.tab_space * 2}\\bfseries {col}"
-              for col in list(self.dataframe.columns.values)
-            ]
-          ) + f" {self.double_backslash}\n",
-          f"{self.tab_space}" + "}"
-        ]
-      )
-
-    return ""
+    return "".join(
+      [
+        "{% Column headers\n",
+        " &\n".join(
+          [
+            f"{self.tab_space * 2}\\bfseries {col}"
+            for col in list(self.dataframe.columns.values)
+          ]
+        ) + f" {self.double_backslash}\n",
+        f"{self.tab_space}" + "}"
+      ]
+    )
 
   @property
   def env_begin(self) -> str:
