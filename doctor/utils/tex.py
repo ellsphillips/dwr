@@ -93,6 +93,22 @@ class TeXDefaults:
       }
     """
 
+  @property
+  def get_tex_source(self, folder=r"docs\tex\report\src"):
+    for root, _, _ in os.walk(os.getcwd()):
+      if folder in root:
+        return root
+        break
+
+  def write_to(self, out_path: str):
+    """
+    Export LaTeX code to src folder destination.
+    """
+    destination = f"{self.get_tex_source}\\{out_path}.tex"
+    with open(destination, "w") as f:
+      f.write(self.get_result())
+    print(f"Table saved to {self.get_tex_source}\\\033[1m\033[93m{out_path}.tex\033[0m.")
+
   def package_requirements():
     """
     Ensure all required packages are loaded.
