@@ -161,43 +161,6 @@ class TabularBuilder:
     return "".join([item for item in elements if item])
 
   @property
-  def preamble(self):
-    """
-    Either use 100% Python and print the long preamble everytime
-    you markup a table, or keep TeX code breif by building
-    helper functions to loop over Python outputs.
-    """
-    return r"""
-    \rowcolor{white}
-    \caption{Description of Variables used in this Study}%
-    \label{table: vardescription} \\%
-    \toprule%
-    \rowcolor{white}\textbf{Code} & \textbf{Definition and source} \\%
-    \specialrule{.05em}{.05em}{.05em}%
-    \endfirsthead%
-    
-    \rowcolor{white}
-    \caption[]{Description of Variables used in this Study (Cont.)} \\%
-    \rowcolor{white}\multicolumn{\numcols}{c}{\raisebox{.15em}{\resizebox{0.95\textwidth}{!}{\makebox[\textwidth]{\dashrule[black]}}}} \\%
-    \rowcolor{white}\textbf{Code} & \textbf{Definition and source} \\%
-    \specialrule{.05em}{.05em}{.05em}
-    \endhead%
-    
-    \rowcolor{white}\multicolumn{\numcols}{r}{%
-      \multirow{2}{*}{%
-        \parbox{0.95\textwidth}{%
-          \raisebox{.15em}{\resizebox{0.95\textwidth}{!}{\makebox[\textwidth]{\dashrule[black]}}}
-          \raggedleft\footnotesize\textit{Continued on next page}
-        }
-      }
-    }
-    \endfoot%
-    
-    \bottomrule%
-    \endlastfoot%
-    """
-
-  @property
   def env_end(self) -> str:
     r"""
     Close the table environment with \end{}.
