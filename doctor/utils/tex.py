@@ -1,5 +1,5 @@
 import os
-import re
+import string
 
 
 class TeXDefaults:
@@ -108,7 +108,7 @@ class TeXDefaults:
     "blindtext": [],
     "underscore": [],
     "lipsum": [],
-    "geometry": ["a4paper, left=2.5cm,right=2.5cm,bottom=3cm,top=4cm"],
+    "geometry": ["a4paper,left=2.5cm,right=2.5cm,bottom=3cm,top=4cm"],
     "graphicx": [],
     "caption": [],
     "fp": [],
@@ -150,6 +150,8 @@ class TeXDefaults:
     r"\pgfplotsset{compat=1.12}",
   ]
 
+  pkg_cmd = [r"\usepackage", r"\RequirePackage"]
+
   @property
   def get_tex_source(self, folder=r"docs\tex\report\src"):
     for root, _, _ in os.walk(os.getcwd()):
@@ -170,7 +172,13 @@ class TeXDefaults:
     """
     Ensure all required packages are loaded.
     """
-    match_case = re.match(r'(ftp|http)://.*\.(jpg|png)$', s)
+    if (
+      string.startswith(("ftp://", "http://"))
+      and 
+      string.endswith((".jpg", ".png"))
+    ):
+      pass
+    
     pass
 
   def file_exists():
