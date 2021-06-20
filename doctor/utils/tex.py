@@ -1,13 +1,11 @@
-"""
-Ensure user has all supporting TeX content to pair with Doctor.
-"""
-
 import os
 
 
 class TeXDefaults:
   """
+  Ensure user has all supporting TeX content to pair with Doctor.
   """
+  @property
   def env_table():
     return r"""
       \newenvironment{doctor-table}[5]{
@@ -94,3 +92,21 @@ class TeXDefaults:
         \endxltabular
       }
     """
+
+  def package_requirements():
+    """
+    Ensure all required packages are loaded.
+    """
+    pass
+
+  def file_exists():
+    """
+    Confirm if doctor .sty or .cls file exists.
+    """
+    pass
+
+  def env_exists():
+    """
+    Confirm if tabular or plotting TeX environments exists.
+    """
+    pass
