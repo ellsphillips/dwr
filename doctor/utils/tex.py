@@ -1,13 +1,13 @@
 import os
+import re
 
 
 class TeXDefaults:
   """
   Ensure user has all supporting TeX content to pair with Doctor.
   """
-  @property
-  def env_table():
-    return r"""
+  
+  env_table = r"""
       \newenvironment{doctor-table}[5]{
         % ---------------------------------------------------------------------------
         % Flexible tabular environment based on pd.DataFrame input. Source code is 
@@ -93,6 +93,63 @@ class TeXDefaults:
       }
     """
 
+  required_packages = {
+    "inputenc": ["utf8"],
+    "fontenc": ["T1"],
+    "textcomp": [],
+    "gensymb": [],
+    "babel": ["english"],
+    "ragged2e": ["document"],
+    "float": [],
+    "bm": [],
+    "amsfonts": [],
+    "cancel": [],
+    "varwidth": [],
+    "blindtext": [],
+    "underscore": [],
+    "lipsum": [],
+    "geometry": ["a4paper, left=2.5cm,right=2.5cm,bottom=3cm,top=4cm"],
+    "graphicx": [],
+    "caption": [],
+    "fp": [],
+    "epstopdf": [],
+    "framed": [],
+    "amsmath": [],
+    "textpos": ["absolute"],
+    "fancyhdr": [],
+    "xkeyval": [],
+    "alphalph": [],
+    "ifthen": [],
+    "appendix": [],
+    "titletoc": [],
+    "etoolbox": [],
+    "emptypage": [],
+    "afterpage": [],
+    "hyperref": ["verbose"],
+    "tcolorbox": [],
+    "tikz": [],
+    "tkz-euclide": [],
+    "pgfplots": [],
+    "collcell": [],
+    "booktabs": [],
+    "longtable": [],
+    "multirow": [],
+    "multicol": [],
+    "colortbl": [],
+    "hhline": [],
+    "dcolumn": [],
+    "tabularx": [],
+    "ctable": [],
+    "xltabular": [],
+    "silence": [],
+  }
+
+  additional_options = [
+    r"\usepgfplotslibrary{fillbetween}",
+    r"\usetikzlibrary{intersections}",
+    r"\pgfplotsset{compat=1.12}",
+  ]
+
   @property
   def get_tex_source(self, folder=r"docs\tex\report\src"):
     for root, _, _ in os.walk(os.getcwd()):
@@ -109,10 +166,11 @@ class TeXDefaults:
       f.write(self.get_result())
     print(f"Table saved to {self.get_tex_source}\\\033[1m\033[93m{out_path}.tex\033[0m.")
 
-  def package_requirements():
+  def packages_loaded():
     """
     Ensure all required packages are loaded.
     """
+    match_case = re.match(r'(ftp|http)://.*\.(jpg|png)$', s)
     pass
 
   def file_exists():
