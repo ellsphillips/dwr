@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 from typing import (
   List,
-  Optional
+  Optional,
+  Union
 )
 
 class TabularBuilder:
@@ -22,7 +23,7 @@ class TabularBuilder:
   def __init__(
     self,
     dataframe: pd.DataFrame = None,
-    column_format: Optional[str] = None,
+    column_format: Optional[List[float]] = None,
     caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",
     short_caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",
     label: Optional[str] = None,
@@ -101,13 +102,23 @@ class TabularBuilder:
         >{}X
       }
     """
-    markup = ">{{\\raggedleft\\arraybackslash\\hsize=\\hsize}}X"
+    if self.column_format:
+      return (
+        f"{self.tab_space}{{% Column format\n"
+        + "\n".join(
+          [
+            f"{self.tab_space * 2 }>{{\\raggedleft\\arraybackslash\\hsize={w}\\hsize}}X"
+            for w in self.column_format
+          ]
+        )
+        + f"\n{self.tab_space}}}"
+      )
 
     return "".join(
       [
-        f"{self.tab_space}" + "{% Column format\n",
-        f"{self.tab_space * 2}{markup}\n" * self.dataframe.shape[1],
-        f"{self.tab_space}" + "}"
+        f"{self.tab_space}{{% Column format\n",
+        f"{self.tab_space * 2}>{{\\raggedleft\\arraybackslash\\hsize=\\hsize}}X\n" * self.dataframe.shape[1],
+        f"{self.tab_space}}}"
       ]
     )
 
@@ -192,9 +203,6 @@ class TabularBuilder:
     Close the table environment with \end{}.
     """
     return "\end{plutotable}"
-
-  def column_format(self) -> str:
-    pass
   
   @property
   def header(self) -> str:
