@@ -1,18 +1,13 @@
 import sys
-import pandas as pd
-from typing import (
-  Union
-)
+import subprocess
 
 
 if sys.version_info < (3, 6):
   raise RuntimeError("This module requires Python 3.6 or higher")
 
 
-def build(
-  data_object: Union[pd.DataFrame, dict]
-):
+def build():
   """
-  Select the appropraite TeX builder for Python data.
+  Run pdflatex shell to build the report.
   """
   pass

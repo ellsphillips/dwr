@@ -6,6 +6,10 @@ class TeXDefaults:
   """
   Ensure user has all supporting TeX content to pair with Doctor.
   """
+
+  options = {
+    "report_path": r"demo\src"
+  }
   
   env_table = r"""
       \newenvironment{doctor-table}[5]{
@@ -153,7 +157,7 @@ class TeXDefaults:
   pkg_cmd = [r"\usepackage", r"\RequirePackage"]
 
   @property
-  def get_tex_source(self, folder=r"docs\tex\report\src"):
+  def get_tex_source(self, folder=options["report_path"]):
     for root, _, _ in os.walk(os.getcwd()):
       if folder in root:
         return root
