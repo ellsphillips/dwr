@@ -10,7 +10,10 @@ class TeXDefaults:
   pkg_cmd = [r"\usepackage", r"\RequirePackage"]
 
   options = {
-    "report_path": r"demo\src",
+    "document": {
+      "path": "demo/",
+      "name": "main"
+    },
     "requirements": {
       "packages": {
         "inputenc": ["utf8"],
@@ -158,7 +161,7 @@ class TeXDefaults:
   }
 
   @property
-  def get_tex_source(self, folder=options["report_path"]) -> None:
+  def get_tex_source(self, folder=options['document']['path']) -> None:
     for root, _, _ in os.walk(os.getcwd()):
       if folder in root:
         return root
@@ -173,7 +176,7 @@ class TeXDefaults:
       f.write(self.get_result())
     print(f"Table saved to {self.get_tex_source}\\\033[1m\033[93m{out_path}.tex\033[0m.")
 
-  def packages_loaded() -> bool:
+  def packages_loaded(self) -> bool:
     """
     Ensure all required packages are loaded.
     """
@@ -183,16 +186,18 @@ class TeXDefaults:
       string.endswith((".jpg", ".png"))
     ):
       pass
+
+    pkg_list = self.options["requirements"]["packages"].keys()
     
     pass
 
-  def file_exists() -> bool:
+  def file_exists(self) -> bool:
     """
     Confirm if doctor .sty or .cls file exists.
     """
     pass
 
-  def env_exists() -> bool:
+  def env_exists(self) -> bool:
     """
     Confirm if tabular or plotting TeX environments exists.
     """

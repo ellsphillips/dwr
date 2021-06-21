@@ -18,7 +18,9 @@ def main():
     label="tabledemo"
   )
 
-  print(table.get_result())
+  # print(table.get_result())
+
+  doctor.build()
   
 
 if __name__ == "__main__":
