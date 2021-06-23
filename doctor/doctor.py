@@ -1,7 +1,9 @@
 import os
 import sys
+import time
 import subprocess
 
+from .utils.cli import *
 from .utils.tex import TeXDefaults as tex
 
 
@@ -17,10 +19,17 @@ def build(
   """
   Run pdflatex shell to build the report.
   """
+
   aux_list = (".aux", ".log", ".out")
 
   tex_path = f"{tex.options['document']['path']}"
   tex_file = f"{tex.options['document']['name']}.tex"
+
+  loader = Loader(
+    "Building your report...",
+    f"Report generated at {colour.CBOLD}{colour.CYELLOW}{tex_path}{outfile}.pdf{colour.CEND}\n",
+    0.05
+  ).start()
 
   shell_cmd = " ".join([
     "pdflatex",
@@ -33,13 +42,15 @@ def build(
 
   subprocess.run(shell_cmd)
 
-  print(
-    "Report generated at",
-    f"\033[1m\033[93m{tex_path}{outfile}.pdf\033[0m",
-    "\n"
-  )
+  # print(
+  #   "Report generated at",
+  #   f"\033[1m\033[93m{tex_path}{outfile}.pdf\033[0m",
+  #   "\n"
+  # )
 
   if not projectiles:
     for _file in os.listdir(tex_path):
       if _file.endswith(aux_list):
         os.remove(os.path.join(tex_path, _file))
+
+  loader.stop()
