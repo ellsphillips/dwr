@@ -2,6 +2,8 @@
 
 An automated documentation assitant for Pythonic data markup to LaTeX.
 
+## Installation
+
 ```shell
   doctor/
   ├── data
