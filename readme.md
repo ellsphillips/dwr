@@ -1,29 +1,4 @@
-<style>
-  :root{
-    --doctor-primary: #FFD866;
-    --doctor-secondary: #3572A5;
-  }
-
-  h1, h2, h3 {
-    color: var(--doctor-primary);
-  }
-
-  :is(h1, h2, h3):not(:first-of-type) {
-    margin-top: 2em;
-  }
-
-  blockquote {
-    border: var(--doctor-primary) 2px solid;
-    padding: 1.5em;
-    margin-bottom: 2em;
-  }
-
-  ::marker {
-    color: var(--doctor-primary);
-  }
-</style>
-
-# Doctor
+# [#FFD866](Doctor)
 
 An automated documentation assitant for Pythonic data markup to LaTeX.
 
