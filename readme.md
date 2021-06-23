@@ -1,4 +1,4 @@
-# [#FFD866](Doctor)
+# ![#f03c15](https://placehold.it/15/f03c15/000000?text=Doctor)
 
 An automated documentation assitant for Pythonic data markup to LaTeX.
 
