@@ -173,6 +173,38 @@
 
 
 
+\newcommand{\draw@header}[1]{% Regular page headers
+	\ifodd\value{page}%
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick] ([yshift = -0.1\paperheight]current page.north west) -- ([xshift = -\marginparwidth, yshift = -0.1\paperheight]current page.north east);
+		%
+			\node[anchor = base west, xshift = -4mm, yshift = 2mm-0.1\paperheight] at (current page.north west){
+				\Large\phantom{Gg}\color{black!50}\ellssectiontitle
+			};
+		%
+			\node[anchor = south east, xshift = 4mm-\marginparwidth, yshift = -0.1\paperheight]  at (current page.north east){
+				\raggedleft
+				\Large\color{black!80}\thepage\phantom{Gg}
+			};
+		\end{tikzpicture}
+	\else
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick] ([xshift = \marginparwidth, yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
+		%
+			\node[anchor = base east, xshift = 4mm, yshift = 2mm-0.1\paperheight] at (current page.north east){
+				\Large\color{black!80}\ellschaptertitle\phantom{Gg}
+			};
+		%
+			\node[anchor = south west, xshift = \marginparwidth-4mm, yshift = -0.1\paperheight]  at (current page.north west){
+				\raggedleft
+				\Large\phantom{Gg}\color{black!80}\thepage
+			};
+		\end{tikzpicture}
+	\fi
+}
+
+
+
 \newlength{\miniframemodule}
 \setlength{\miniframemodule}{0.02\paperwidth}%
 
