@@ -175,6 +175,13 @@
 	\fancyhead{\draw@header}%
 }%
 
+\def\@makechapterhead#1{%
+	\hypertarget{chapter \thetotalchapters}{}%
+	\parindent 0pt%
+	\draw@chapterheader{#1}%
+	\draw@footer%
+}%
+
 
 
 \newcommand{\doctorsection}{}
@@ -205,13 +212,58 @@
 	\flushleft{
 		\begin{tikzpicture}[overlay]
 			\node[anchor = east, rectangle, rounded corners = 1pt, inner sep = 3.5pt, fill = ONSblue] at (-0.45, 0.45) {\normalfont\sffamily\large\bfseries\color{white} \thesection.\thedoctorsubsection};
-			%
+		%
 			\draw[color = ONSblue, anchor=west] (-0.15, 0.45) node {\large\bfseries#1};
 		\end{tikzpicture}
 	}
 	\justify
 	\vspace{0mm}
 }
+
+
+
+\newcommand{\ellschaptertitle}{}
+\newcommand{\draw@chapterheader}[1]{% Regular chapters header
+	\renewcommand{\ellschaptertitle}{#1}
+	\begin{tikzpicture}[overlay, remember picture]
+		\node[anchor = north west] at (current page.north west) {
+			\begin{tikzpicture}[overlay, remember picture]
+				\fill[LightGrey] (current page.north west) rectangle ([yshift = -0.1\paperheight]current page.north east);
+			%
+				\draw[color = black, thick] ([yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
+			\end{tikzpicture}
+		};
+	%
+		\node[
+			rectangle,
+			rounded corners = 4pt,
+			inner sep = 11pt,
+			draw = black,
+			fill = ONSblue,
+			line width = 0.25mm,
+			yshift = -0.1\paperheight
+		] at (current page.north){
+			\Large\color{white}\bfseries\MakeUppercase{#1}
+		};
+	\end{tikzpicture}
+	\vskip 0cm
+}
+
+\newcommand{\draw@chaptersheader}[1]{% Table of Contents header etc
+	\begin{textblock}{1}(0,0)
+		\begin{tikzpicture}[x=1.0cm,y=1.0cm]%
+			\clip(0,0) rectangle (\paperwidth,.105\paperwidth);
+			\draw[header style] (0,.0333\paperwidth) rectangle (\paperwidth,.105\paperwidth);
+			\node[title color,right] at (.05\paperwidth,.07\paperwidth) {\LARGE \bf #1};
+		\end{tikzpicture}
+	\end{textblock}
+}
+
+\newcommand{\draw@chaptersfooter}{%
+	\pagestyle{empty}
+}
+
+
 
 \newcommand{\draw@header}[1]{% Regular page headers
 	\ifodd\value{page}%
@@ -255,6 +307,9 @@
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
+			\node[anchor = north east, xshift = -1mm-\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south east){
+				\includegraphics[height = 0.04\textwidth]{example-image-b}
+			};
 %			\node[anchor = north east, xshift = 3mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){
 %				\scalebox{0.66}{
 %					\rotatebox{180}{
@@ -276,35 +331,26 @@
 	\begin{tikzpicture}[overlay, remember picture]
 		\node[anchor = south] at ([yshift = 0.033\paperheight]current page.south) {
 			\begin{tikzpicture}%
-				%
-				% Select the color corresponding to the current chapter
-%				\ch@ngecolors{\thetotalchapters}
-				%   
 				\clip(-0.01\paperwidth, -0.01\paperwidth) rectangle (\totvalue{totalchapters}\miniframemodule + 0.01\paperwidth, 0.11\paperwidth);
-				%    
+			%
 				\foreach[evaluate=\y using \x-1,evaluate=\z using \x-.5] \x in {1,...,\totvalue{totalchapters}} {
-%					\ch@ngecolors{\x}
-					%         
 					% Draw the rectangles in the footer
 					\ifthenelse{
 						% Condition: if \x is current chapter
 						\equal{\thetotalchapters}{\x}
 					}{%
 						%%% IF CURRENT CHAPTER
-						%							\draw[fill=\ch@p, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
-						\draw[fill=ONSblue, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth); %fill=\ch@p
-						%
+						\draw[fill=ONSblue, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+					%
 						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 						
 					}{%
 						%%% OTHER CHAPTERS
-						%							\draw[fill=black!10, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
 						\draw[fill=black!5, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
-						%
+					%
 						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 					}
 				}
-				%
 			\end{tikzpicture}
 		};
 	\end{tikzpicture}
@@ -315,6 +361,10 @@
 %			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
 %		\end{tikzpicture}
 }
+
+
+
+\pagestyle{doctor}
 
 
 

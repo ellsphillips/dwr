@@ -4,17 +4,26 @@
 
 \input{src/titlepage}
 
-\newpage
+%\blankpage
+%
+{ % Document setup
+	\makeatletter
+		\@twosidetrue
+		\@openrighttrue
+	\makeatother
+	
+	\ifodd\thepage\relax\else\blankpage\fi
+	
+%	\chaptertabs
+	
+	\setcounter{page}{1}
+}
 
-\pagestyle{doctor}
-
-\chapter{Test}
+\chapter{Doctor env}
 
 \section{Lorem ipsum}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at risus nec sapien egestas hendrerit vitae non urna. Vivamus non pulvinar nulla. Duis id sapien imperdiet lorem commodo sodales ut in nunc. Mauris mattis interdum est. Maecenas eleifend, eros vel ultricies gravida, felis sem aliquet purus, id suscipit lorem massa a massa. Duis ut semper risus, eu fermentum ante. Praesent ultricies augue nunc, a tincidunt urna fringilla id. Maecenas malesuada nec justo congue varius. Nulla eget aliquam metus, ac venenatis velit. Pellentesque id euismod lacus. Aliquam erat volutpat. Suspendisse vehicula eu ante ac congue. Nunc et diam vitae ligula feugiat pellentesque. Suspendisse iaculis metus diam, ac vulputate augue venenatis sed. Morbi a purus id mauris eleifend molestie.
-
-Pellentesque augue erat, rhoncus non consequat a, rutrum ut ex. Maecenas sit amet tincidunt ex. Aenean vestibulum aliquet diam. Praesent non urna efficitur, blandit erat luctus, cursus nisi. Phasellus quis sapien facilisis, dictum velit sed, mattis tellus. Aliquam in faucibus velit. Sed vel sapien at mi convallis luctus vel fermentum dui. Cras venenatis neque vel arcu viverra, sodales consequat mauris fringilla. Morbi id pulvinar eros. Vivamus gravida venenatis varius.
+\lipsum[1-3]
 
 \newpage
 
@@ -25,5 +34,21 @@ Pellentesque augue erat, rhoncus non consequat a, rutrum ut ex. Maecenas sit ame
 \section{Plots}
 
 \input{src/graphs/timeseries}
+
+\newpage
+
+\chapter{TOC macros}
+
+\section{First}
+
+\subsection{one-one}
+
+\subsection{one-two}
+
+\section{Second}
+
+\subsection{two-one}
+
+\subsection{two-two}
 
 \end{document}
