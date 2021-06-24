@@ -1,3 +1,5 @@
+[doctor-build]: https://i.imgur.com/8iuEgjZ.gif
+
 # Doctor
 
 An automated documentation assitant for Pythonic data markup to LaTeX.
@@ -40,7 +42,7 @@ pip install -r requirements.txt
   doctor.build(outfile="report")
 ```
 
-![Doctor console](https://i.imgur.com/RH2mbtG.gif)
+![Build your PDF with Doctor][doctor-build]
 
 ## Architecture
 
