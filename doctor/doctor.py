@@ -14,6 +14,7 @@ if sys.version_info < (3, 6):
 def build(
   outfile: str = "",
   projectiles: bool = False,
+  quick: bool = False,
   verbose: bool = False
 ):
   """
@@ -40,7 +41,8 @@ def build(
     f"{tex_path} {tex_file}",
   ])
 
-  subprocess.run(shell_cmd)
+  for _ in range(1 if quick else 3):
+    subprocess.run(shell_cmd)
 
   # print(
   #   "Report generated at",

@@ -20,7 +20,7 @@ def main():
 
   # print(table.get_result())
 
-  doctor.build(outfile="report")
+  doctor.build(outfile="report", quick=True)
   
 
 if __name__ == "__main__":
