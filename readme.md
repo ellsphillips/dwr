@@ -98,13 +98,13 @@ Reference the [architecture below](#architecture) for an example.
   doctor/
   ├── data
   │   ├── __init__.py
-  │   ├── data.py
+  │   └── data.py
   ├── demo
   │   ├── src
   │   │   └── ...
   │   ├── doctor.cls
   │   ├── main.tex
-  │   ├── report.pdf
+  │   └── report.pdf
   ├── doctor
   │   ├── builder
   │   │   ├── plot
@@ -114,6 +114,6 @@ Reference the [architecture below](#architecture) for an example.
   │   │   ├── cli.py
   │   │   └── tex.py
   │   ├── __init__.py
-  │   ├── doctor.py
+  │   └── doctor.py
   └── app.py
 ```
