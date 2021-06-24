@@ -160,6 +160,93 @@
 
 
 % -------------------------------------------------------------------------------
+% Page styling
+% -------------------------------------------------------------------------------
+
+\fancypagestyle{plain}{\fancyhf{}}
+% \renewcommand\chaptermark[1]{\markboth{\textcolor{white}{#1}}{}}
+
+\fancypagestyle{doctor}{%
+	\fancyfoot{\draw@footer}%
+	\fancyhead{\draw@header}%
+}%
+
+
+
+\newlength{\miniframemodule}
+\setlength{\miniframemodule}{0.02\paperwidth}%
+
+\newcommand{\draw@footer}{%
+	\pagestyle{fancy}
+%
+	\ifodd\value{page}%
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
+		%
+			\node[anchor = north east, xshift = 3mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){
+				\scalebox{0.66}{
+					\rotatebox{180}{
+						\hourglassAnimation{\thepage}
+					}
+				}
+			};
+		\end{tikzpicture}
+	\else
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
+		%
+			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){
+				\includegraphics[height = 0.04\textwidth]{figures/logos/ons-english.pdf}
+			};
+		\end{tikzpicture}
+	\fi
+%
+	\ifFinalVersion
+		\begin{tikzpicture}[overlay, remember picture]
+			\node[anchor = south] at ([yshift = 0.033\paperheight]current page.south) {
+				\begin{tikzpicture}%
+					%
+					% Select the color corresponding to the current chapter
+					\ch@ngecolors{\thetotalchapters}
+					%   
+					\clip(-0.01\paperwidth, -0.01\paperwidth) rectangle (\totvalue{totalchapters}\miniframemodule + 0.01\paperwidth, 0.11\paperwidth);
+					%    
+					\foreach[evaluate=\y using \x-1,evaluate=\z using \x-.5] \x in {1,...,\totvalue{totalchapters}} {
+						\ch@ngecolors{\x}
+						%         
+						% Draw the rectangles in the footer
+						\ifthenelse{
+							% Condition: if \x is current chapter
+							\equal{\thetotalchapters}{\x}
+						}{%
+							%%% IF CURRENT CHAPTER
+							%							\draw[fill=\ch@p, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
+							\draw[fill=\ch@p, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+							%
+							\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
+							
+						}{%
+							%%% OTHER CHAPTERS
+							%							\draw[fill=black!10, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
+							\draw[fill=black!5, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+							%
+							\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
+						}
+					}
+					%
+				\end{tikzpicture}
+			};
+		\end{tikzpicture}
+	\else
+		\begin{tikzpicture}[overlay, remember picture]
+			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
+		\end{tikzpicture}
+	\fi
+}
+
+
+
+% -------------------------------------------------------------------------------
 % XLTabular: Herbert Voss, Rolf Niepraschk
 % -------------------------------------------------------------------------------
 
