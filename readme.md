@@ -2,11 +2,9 @@
 
 # Doctor
 
-An automated documentation assitant for Pythonic data markup to LaTeX.
+An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
 
-Procedurally generate PDF reports from `DataFrame`, `list` and `dict` objects to beautiful, flexible LaTeX documents.
-
-Doctor aims to ease the reporting build process over other available tools, such as `pandas`, `pandoc` etc, through an intuitive Python API, with a customisable LaTeX class wrapper to accommodate outputs.
+Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset documents.
 
 ## Installation
 
@@ -25,6 +23,8 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+
+To get started, import `doctor` into your python script. You have immediate access to 2 classes, `table` and `plot`- feed Doctor a dataframe object and watch it build beautiful `LaTeX` code. Returned as a literal, you can pass this result to any of the available methods to further build on or output to your `LaTeX` directory.
 
 ```python
   import doctor
