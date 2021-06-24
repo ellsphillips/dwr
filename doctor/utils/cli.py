@@ -35,7 +35,7 @@ class Loader:
       if self.done:
         break
       print(
-        f"\r{self.desc} {colour.CBOLD}{colour.CYELLOW}{c}{colour.CEND}",
+        f"\r{self.desc}{colour.CBOLD}{colour.CYELLOW} {c} {colour.CEND}",
         flush=True,
         end=""
       )

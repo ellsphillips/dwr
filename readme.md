@@ -40,6 +40,8 @@ pip install -r requirements.txt
   doctor.build(outfile="report")
 ```
 
+![Doctor console](https://imgur.com/a/saoIsZb)
+
 ## Architecture
 
 ```shell
