@@ -78,12 +78,6 @@
 \RequirePackage{titletoc}
 \RequirePackage{etoolbox}
 
-%\RequirePackage{assoccnt}
-%\RequirePackage{totcount}
-%\newtotcounter{totalchapters}
-%\regtotcounter{chapter}
-%\DeclareAssociatedCounters{chapter}{totalchapters}
-
 
 
 \RequirePackage{emptypage}
@@ -163,6 +157,16 @@
 % Page styling
 % -------------------------------------------------------------------------------
 
+\RequirePackage{assoccnt}
+\RequirePackage{totcount}
+\newtotcounter{totalchapters}
+\regtotcounter{chapter}
+\DeclareAssociatedCounters{chapter}{totalchapters} % Associate the driven counter `totalchapters` to the master counter `chapter`
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+\setlength{\footskip}{50pt}
+
 \fancypagestyle{plain}{\fancyhf{}}
 % \renewcommand\chaptermark[1]{\markboth{\textcolor{white}{#1}}{}}
 
@@ -173,13 +177,49 @@
 
 
 
+\newcommand{\doctorsection}{}
+\renewcommand{\section}[1]{
+	\addtocounter{section}{1}
+%	\addcontentsline{toc}{section}{\thesection \; #1}
+	\vskip 1cm
+	\flushleft{
+		\Large\bfseries\thesection\;#1
+		\vskip -3mm
+		\textcolor{black!50}{\hrule}
+		\vskip 3mm
+	}
+	\vskip 3mm
+	\renewcommand{\doctorsection}{#1}
+	\setcounter{doctorsubsection}{0}
+}
+
+
+
+\newcounter{doctorsubsection}[subsection]
+\setcounter{doctorsubsection}{1}
+
+\renewcommand{\subsection}[1]{
+	\stepcounter{doctorsubsection}
+	\addcontentsline{toc}{subsection}{\color{black!50} \thesection.\thedoctorsubsection \; #1}
+	\vspace{3mm}
+	\flushleft{
+		\begin{tikzpicture}[overlay]
+			\node[anchor = east, rectangle, rounded corners = 1pt, inner sep = 3.5pt, fill = ONSblue] at (-0.45, 0.45) {\normalfont\sffamily\large\bfseries\color{white} \thesection.\thedoctorsubsection};
+			%
+			\draw[color = ONSblue, anchor=west] (-0.15, 0.45) node {\large\bfseries#1};
+		\end{tikzpicture}
+	}
+	\justify
+	\vspace{0mm}
+}
+
 \newcommand{\draw@header}[1]{% Regular page headers
 	\ifodd\value{page}%
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([yshift = -0.1\paperheight]current page.north west) -- ([xshift = -\marginparwidth, yshift = -0.1\paperheight]current page.north east);
 		%
 			\node[anchor = base west, xshift = -4mm, yshift = 2mm-0.1\paperheight] at (current page.north west){
-				\Large\phantom{Gg}\color{black!50}\ellssectiontitle
+				\Large\phantom{Gg}\color{black!50}\doctorsection
 			};
 		%
 			\node[anchor = south east, xshift = 4mm-\marginparwidth, yshift = -0.1\paperheight]  at (current page.north east){
@@ -215,65 +255,65 @@
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
-			\node[anchor = north east, xshift = 3mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){
-				\scalebox{0.66}{
-					\rotatebox{180}{
-						\hourglassAnimation{\thepage}
-					}
-				}
-			};
+%			\node[anchor = north east, xshift = 3mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){
+%				\scalebox{0.66}{
+%					\rotatebox{180}{
+%						\hourglassAnimation{\thepage}
+%					}
+%				}
+%			};
 		\end{tikzpicture}
 	\else
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
 			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){
-				\includegraphics[height = 0.04\textwidth]{figures/logos/ons-english.pdf}
+				\includegraphics[height = 0.04\textwidth]{example-image-a}
 			};
 		\end{tikzpicture}
 	\fi
 %
-	\ifFinalVersion
-		\begin{tikzpicture}[overlay, remember picture]
-			\node[anchor = south] at ([yshift = 0.033\paperheight]current page.south) {
-				\begin{tikzpicture}%
-					%
-					% Select the color corresponding to the current chapter
-					\ch@ngecolors{\thetotalchapters}
-					%   
-					\clip(-0.01\paperwidth, -0.01\paperwidth) rectangle (\totvalue{totalchapters}\miniframemodule + 0.01\paperwidth, 0.11\paperwidth);
-					%    
-					\foreach[evaluate=\y using \x-1,evaluate=\z using \x-.5] \x in {1,...,\totvalue{totalchapters}} {
-						\ch@ngecolors{\x}
-						%         
-						% Draw the rectangles in the footer
-						\ifthenelse{
-							% Condition: if \x is current chapter
-							\equal{\thetotalchapters}{\x}
-						}{%
-							%%% IF CURRENT CHAPTER
-							%							\draw[fill=\ch@p, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
-							\draw[fill=\ch@p, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
-							%
-							\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
-							
-						}{%
-							%%% OTHER CHAPTERS
-							%							\draw[fill=black!10, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
-							\draw[fill=black!5, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
-							%
-							\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
-						}
+	\begin{tikzpicture}[overlay, remember picture]
+		\node[anchor = south] at ([yshift = 0.033\paperheight]current page.south) {
+			\begin{tikzpicture}%
+				%
+				% Select the color corresponding to the current chapter
+%				\ch@ngecolors{\thetotalchapters}
+				%   
+				\clip(-0.01\paperwidth, -0.01\paperwidth) rectangle (\totvalue{totalchapters}\miniframemodule + 0.01\paperwidth, 0.11\paperwidth);
+				%    
+				\foreach[evaluate=\y using \x-1,evaluate=\z using \x-.5] \x in {1,...,\totvalue{totalchapters}} {
+%					\ch@ngecolors{\x}
+					%         
+					% Draw the rectangles in the footer
+					\ifthenelse{
+						% Condition: if \x is current chapter
+						\equal{\thetotalchapters}{\x}
+					}{%
+						%%% IF CURRENT CHAPTER
+						%							\draw[fill=\ch@p, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
+						\draw[fill=ONSblue, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth); %fill=\ch@p
+						%
+						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
+						
+					}{%
+						%%% OTHER CHAPTERS
+						%							\draw[fill=black!10, rounded corners=1pt] (\y\miniframemodule, 0) rectangle (\x\miniframemodule, 0.015\paperwidth);
+						\draw[fill=black!5, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+						%
+						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 					}
-					%
-				\end{tikzpicture}
-			};
-		\end{tikzpicture}
-	\else
-		\begin{tikzpicture}[overlay, remember picture]
-			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
-		\end{tikzpicture}
-	\fi
+				}
+				%
+			\end{tikzpicture}
+		};
+	\end{tikzpicture}
+	%
+	%
+	%
+%		\begin{tikzpicture}[overlay, remember picture]
+%			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
+%		\end{tikzpicture}
 }
 
 
