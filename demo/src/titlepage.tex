@@ -1,0 +1,43 @@
+\pagestyle{empty}
+
+\begin{tikzpicture}[overlay, remember picture]
+	\begin{scope}
+		\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);
+		\node[] at ($(current page.center)+(0.012\paperwidth, 0.35\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};
+	\end{scope}
+%
+	\draw[fill = none, draw = white, line width = 0.033\paperwidth]
+	($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+	-- ($(current page.north west)+(0.0165\paperwidth, -0.0165\paperwidth)$)
+	-- ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$)
+	-- ($(current page.north east)+(-0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+	-- cycle;
+%%%
+	\node[anchor = north, yshift = -1cm] (title) at (current page.center) {
+		\color{black}
+		\def\baselinestretch{1.2}\Huge\bfseries Elliott Phillips \par
+	};
+%
+	\node[anchor = north, yshift = -2.5cm] (author) at (current page.center) {
+		\parbox{\textwidth}{
+			\color{black}\large\bfseries\centering 
+			Data Scientist \newline
+			BSc OR $\bm{\mathrm{II}}$
+		}
+	};
+%
+	\node[anchor = north, yshift = -5.5cm] (subjects) at (current page.center) {
+		\parbox{\textwidth}{
+			\color{black}\centering
+			\huge\bfseries PROJECT TITLE \newline
+			\large PROJECT TAGILNE
+		}
+	};
+%
+	\node[anchor = south, yshift = 1cm] (subjects) at (current page.south) {
+		\color{black}\bfseries
+		Last updated: \today
+	};
+\end{tikzpicture}
+
+\null\newpage\pagestyle{doctor}
