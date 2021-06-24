@@ -44,12 +44,6 @@ def build(
   for _ in range(1 if quick else 3):
     subprocess.run(shell_cmd)
 
-  # print(
-  #   "Report generated at",
-  #   f"\033[1m\033[93m{tex_path}{outfile}.pdf\033[0m",
-  #   "\n"
-  # )
-
   if not projectiles:
     for _file in os.listdir(tex_path):
       if _file.endswith(aux_list):
