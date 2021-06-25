@@ -6,10 +6,11 @@
 
 An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
 
-Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
-
 [![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor)
 
+<p style="width: 33%; float: left">
+  Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
+</p>
 <a href="https://github.com/ellsphillips/doctor">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor" />
 </a>
