@@ -1,4 +1,5 @@
-[repo-card]: https://github-readme-stats.vercel.app/api?username=ellsphillips&theme=react&show_icons=true
+[repo-card-api]: https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor&card_width=100%
+[repo-card]: https://github.com/ellsphillips/doctor
 [doctor-build]: https://i.imgur.com/8iuEgjZ.gif
 
 # Doctor
@@ -7,9 +8,11 @@ An automated documentation assitant built in Python and TeX for procedural, data
 
 Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
 
-<center>
-  ![Anurag's GitHub stats][repo-card]
-</center>
+[![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor)
+
+<a href="https://github.com/ellsphillips/doctor">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor" />
+</a>
 
 ## Installation
 
