@@ -1,25 +1,30 @@
+[repo-card]: https://github-readme-stats.vercel.app/api?username=ellsphillips&theme=react&show_icons=true
 [doctor-build]: https://i.imgur.com/8iuEgjZ.gif
 
 # Doctor
 
 An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
 
-Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset documents.
+Doctor aims to simplify the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
+
+<center>
+  ![Anurag's GitHub stats][repo-card]
+</center>
 
 ## Installation
 
 Clone the repo
 
-```
-git clone https://github.com/ellsphillips/doctor.git
+```bash
+$ git clone https://github.com/ellsphillips/doctor.git
 
-cd doctor
+$ cd doctor
 ```
 
 Install the requirements
 
-```
-pip install -r requirements.txt
+```bash
+$ pip install -r requirements.txt
 ```
 
 ## Usage
