@@ -1,0 +1,30 @@
+\begin{doctor-plot}{Example text}
+	\addplot[
+		gray!25,
+		quiver={v=\thisrow{difference}},
+		forget plot
+	] table[x=time, y=data1] {src/graphs/doctor-plot.dat};
+	
+	\addplot[
+		ONSblue,
+		thick,
+		mark=none
+	] table[x=time, y=data1] {src/graphs/doctor-plot.dat};
+	\addlegendentry{data1}
+	
+	\addplot[
+		ONSgreen,
+		thick,
+		mark=none
+	] table[x=time, y=data2] {src/graphs/doctor-plot.dat};
+	\addlegendentry{data2}
+	
+	\draw[
+		pattern=flexible hatch,
+		hatch distance=10pt,
+		hatch thickness=.5pt,
+		pattern color = ONSpink!20,
+		draw = none
+	]
+	(0, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (43, \pgfkeysvalueof{/pgfplots/ymax});
+\end{doctor-plot}
