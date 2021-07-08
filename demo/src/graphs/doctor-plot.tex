@@ -1,4 +1,20 @@
 \begin{doctor-plot}{Example text}
+	\draw[
+		fill=ONSorange,
+		opacity=0.05,
+		draw = none
+	]
+	(9, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (27, \pgfkeysvalueof{/pgfplots/ymax});
+	
+	\draw[
+		pattern=flexible hatch,
+		hatch distance=10pt,
+		hatch thickness=.5pt,
+		pattern color = ONSpink!20,
+	draw = none
+	]
+	(57, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (\pgfkeysvalueof{/pgfplots/xmax}, \pgfkeysvalueof{/pgfplots/ymax});
+	
 	\addplot[
 		gray!25,
 		quiver={v=\thisrow{difference}},
@@ -18,13 +34,4 @@
 		mark=none
 	] table[x=time, y=data2] {src/graphs/doctor-plot.dat};
 	\addlegendentry{data2}
-	
-	\draw[
-		pattern=flexible hatch,
-		hatch distance=10pt,
-		hatch thickness=.5pt,
-		pattern color = ONSpink!20,
-		draw = none
-	]
-	(0, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (43, \pgfkeysvalueof{/pgfplots/ymax});
 \end{doctor-plot}

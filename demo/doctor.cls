@@ -631,6 +631,7 @@
 	%
 		\begin{axis}[%
 		% Abstract
+			set layers,
 			axis x line=bottom,
 			axis y line=middle,
 			axis line style={-stealth, shorten >=-2mm},
