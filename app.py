@@ -18,26 +18,28 @@ def main():
     label="tabledemo"
   )
 
-  doctor.build(outfile="report", quick=True)
+  # doctor.build(outfile="report", quick=True)
 
   #
 
-  figure = doctor.plot({
-    "data": {
-      "data1": "",
-      "data2": "",
+  figure = doctor.plot(
+    data = {
+      "data1": data.timeseries_singleton(points=20, places=(1,3)),
+      "data2": data.timeseries_singleton(points=20, places=(1,3)),
     },
-    "shade": {
-      "fill": "solid",
-      "colour": "ONSpink",
-      "regions": [[9, 27], [50, "end"]]
-    },
-    "options": {
+    options = {
       "xlabel": "Horizontal",
       "ylabel": "Vertical",
-      "caption": "Test caption"
+      "caption": "Test caption",
+      "shade": {
+        "fill": "solid",
+        "colour": "ONSpink",
+        "regions": [[9, 27], [50, "end"]]
+      }
     }
-  })
+  )
+
+  print(figure.id_data())
   
 
 if __name__ == "__main__":
