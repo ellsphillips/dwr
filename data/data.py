@@ -2,8 +2,22 @@ import pandas as pd
 import numpy as np
 import random
 from typing import (
-  Tuple
+  Tuple,
+  Union
 )
+
+def timeseries_singleton(
+  points: int = 10,
+  places: Union[int, Tuple[int, int]] = 4
+) -> list:
+  return [
+    *lognuniform(
+      size=points,
+      low=places[0] if isinstance(places, tuple) else 0,
+      high=places[1] if isinstance(places, tuple) else places,
+      base=10
+    )
+  ]
 
 def numerical(
   shape: Tuple[int, int] = (10, 10)
