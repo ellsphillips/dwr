@@ -28,7 +28,7 @@ def build(
 
   loader = Loader(
     "Building your report...",
-    f"Report generated at {colour.CBOLD}{colour.CYELLOW}{tex_path}{outfile}.pdf{colour.CEND}\n",
+    f"Report generated at {style.announce}{tex_path}{outfile}.pdf{style.end}\n",
     0.05
   ).start()
 
