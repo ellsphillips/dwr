@@ -209,7 +209,10 @@ class TabularBuilder:
     for i, row in self.dataframe.iterrows():
       export.append(
         self.tab_space
-        + " & ".join([self.pad_spaces(str(cell), col_index) for col_index, cell in enumerate(row.values)])
+        + " & ".join([
+          self.pad_spaces(str(cell), col_index)
+          for col_index, cell in enumerate(row.values)
+        ])
         + f" {self.double_backslash}"
       )
     return "\n".join([item for item in export if item])

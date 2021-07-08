@@ -1,8 +1,8 @@
+[repo-card-api]: https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor&card_width=100%
+[repo-card]: https://github.com/ellsphillips/doctor
 [doctor-build]: https://i.imgur.com/8iuEgjZ.gif
 
-<p align="center">
-  <img width="50%" src="https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor" align="center" alt="Doctor summary" />
-</p>
+[![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor)
 
 # Doctor
 
