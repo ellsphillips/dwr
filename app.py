@@ -18,9 +18,26 @@ def main():
     label="tabledemo"
   )
 
-  # print(table.get_result())
-
   doctor.build(outfile="report", quick=True)
+
+  #
+
+  figure = doctor.plot({
+    "data": {
+      "data1": "",
+      "data2": "",
+    },
+    "shade": {
+      "fill": "solid",
+      "colour": "ONSpink",
+      "regions": [[9, 27], [50, "end"]]
+    },
+    "options": {
+      "xlabel": "Horizontal",
+      "ylabel": "Vertical",
+      "caption": "Test caption"
+    }
+  })
   
 
 if __name__ == "__main__":
