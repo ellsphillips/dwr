@@ -1,11 +1,22 @@
 from itertools import cycle
 from shutil import get_terminal_size
 from threading import Thread
-from time import sleep
+import time
 
 """
 Utility classes for Doctor
 """
+
+
+def timer(f):
+  def wrapper(*args, **kwargs):
+    start = time.perf_counter()
+    rv = f()
+    end = time.time() - start
+    end = time.perf_counter()
+    print(f'{style.emoji["lightning"]} Finished in {style.announce}{end:.02f}s{style.end}')
+
+  return wrapper
 
 
 class Loader:
@@ -39,7 +50,7 @@ class Loader:
         flush=True,
         end=""
       )
-      sleep(self.timeout)
+      time.sleep(self.timeout)
 
   def __enter__(self):
     self.start()
@@ -53,6 +64,16 @@ class Loader:
   def __exit__(self, exc_type, exc_value, tb):
     # handle exceptions with those variables ^
     self.stop()
+
+
+class style:
+  emoji = {
+    "lightning": "⚡"
+  }
+  end = "\33[0m"
+  warning = "\033[1m\33[91m"
+  announce = "\033[1m\033[93m"
+  comment = "\033[1m\33[94m"
 
 class colour:
   CEND       = '\33[0m'

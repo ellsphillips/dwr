@@ -1,3 +1,4 @@
+from doctor.utils.cli import style, timer
 import os
 import pandas as pd
 import numpy as np
@@ -5,10 +6,11 @@ import numpy as np
 import doctor
 import data
 
+@timer
 def main():
   os.system('cls' if os.name == 'nt' else 'clear')
   print("\n"*100)
-  print("The \033[1m\033[93mDoctor\033[0m was called...\n")
+  print(f"The {style.announce}Doctor{style.end} was called...\n")
 
   table = doctor.table(
     data.numerical((8, 4)),
@@ -40,12 +42,9 @@ def main():
   )
 
   print(figure.id_data())
+
+  print(figure.build_dataframe())
   
 
 if __name__ == "__main__":
-  import time
-  start = time.perf_counter()
   main()
-  end = time.perf_counter()
-  elapsed = end - start
-  print(f'Finished in \033[1m\033[93m{elapsed:.02f}s\033[0m')
