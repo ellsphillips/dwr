@@ -24,9 +24,14 @@ class PlotBuilder():
     time_points = max([len(ts[1]) for ts in self.id_data()])
     print(f"Built dataframe of dimension {style.announce}{len(self.data), time_points}{style.end}\n")
 
-    return pd.DataFrame(
-      dict([(k, pd.Series(v)) for k,v in self.data.items()])
+    output = pd.DataFrame(
+      dict(
+        [(k, pd.Series(v)) for k,v in self.data.items()]
+      )
     )
+    output["time"] = range(time_points)
+
+    return output[["time"] + [c for c in output.columns if c != "time" ] ]
   
   def export_data(self, out_path: str) -> None:
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"

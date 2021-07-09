@@ -41,10 +41,7 @@ def main():
     }
   )
 
-  # figure.export_data(out_path="graphs/test")
-
-  figure.build_dataframe()
-  
+  figure.export_data(out_path="graphs/test")
 
 if __name__ == "__main__":
   main()
