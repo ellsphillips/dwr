@@ -21,7 +21,12 @@ class PlotBuilder():
     return [(name, series) for name, series in self.data.items()]
 
   def build_dataframe(self) -> pd.DataFrame:
-    return pd.DataFrame(self.data)
+    time_points = max([len(ts[1]) for ts in self.id_data()])
+    print(f"Built dataframe of dimension {style.announce}{len(self.data), time_points}{style.end}\n")
+
+    return pd.DataFrame(
+      dict([(k, pd.Series(v)) for k,v in self.data.items()])
+    )
   
   def export_data(self, out_path: str) -> None:
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"

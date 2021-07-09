@@ -14,7 +14,7 @@ def timer(f):
     rv = f()
     end = time.time() - start
     end = time.perf_counter()
-    print(f'{style.emoji["lightning"]} Finished in {style.announce}{end:.02f}s{style.end}')
+    print(f'{style.emoji["lightning"]} Finished in {style.announce}{end:.02f}s{style.end}\n')
 
   return wrapper
 

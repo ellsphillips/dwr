@@ -20,14 +20,14 @@ def main():
     label="tabledemo"
   )
 
-  # doctor.build(outfile="report", quick=True)
+  # doctor.build(outfile="report", quick=False)
 
   #
 
   figure = doctor.plot(
     data = {
-      "data1": data.timeseries_singleton(points=20, places=(1,3)),
-      "data2": data.timeseries_singleton(points=20, places=(1,3)),
+      "data1": data.timeseries_singleton(points=20, places=4),
+      "data2": data.timeseries_singleton(points=34, places=4),
     },
     options = {
       "xlabel": "Horizontal",
@@ -41,7 +41,9 @@ def main():
     }
   )
 
-  figure.export_data(out_path="graphs/test")
+  # figure.export_data(out_path="graphs/test")
+
+  figure.build_dataframe()
   
 
 if __name__ == "__main__":
