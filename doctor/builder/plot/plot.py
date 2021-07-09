@@ -37,4 +37,4 @@ class PlotBuilder():
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
     dataframe = self.build_dataframe()
     dataframe.to_csv(destination, index=False, encoding='utf-8')
-    print(f"Data file generated at {style.announce}{destination}{style.end}\n")
+    print(f"Data file generated at {style.emoji['write']}{style.output}{destination}{style.end}\n")
