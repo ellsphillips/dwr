@@ -87,7 +87,7 @@ class style:
   notice: str = bold + "\33[95m"
 
 
-class Logger:
+class log:
   """
   Handle console logging types.
   """
@@ -99,4 +99,34 @@ class Logger:
     self.content = content
     self.style = style
 
+  def warning():
+    elements = [
+      f"{style.emoji['cross']}",
+      f"{style.warning}",
+      "I'm not much good without data, you know...",
+      f"{style.end}"
+    ]
+    print(
+      "".join([item for item in elements if item])
+    )
+
+  def output(file_path: str):
+    print(
+      "".join([
+        f"{style.emoji['write']} ",
+        "Data file generated at ",
+        f"{style.output}",
+        f"{file_path}",
+        f"{style.end}\n"
+      ])
+    )
+
+  def announce():
+    pass
+
+  def comment():
+    pass
+
+  def notice():
+    pass
 
