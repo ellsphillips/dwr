@@ -88,6 +88,15 @@ class style:
 
 
 class Logger:
-  pass
+  """
+  Handle console logging types.
+  """
+  def __init__(
+    self,
+    content: str,
+    style: str = "announce"
+  ) -> None:
+    self.content = content
+    self.style = style
 
 
