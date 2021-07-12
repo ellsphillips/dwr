@@ -1,17 +1,17 @@
-from doctor.utils.cli import style, timer
 import os
 import pandas as pd
 import numpy as np
 
+# from doctor.utils.cli import *
+
 import doctor
 import data
-from doctor.utils.cli import *
 
-@timer
+@doctor.timer
 def main():
   os.system('cls' if os.name == 'nt' else 'clear')
   print("\n"*100)
-  print(f"The {style.announce}Doctor{style.end} was called...\n")
+  print(f"The {doctor.style.announce}Doctor{doctor.style.end} was called...\n")
 
   table = doctor.table(
     data.numerical((8, 4)),
@@ -44,7 +44,7 @@ def main():
 
   figure.export_data(out_path="graphs/test")
 
-  log.comment("[This is] not [a] test...")
+  doctor.log.comment("[This is] not [a] test...")
 
 if __name__ == "__main__":
   main()

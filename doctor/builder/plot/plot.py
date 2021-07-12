@@ -22,7 +22,7 @@ class PlotBuilder():
 
   def build_dataframe(self) -> pd.DataFrame:
     time_points = max([len(ts[1]) for ts in self.id_data()])
-    print(f"Built dataframe of dimension {style.announce}{len(self.data), time_points}{style.end}\n")
+    log.comment(f"Built dataframe of dimension [{len(self.data), time_points}]")
 
     output = pd.DataFrame(
       dict(

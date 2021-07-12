@@ -14,7 +14,10 @@ def timer(f):
     start = time.perf_counter()
     rv = f()
     end = time.perf_counter()
-    print(f'{style.emoji["lightning"]} Finished in {style.announce}{end - start:.02f}s{style.end}\n')
+    print(
+      f"{style.emoji['lightning']} Finished in "
+      f"{style.announce}{end - start:.02f}s{style.end}\n"
+    )
 
   return wrapper
 
@@ -84,8 +87,8 @@ class style:
   warning: str = bold + "\33[91m"
   output: str = bold + "\33[92m"
   announce: str = bold + "\033[93m"
-  comment: str = bold + "\33[94m"
-  notice: str = bold + "\33[95m"
+  notice: str = bold + "\33[94m"
+  comment: str = bold + "\33[96m"
 
 
 class log:
@@ -94,6 +97,7 @@ class log:
   """
 
   delimiters = "[...]"
+  l, r = delimiters.split("...")
 
   def __init__(
     self,
@@ -103,18 +107,18 @@ class log:
     self.content = content
     self.style = style
 
-  def warning():
+  def warning(input_str: str) -> None:
     elements = [
-      f"{style.emoji['cross']}",
+      f"{style.emoji['cross']} ",
       f"{style.warning}",
-      "I'm not much good without data, you know...",
+      f"{input_str}",
       f"{style.end}"
     ]
     print(
       "".join([item for item in elements if item])
     )
 
-  def output(file_path: str):
+  def output(file_path: str) -> None:
     print(
       "".join([
         f"{style.emoji['write']} ",
@@ -125,10 +129,10 @@ class log:
       ])
     )
 
-  def announce():
+  def announce() -> None:
     pass
 
-  def comment(input_str: str):
+  def comment(input_str: str) -> None:
     matches = re.compile(r'\[([^]]*)\]')
 
     l = []
@@ -140,6 +144,6 @@ class log:
 
     print(f"{out_str}\n")
 
-  def notice():
-    pass
+  def notice(input_str: str) -> None:
+    print(f"{style.notice}{input_str}{style.end}")
 
