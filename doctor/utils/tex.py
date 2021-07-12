@@ -11,7 +11,7 @@ class TeXDefaults:
 
   options = {
     "document": {
-      "path": "demo/",
+      "path": "document/",
       "name": "main"
     },
     "requirements": {

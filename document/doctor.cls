@@ -187,7 +187,7 @@
 \newcommand{\doctorsection}{}
 \renewcommand{\section}[1]{
 	\addtocounter{section}{1}
-%	\addcontentsline{toc}{section}{\thesection \; #1}
+	\addcontentsline{toc}{section}{\thesection \; #1}
 	\vskip 1cm
 	\flushleft{
 		\Large\bfseries\thesection\;#1
@@ -672,6 +672,134 @@
 	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
 	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
 	\pgfusepath{stroke}
+}
+
+
+
+% -------------------------------------------------------------------------------
+% Table of Contents
+% -------------------------------------------------------------------------------
+
+\renewcommand\chaptermark[1]{\markboth{\textcolor{white}{#1}}{}}
+
+% Avoid badbox for >100 page documents
+\renewcommand{\@pnumwidth}{3em}%
+\contentsmargin{-0mm}%
+
+
+\@ifundefinedcolor{ONSblue}{% Fast compilation
+%
+% TOC Chapter
+%
+	\titlecontents{chapter}[4pc]
+	{\addvspace{30pt}%
+		\begin{tikzpicture}[remember picture, overlay]%
+			\draw[black] (-4.2,-.1) rectangle (-.8,.5);%
+			\pgftext[left,x=-3.5cm,y=0.2cm]{\color{black}\large\bfseries\sc\ \thecontentslabel};%
+		\end{tikzpicture}%
+	}%
+	{}
+	{}
+	{\;\titlerule\;\large\bfseries Page 
+		\thecontentspage
+		\begin{tikzpicture}[remember picture, overlay]
+			\draw[black] (2pt,0) rectangle (6,0.1pt);
+		\end{tikzpicture}%
+	}%
+	[\addvspace{.2cm}]%
+%
+% TOC Section
+%
+	\titlecontents{section}[0pc]
+	{\addvspace{5pt}}
+	{
+		\contentslabel[\thecontentslabel]{2pc}\color{black}}
+	{}
+	{\hfill\small\thecontentspage\color{black}}
+	[\addvspace{3pt}]
+%
+% TOC Subsection
+%
+	\titlecontents*{subsection}[1pc]
+	{\addvspace{-1pt}\small\contentsmargin{-1cm}\normalfont\sffamily\footnotesize}
+	{}
+	{}
+	{}
+	[~{–}\ ][]
+}{% Paint colour mapping
+%
+% TOC Chapter
+%
+	\titlecontents{chapter}[3.3pc]
+	{%
+		\addvspace{30pt}%
+%		\stepcounter{charpitre}
+		\begin{tikzpicture}[remember picture, overlay]%
+			\fill[
+				rounded corners = 4pt,
+				inner sep = 11pt,
+				ONSblue,
+				text=white
+			] (-4.5,-.2) rectangle (-.8,.6);%
+		%
+			\node at (-2.5,0.2) {%
+				\hyperlink{chapter\thechapter}{%
+					\XeTeXLinkBox{\phantom{\rule{3.4cm}{.6cm}}}
+				}
+			};
+			\node[xshift=-2.5cm, yshift=0.2cm]{%
+				\raggedright\bfseries\color{white}\large\sc%
+				Chapter\ \thecontentslabel%
+			};%
+		\end{tikzpicture}%
+		\large\bfseries\color{black}}%
+	{}
+	{}
+	{%
+		\;\titlerule\;\large\bfseries Page\ \thecontentspage%
+		\begin{tikzpicture}[remember picture, overlay]
+			\draw[black] (2pt,0) rectangle (6,0.1pt);
+		\end{tikzpicture}%
+	}%
+	[\addvspace{.2cm}]%
+%
+% TOC Section
+%
+	\titlecontents{section}[3.3pc]
+	{\addvspace{5pt}}
+	{%
+		\color{black}\contentslabel[\thecontentslabel]{2pc}\color{black}}
+	{}
+	{\hfill\small\color{black}\thecontentspage\color{black}}
+	[\addvspace{3pt}]
+%
+% TOC Subsection
+%
+	\titlecontents{subsection}[5.1pc]
+	{\addvspace{5pt}}
+	{%
+		\color{black!50}\contentslabel[\thecontentslabel]{2pc}\color{black}}
+	{}
+	{\hfill\small\color{black}\thecontentspage\color{black}}
+	[\addvspace{0pt}]
+%
+% TOC Figure
+%
+	\titlecontents{figure}
+	[0em]
+	{}
+	{\fbox{\thecontentslabel}\hspace*{1.5em}}
+	{}
+	{\ \titlerule*[8pt]{$\cdot$}\contentspage}
+}
+
+% Correct spacing between page header and TOC
+\renewcommand{\tableofcontents}{%
+	\chapter*{\contentsname}%
+	\markboth{\contentsname}{}
+%	\def\@leftmark{\contentsname}%
+	\vspace{-30pt}%
+	\@starttoc{toc}
 }
 
 

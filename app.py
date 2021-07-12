@@ -1,8 +1,4 @@
 import os
-import pandas as pd
-import numpy as np
-
-# from doctor.utils.cli import *
 
 import doctor
 import data
