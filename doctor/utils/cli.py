@@ -2,6 +2,7 @@ from itertools import cycle
 from shutil import get_terminal_size
 from threading import Thread
 import time
+import re
 
 """
 Utility classes for Doctor
@@ -91,6 +92,9 @@ class log:
   """
   Handle console logging types.
   """
+
+  delimiters = "[...]"
+
   def __init__(
     self,
     content: str,
@@ -124,8 +128,17 @@ class log:
   def announce():
     pass
 
-  def comment():
-    pass
+  def comment(input_str: str):
+    matches = re.compile(r'\[([^]]*)\]')
+
+    l = []
+    def repl(m):
+      l.append(m.group(0))
+      return f'{style.comment}{m[1]}{style.end}'
+
+    out_str = matches.sub(repl, input_str)
+
+    print(f"{out_str}\n")
 
   def notice():
     pass

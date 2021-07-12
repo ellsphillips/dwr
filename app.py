@@ -5,6 +5,7 @@ import numpy as np
 
 import doctor
 import data
+from doctor.utils.cli import *
 
 @timer
 def main():
@@ -42,6 +43,8 @@ def main():
   )
 
   figure.export_data(out_path="graphs/test")
+
+  log.comment("[This is] not [a] test...")
 
 if __name__ == "__main__":
   main()
