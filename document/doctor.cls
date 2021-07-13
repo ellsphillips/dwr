@@ -74,6 +74,7 @@
 \RequirePackage{xkeyval}
 \RequirePackage{alphalph}
 \RequirePackage{ifthen}
+\RequirePackage{xifthen}
 \RequirePackage{appendix}
 \RequirePackage{titletoc}
 \RequirePackage{etoolbox}
@@ -121,8 +122,18 @@
 \RequirePackage{pgfplots}
 
 \usepgfplotslibrary{fillbetween}
-\usetikzlibrary{intersections}
-\pgfplotsset{compat=1.12}
+\usetikzlibrary{
+	intersections,
+	backgrounds,
+	positioning,
+	calc,
+	patterns,
+	shapes,
+}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{middle}
+\pgfsetlayers{background,middle,main}
 
 
 
@@ -198,6 +209,7 @@
 	\vskip 3mm
 	\renewcommand{\doctorsection}{#1}
 	\setcounter{doctorsubsection}{0}
+	\justify
 }
 
 
@@ -257,14 +269,6 @@
 			\node[red,right] at (.05\paperwidth,.07\paperwidth) {\Large\color{white}\bfseries\MakeUppercase{#1}};
 		\end{tikzpicture}
 	\end{textblock}
-%
-%\begin{tikzpicture}
-%	\node[anchor = north, yshift = -0.5\paperheight] at (current page.center) {
-%		\begin{tikzpicture}[overlay]
-%			\fill[pink] (current page.north west) rectangle ([yshift=-0.2\paperheight]current page.north east);
-%		\end{tikzpicture}
-%	};
-%\end{tikzpicture}
 }
 
 \newcommand{\draw@chaptersfooter}{%
@@ -532,6 +536,54 @@
 % Environments
 % -------------------------------------------------------------------------------
 
+\RequirePackage{enumitem}
+\RequirePackage{environ}
+
+\NewEnviron{main-points}{
+	% ---------------------------------------------------------------------------
+	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
+	% difference quiver plots and regions hatch-shading are supported. Set the  
+	% axis labels and title and allow Doctor to automatically populate the rest.
+	% 
+	% Parameters
+	% ----------
+	% 
+	% #1: 
+	% 
+	% Demo
+	% ----
+	% 
+	% \begin{doctor-plot}
+	% \end{doctor-plot}
+	% ---------------------------------------------------------------------------
+	\begin{tikzpicture}%
+		\node[%
+			text width = \textwidth-48pt,
+			rounded corners = 4pt,
+			fill = LightGrey,
+			inner sep = 24pt,
+		] (list) {%
+			\begin{varwidth}{\linewidth}%
+				{%
+					\Large\bfseries Main points%
+					\vskip.5\baselineskip\color{black!50}\hrule
+				}
+				\justify
+				\begin{enumerate}[%
+					label=\bfseries\color{ONSblue}\theenumi.\:,
+					wide,
+					labelwidth=!,
+					labelindent=0pt,
+				]%
+					\BODY
+				\end{enumerate}%
+			\end{varwidth}%
+		};%
+	\end{tikzpicture}%
+}
+
+
+
 \newenvironment{doctor-table}[5]{
 	% ---------------------------------------------------------------------------
 	% Flexible tabular environment based on pd.DataFrame input. Source code is 
@@ -686,6 +738,39 @@
 	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
 	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
 	\pgfusepath{stroke}
+}
+
+
+
+\tikzset{
+	dlbuttonfill/.cd,
+	image/.style={draw=none,fill=ONSblue,text=white},
+	data/.style={draw=ONSblue,fill=none,text=ONSblue},
+	error/.style={draw=red,fill=none,text=red},
+	paint/.code={%
+		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
+			\ifthenelse{\isin{#1}{data}}{\tikzset{dlbuttonfill/data}}{
+				\tikzset{dlbuttonfill/error}
+			}
+		}
+	},
+}
+
+\newcommand{\button}[2][data]{%
+	Download this data: \newline%
+	\vskip-.5\baselineskip%
+	\noindent\href{#2}{%
+		\begin{tikzpicture}
+			\node[
+				dlbuttonfill/paint=#1,
+				rectangle,
+				inner sep = 6pt,
+				rounded corners = 2pt,
+			] {%
+				\small\bfseries\MakeUppercase{#1}%
+			};
+		\end{tikzpicture}
+	}
 }
 
 
