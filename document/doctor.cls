@@ -253,15 +253,29 @@
 	\begin{textblock}{1}(0,0)
 		\begin{tikzpicture}[x=1.0cm,y=1.0cm]%
 			\clip(0,0) rectangle (\paperwidth,.105\paperwidth);
-			\draw[header style] (0,.0333\paperwidth) rectangle (\paperwidth,.105\paperwidth);
-			\node[title color,right] at (.05\paperwidth,.07\paperwidth) {\LARGE \bf #1};
+			\fill[ONSblue] (0,.0333\paperwidth) rectangle (\paperwidth,.105\paperwidth);
+			\node[red,right] at (.05\paperwidth,.07\paperwidth) {\Large\color{white}\bfseries\MakeUppercase{#1}};
 		\end{tikzpicture}
 	\end{textblock}
+%
+%\begin{tikzpicture}
+%	\node[anchor = north, yshift = -0.5\paperheight] at (current page.center) {
+%		\begin{tikzpicture}[overlay]
+%			\fill[pink] (current page.north west) rectangle ([yshift=-0.2\paperheight]current page.north east);
+%		\end{tikzpicture}
+%	};
+%\end{tikzpicture}
 }
 
 \newcommand{\draw@chaptersfooter}{%
 	\pagestyle{empty}
 }
+
+\def\@makeschapterhead#1{%
+	\parindent 0pt%
+	\draw@chaptersheader{#1}%
+	\draw@chaptersfooter%
+}%
 
 
 
@@ -686,6 +700,9 @@
 \renewcommand{\@pnumwidth}{3em}%
 \contentsmargin{-0mm}%
 
+\dottedcontents{section}[2.3em]{}{2.3em}{5pt}
+\dottedcontents{subsection}[5.5em]{}{3.2em}{5pt}
+
 
 \@ifundefinedcolor{ONSblue}{% Fast compilation
 %
@@ -770,7 +787,8 @@
 	{%
 		\color{black}\contentslabel[\thecontentslabel]{2pc}\color{black}}
 	{}
-	{\hfill\small\color{black}\thecontentspage\color{black}}
+	{\mdseries\titlerule*[0.75em]{$\cdotp$}\bfseries
+		\small\color{black}\thecontentspage\color{black}}
 	[\addvspace{3pt}]
 %
 % TOC Subsection
@@ -780,7 +798,7 @@
 	{%
 		\color{black!50}\contentslabel[\thecontentslabel]{2pc}\color{black}}
 	{}
-	{\hfill\small\color{black}\thecontentspage\color{black}}
+	{\hfill\small\color{black!50}\thecontentspage\color{black}}
 	[\addvspace{0pt}]
 %
 % TOC Figure
