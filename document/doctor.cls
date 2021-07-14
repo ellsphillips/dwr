@@ -181,10 +181,14 @@
 \newcommand{\frontpage}{
 	\pagestyle{empty}
 	
-	\begin{tikzpicture}[overlay, remember picture]
-		\begin{scope}
-			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);
-			\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};
+	\begin{tikzpicture}[overlay, remember picture]%
+		\begin{scope}%
+			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);%
+			\ifx\companylogo\empty%
+				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
+			\else%
+				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companylogo}};%
+			\fi%
 		\end{scope}
 		%
 		\draw[
@@ -434,9 +438,6 @@
 %
 	\ifodd\value{page}%
 		\begin{tikzpicture}[overlay, remember picture]
-		%
-			\draw[red, thick] ([xshift=-3mm-\marginparwidth]current page.south east) -- ([xshift=-3mm-\marginparwidth]current page.north east);
-		%
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
 			\ifhourglass%
@@ -492,9 +493,13 @@
 	%
 	%
 	%
-%		\begin{tikzpicture}[overlay, remember picture]
+		\begin{tikzpicture}[overlay, remember picture]
 %			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
-%		\end{tikzpicture}
+	%
+		\draw[red, thick] ([xshift=-3mm-\marginparwidth]current page.south east) -- ([xshift=-3mm-\marginparwidth]current page.north east);
+	%
+		\draw[red, thick] ([xshift=3mm+\marginparwidth]current page.south west) -- ([xshift=3mm+\marginparwidth]current page.north west);
+		\end{tikzpicture}
 }
 
 
@@ -1030,9 +1035,12 @@
 
 \RequirePackage{xkeyval}
 
+\def\companylogo{}
+
 \newif\ifhourglass
 
 %\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
+\DeclareOptionX{logo}{\def\companylogo{#1}}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
