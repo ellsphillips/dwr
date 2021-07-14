@@ -165,6 +165,62 @@
 
 
 % -------------------------------------------------------------------------------
+% Title page
+% -------------------------------------------------------------------------------
+
+\gdef\@credentialtext{}
+\gdef\credential#1{%
+	\g@addto@macro\@credentialtext{%
+		#1 \par%
+	}
+}
+
+\gdef\@subtitle{}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+
+\newcommand{\frontpage}{
+	\pagestyle{empty}
+	
+	\begin{tikzpicture}[overlay, remember picture]
+		\begin{scope}
+			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);
+			\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};
+		\end{scope}
+		%
+		\draw[
+			fill = none,
+			draw = white,
+			line width = 0.033\paperwidth,
+			rounded corners = 16pt
+		]
+		($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+		-- ($(current page.north west)+(0.0165\paperwidth, -0.0165\paperwidth)$)
+		-- ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$)
+		-- ($(current page.north east)+(-0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+		-- cycle;
+		%%%
+		\node[anchor = north, yshift = -1cm] (maketitle) at (current page.center) {%
+			\parbox{0.4\paperwidth}{
+				\def\baselinestretch{1.2}%
+				\centering\bfseries%
+				\Huge\@author \par%
+				\vskip\baselineskip%
+				\large\@credentialtext \par%
+				\huge\vskip\baselineskip%
+				\@title \par%
+				\large\@subtitle \par%
+				\vskip10\baselineskip%
+				\normalsize Last updated: \@date%
+			}
+		};
+	\end{tikzpicture}
+	
+	\null\newpage\pagestyle{doctor}
+}
+
+
+
+% -------------------------------------------------------------------------------
 % Page animation
 % -------------------------------------------------------------------------------
 
