@@ -165,6 +165,61 @@
 
 
 % -------------------------------------------------------------------------------
+% Page animation
+% -------------------------------------------------------------------------------
+
+\RequirePackage{intcalc}
+\RequirePackage{fp}
+\usepackage[lastpage]{zref}
+
+\newcommand{\totalpages}{\zref@extractdefault{LastPage}{page}{0}}
+
+\newcommand\hourglassAnimation[1]{
+	\tikz\node (pic) at (0,-1in) {
+		\rotatebox{180}{
+			\resizebox{26pt}{28pt}{
+				\pgfmathparse{1 - (#1 / (\totalpages+.1))}
+				\edef\perc{\pgfmathresult}
+				\hourglass{1}{1.5}{\perc}{}
+			}
+		}
+	};
+}
+
+\newcommand\hourglass[4]{
+	\begin{tikzpicture}
+		\tikzset{
+			corners/.style={
+				rounded corners = 6pt
+			},
+			line/.style={
+				draw = black,
+				corners
+			},
+		}
+	%
+		\coordinate (center) at (#1/2, #2/2);
+	%	
+		\begin{scope}
+			\clip[corners] (center) -- (#1, #2) -- (0, #2) -- (center);
+			\fill[ONSblue] (0, #2/2 * #3) rectangle ++(#1, #2/2);
+		\end{scope}
+	%
+		\draw[densely dotted, thick, ONSblue!50, #4] (center) -- ++(0,-#2/2);
+	%
+		\begin{scope}
+			\clip[corners] (center) -- (0,0) -- (#1,0) -- (center);
+			\fill[ONSblue] (0, 0) rectangle ++(#1,{#2/2*(1-#3)});
+		\end{scope}
+	%
+		\draw[line] (center) -- (0,0) -- (#1,0) -- (center);
+		\draw[line] (center) -- (#1,#2) -- (0,#2) -- (center);
+	\end{tikzpicture}
+}
+
+
+
+% -------------------------------------------------------------------------------
 % Page styling
 % -------------------------------------------------------------------------------
 
@@ -323,24 +378,30 @@
 %
 	\ifodd\value{page}%
 		\begin{tikzpicture}[overlay, remember picture]
+		%
+			\draw[red, thick] ([xshift=-3mm-\marginparwidth]current page.south east) -- ([xshift=-3mm-\marginparwidth]current page.north east);
+		%
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
-			\node[anchor = north east, xshift = -1mm-\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south east){
-				\includegraphics[height = 0.04\textwidth]{example-image-b}
-			};
-%			\node[anchor = north east, xshift = 3mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){
-%				\scalebox{0.66}{
-%					\rotatebox{180}{
-%						\hourglassAnimation{\thepage}
-%					}
-%				}
-%			};
+			\ifhourglass%
+				\node[anchor = north east, xshift = 1.5mm-\marginparwidth, yshift = 0.066\paperheight]  at (current page.south east){%
+					\scalebox{0.66}{%
+						\rotatebox{180}{%
+							\hourglassAnimation{\thepage}%
+						}%
+					}%
+				};%
+			\else%
+				\node[anchor = north east, xshift = -1mm-\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south east){%
+					\includegraphics[height = 0.04\textwidth]{example-image-b}
+				};%
+			\fi%
 		\end{tikzpicture}
 	\else
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
-			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){
+			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){%
 				\includegraphics[height = 0.04\textwidth]{example-image-a}
 			};
 		\end{tikzpicture}
@@ -744,8 +805,8 @@
 
 \tikzset{
 	dlbuttonfill/.cd,
-	image/.style={draw=none,fill=ONSblue,text=white},
-	data/.style={draw=ONSblue,fill=none,text=ONSblue},
+	data/.style={draw=ONSblue,fill=ONSblue,text=white},
+	image/.style={draw=ONSblue,fill=none,text=ONSblue},
 	error/.style={draw=red,fill=none,text=red},
 	paint/.code={%
 		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
@@ -757,20 +818,20 @@
 }
 
 \newcommand{\button}[2][data]{%
-	Download this data: \newline%
-	\vskip-.5\baselineskip%
+%	Download this data: \newline%
+%	\vskip-.5\baselineskip%
 	\noindent\href{#2}{%
-		\begin{tikzpicture}
-			\node[
+		\begin{tikzpicture}%
+			\node[%
 				dlbuttonfill/paint=#1,
 				rectangle,
 				inner sep = 6pt,
 				rounded corners = 2pt,
 			] {%
 				\small\bfseries\MakeUppercase{#1}%
-			};
-		\end{tikzpicture}
-	}
+			};%
+		\end{tikzpicture}%
+	}%
 }
 
 
@@ -904,6 +965,21 @@
 	\vspace{-30pt}%
 	\@starttoc{toc}
 }
+
+
+
+% -------------------------------------------------------------------------------
+% Optional class parameters
+% -------------------------------------------------------------------------------
+
+\RequirePackage{xkeyval}
+
+\newif\ifhourglass
+
+%\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
+\DeclareOptionX{hourglass}{\hourglasstrue}
+\DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
+\ProcessOptionsX \relax
 
 
 
