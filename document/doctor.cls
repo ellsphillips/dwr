@@ -130,6 +130,7 @@
 	patterns,
 	shapes,
 }
+\pgfplotsset{compat=1.12}
 
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{middle}
@@ -184,10 +185,12 @@
 	\begin{tikzpicture}[overlay, remember picture]%
 		\begin{scope}%
 			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);%
-			\ifx\companylogo\empty%
+			\ifx\companybanner\empty%
 				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
 			\else%
-				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companylogo}};%
+				\fill[ONSblue] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+			%
+				\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
 			\fi%
 		\end{scope}
 		%
@@ -458,9 +461,15 @@
 		\begin{tikzpicture}[overlay, remember picture]
 			\draw[thick] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 		%
-			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){%
-				\includegraphics[height = 0.04\textwidth]{example-image-a}
-			};
+			\ifx\companylogo\empty%
+				\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){%
+					\includegraphics[height = 0.04\textwidth]{example-image-a}
+				};
+			\else%
+				\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){%
+					\includegraphics[height = 0.04\textwidth]{\companylogo}
+				};
+			\fi%
 		\end{tikzpicture}
 	\fi
 %
@@ -496,9 +505,9 @@
 		\begin{tikzpicture}[overlay, remember picture]
 %			\node[anchor = south] (DRAFTVERSION) at ([yshift = 0.033\paperheight]current page.south) {\bfseries\color{red}DRAFT VERSION};
 	%
-		\draw[red, thick] ([xshift=-3mm-\marginparwidth]current page.south east) -- ([xshift=-3mm-\marginparwidth]current page.north east);
-	%
-		\draw[red, thick] ([xshift=3mm+\marginparwidth]current page.south west) -- ([xshift=3mm+\marginparwidth]current page.north west);
+%		\draw[red, thick] ([xshift=-3mm-\marginparwidth]current page.south east) -- ([xshift=-3mm-\marginparwidth]current page.north east);
+%	%
+%		\draw[red, thick] ([xshift=3mm+\marginparwidth]current page.south west) -- ([xshift=3mm+\marginparwidth]current page.north west);
 		\end{tikzpicture}
 }
 
@@ -651,6 +660,56 @@
 \definecolor{ExeterOrange}{RGB}{255, 165, 30}
 \definecolor{LightOrange}{RGB}{255, 235, 206}
 \definecolor{ExeterRed}{RGB}{191, 30, 30}
+
+
+
+% -------------------------------------------------------------------------------
+% Environment macros
+% -------------------------------------------------------------------------------
+
+\makeatletter
+\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+{\pgfpoint{\hatchdistance-1pt}{\hatchdistance-1pt}}%
+{
+	\pgfsetcolor{\tikz@pattern@color}
+	\pgfsetlinewidth{\hatchthickness}
+	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+	\pgfusepath{stroke}
+}
+
+
+
+\tikzset{
+	dlbuttonfill/.cd,
+	data/.style={draw=ONSblue,fill=ONSblue,text=white},
+	image/.style={draw=ONSblue,fill=none,text=ONSblue},
+	error/.style={draw=red,fill=none,text=red},
+	paint/.code={%
+		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
+			\ifthenelse{\isin{#1}{data}}{\tikzset{dlbuttonfill/data}}{
+				\tikzset{dlbuttonfill/error}
+			}
+		}
+	},
+}
+
+\newcommand{\button}[2][data]{%
+	\noindent\href{#2}{%
+		\begin{tikzpicture}%
+			\node[%
+			dlbuttonfill/paint=#1,
+			rectangle,
+			inner sep = 6pt,
+			rounded corners = 2pt,
+			] {%
+				\small\bfseries\MakeUppercase{#1}%
+			};%
+		\end{tikzpicture}%
+	}%
+}
 
 
 
@@ -846,58 +905,6 @@
 
 
 % -------------------------------------------------------------------------------
-% Environment macros
-% -------------------------------------------------------------------------------
-
-\makeatletter
-\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
-{\pgfqpoint{0pt}{0pt}}
-{\pgfqpoint{\hatchdistance}{\hatchdistance}}
-{\pgfpoint{\hatchdistance-1pt}{\hatchdistance-1pt}}%
-{
-	\pgfsetcolor{\tikz@pattern@color}
-	\pgfsetlinewidth{\hatchthickness}
-	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
-	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
-	\pgfusepath{stroke}
-}
-
-
-
-\tikzset{
-	dlbuttonfill/.cd,
-	data/.style={draw=ONSblue,fill=ONSblue,text=white},
-	image/.style={draw=ONSblue,fill=none,text=ONSblue},
-	error/.style={draw=red,fill=none,text=red},
-	paint/.code={%
-		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
-			\ifthenelse{\isin{#1}{data}}{\tikzset{dlbuttonfill/data}}{
-				\tikzset{dlbuttonfill/error}
-			}
-		}
-	},
-}
-
-\newcommand{\button}[2][data]{%
-%	Download this data: \newline%
-%	\vskip-.5\baselineskip%
-	\noindent\href{#2}{%
-		\begin{tikzpicture}%
-			\node[%
-				dlbuttonfill/paint=#1,
-				rectangle,
-				inner sep = 6pt,
-				rounded corners = 2pt,
-			] {%
-				\small\bfseries\MakeUppercase{#1}%
-			};%
-		\end{tikzpicture}%
-	}%
-}
-
-
-
-% -------------------------------------------------------------------------------
 % Table of Contents
 % -------------------------------------------------------------------------------
 
@@ -1036,11 +1043,13 @@
 \RequirePackage{xkeyval}
 
 \def\companylogo{}
+\def\companybanner{}
 
 \newif\ifhourglass
 
 %\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
 \DeclareOptionX{logo}{\def\companylogo{#1}}
+\DeclareOptionX{banner}{\def\companybanner{#1}}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
