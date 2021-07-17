@@ -730,15 +730,12 @@
 	% Boxed section to summarise the main document's points as an enumerated
 	% list. Expand the list through the \item macro.
 	% 
-	% 
 	% Parameters
 	% ----------
-	% 
 	% None.
 	% 
 	% Demo
 	% ----
-	% 
 	% \begin{main-points}
 	%     \item Point 1
 	%     \item Point 2
@@ -782,7 +779,6 @@
 	% 
 	% Parameters
 	% ----------
-	% 
 	% #1: Column count
 	% #2: Column format
 	% #3: Column headers
@@ -791,7 +787,6 @@
 	% 
 	% Demo
 	% ----
-	% 
 	% \begin{doctor-table}{4}
 	%   {% Column format
 	%     >{{\raggedleft\arraybackslash\hsize=\hsize}}X
@@ -868,12 +863,10 @@
 	% 
 	% Parameters
 	% ----------
-	% 
 	% #1: 
 	% 
 	% Demo
 	% ----
-	% 
 	% \begin{doctor-plot}
 	% \end{doctor-plot}
 	% ---------------------------------------------------------------------------
@@ -926,47 +919,7 @@
 \dottedcontents{section}[2.3em]{}{2.3em}{5pt}
 \dottedcontents{subsection}[5.5em]{}{3.2em}{5pt}
 
-
-\@ifundefinedcolor{maindocumentcolour}{% Fast compilation
-%
-% TOC Chapter
-%
-	\titlecontents{chapter}[4pc]
-	{\addvspace{30pt}%
-		\begin{tikzpicture}[remember picture, overlay]%
-			\draw[black] (-4.2,-.1) rectangle (-.8,.5);%
-			\pgftext[left,x=-3.5cm,y=0.2cm]{\color{black}\large\bfseries\sc\ \thecontentslabel};%
-		\end{tikzpicture}%
-	}%
-	{}
-	{}
-	{\;\titlerule\;\large\bfseries Page 
-		\thecontentspage
-		\begin{tikzpicture}[remember picture, overlay]
-			\draw[black] (2pt,0) rectangle (6,0.1pt);
-		\end{tikzpicture}%
-	}%
-	[\addvspace{.2cm}]%
-%
-% TOC Section
-%
-	\titlecontents{section}[0pc]
-	{\addvspace{5pt}}
-	{
-		\contentslabel[\thecontentslabel]{2pc}\color{black}}
-	{}
-	{\hfill\small\thecontentspage\color{black}}
-	[\addvspace{3pt}]
-%
-% TOC Subsection
-%
-	\titlecontents*{subsection}[1pc]
-	{\addvspace{-1pt}\small\contentsmargin{-1cm}\normalfont\sffamily\footnotesize}
-	{}
-	{}
-	{}
-	[~{–}\ ][]
-}{% Paint colour mapping
+% Start title contents formatting
 %
 % TOC Chapter
 %
@@ -1032,7 +985,8 @@
 	{\fbox{\thecontentslabel}\hspace*{1.5em}}
 	{}
 	{\ \titlerule*[8pt]{$\cdot$}\contentspage}
-}
+%
+% End title contents formatting
 
 % Correct spacing between page header and TOC
 \renewcommand{\tableofcontents}{%
