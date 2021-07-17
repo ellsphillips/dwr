@@ -2,7 +2,7 @@
 		\noindent\parbox{\textwidth}{\justify\slshape\lipsum[9]\vskip\baselineskip}
 	}
 	\draw[
-		fill=ONSorange,
+		fill=ons-orange,
 		opacity=0.05,
 		draw = none
 	] (57, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (83, \pgfkeysvalueof{/pgfplots/ymax});
@@ -22,14 +22,14 @@
 	] table[x=time, y=data1] {src/graphs/doctor-plot.dat};
 	
 	\addplot[
-		ONSblue,
+		ons-blue,
 		thick,
 		mark=none
 	] table[x=time, y=data1] {src/graphs/doctor-plot.dat};
 	\addlegendentry{data1}
 	
 	\addplot[
-		ONSgreen,
+		ons-green,
 		thick,
 		mark=none
 	] table[x=time, y=data2] {src/graphs/doctor-plot.dat};

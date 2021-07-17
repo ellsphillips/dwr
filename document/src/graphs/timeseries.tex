@@ -33,14 +33,14 @@
 		] table[x=time, y=data1] {src/graphs/timeseries.dat};
 		
 		\addplot[
-			ONSblue,
+			ons-blue,
 			thick,
 			mark=none
 		] table[x=time, y=data1] {src/graphs/timeseries.dat};
 		\addlegendentry{data1}
 		
 		\addplot[
-			ONSgreen,
+			ons-green,
 			thick,
 			mark=none
 		] table[x=time, y=data2] {src/graphs/timeseries.dat};
@@ -50,7 +50,7 @@
 			pattern=flexible hatch,
 			hatch distance=10pt,
 			hatch thickness=.5pt,
-			pattern color = ONSpink!20,
+			pattern color = ons-pink!20,
 			draw = none
 		]
 		(0, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (43, \pgfkeysvalueof{/pgfplots/ymax});
