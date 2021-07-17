@@ -107,7 +107,7 @@
 \setlength{\XeTeXLinkMargin}{-1pt}
 
 \newcommand{\refer}[1]{
-	\hspace{-.15em}\textcolor{ONSblue}{\bfseries Figure\ref{#1}}\hspace{-.4em}
+	\hspace{-.15em}\textcolor{maindocumentcolour}{\bfseries Figure\ref{#1}}\hspace{-.4em}
 }
 
 
@@ -188,7 +188,7 @@
 			\ifx\companybanner\empty%
 				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
 			\else%
-				\fill[ONSblue] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+				\fill[maindocumentcolour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
 			%
 				\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
 			\fi%
@@ -265,14 +265,14 @@
 	%	
 		\begin{scope}
 			\clip[corners] (center) -- (#1, #2) -- (0, #2) -- (center);
-			\fill[ONSblue] (0, #2/2 * #3) rectangle ++(#1, #2/2);
+			\fill[maindocumentcolour] (0, #2/2 * #3) rectangle ++(#1, #2/2);
 		\end{scope}
 	%
-		\draw[densely dotted, thick, ONSblue!50, #4] (center) -- ++(0,-#2/2);
+		\draw[densely dotted, thick, maindocumentcolour!50, #4] (center) -- ++(0,-#2/2);
 	%
 		\begin{scope}
 			\clip[corners] (center) -- (0,0) -- (#1,0) -- (center);
-			\fill[ONSblue] (0, 0) rectangle ++(#1,{#2/2*(1-#3)});
+			\fill[maindocumentcolour] (0, 0) rectangle ++(#1,{#2/2*(1-#3)});
 		\end{scope}
 	%
 		\draw[line] (center) -- (0,0) -- (#1,0) -- (center);
@@ -341,9 +341,9 @@
 	\vspace{3mm}
 	\flushleft{
 		\begin{tikzpicture}[overlay]
-			\node[anchor = east, rectangle, rounded corners = 1pt, inner sep = 3.5pt, fill = ONSblue] at (-0.45, 0.45) {\normalfont\sffamily\large\bfseries\color{white} \thesection.\thedoctorsubsection};
+			\node[anchor = east, rectangle, rounded corners = 1pt, inner sep = 3.5pt, fill = maindocumentcolour] at (-0.45, 0.45) {\normalfont\sffamily\large\bfseries\color{white} \thesection.\thedoctorsubsection};
 		%
-			\draw[color = ONSblue, anchor=west] (-0.15, 0.45) node {\large\bfseries#1};
+			\draw[color = maindocumentcolour, anchor=west] (-0.15, 0.45) node {\large\bfseries#1};
 		\end{tikzpicture}
 	}
 	\justify
@@ -358,7 +358,7 @@
 	\begin{tikzpicture}[overlay, remember picture]
 		\node[anchor = north west] at (current page.north west) {
 			\begin{tikzpicture}[overlay, remember picture]
-				\fill[LightGrey] (current page.north west) rectangle ([yshift = -0.1\paperheight]current page.north east);
+				\fill[ons-grey-900] (current page.north west) rectangle ([yshift = -0.1\paperheight]current page.north east);
 			%
 				\draw[color = black, thick] ([yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
 			\end{tikzpicture}
@@ -369,7 +369,7 @@
 			rounded corners = 4pt,
 			inner sep = 11pt,
 			draw = black,
-			fill = ONSblue,
+			fill = maindocumentcolour,
 			line width = 0.25mm,
 			yshift = -0.1\paperheight
 		] at (current page.north){
@@ -383,7 +383,7 @@
 	\begin{textblock}{1}(0,0)
 		\begin{tikzpicture}[x=1.0cm,y=1.0cm]%
 			\clip(0,0) rectangle (\paperwidth,.105\paperwidth);
-			\fill[ONSblue] (0,.0333\paperwidth) rectangle (\paperwidth,.105\paperwidth);
+			\fill[maindocumentcolour] (0,.0333\paperwidth) rectangle (\paperwidth,.105\paperwidth);
 			\node[red,right] at (.05\paperwidth,.07\paperwidth) {\Large\color{white}\bfseries\MakeUppercase{#1}};
 		\end{tikzpicture}
 	\end{textblock}
@@ -485,7 +485,7 @@
 						\equal{\thetotalchapters}{\x}
 					}{%
 						%%% IF CURRENT CHAPTER
-						\draw[fill=ONSblue, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+						\draw[fill=maindocumentcolour, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
 					%
 						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 						
@@ -640,17 +640,15 @@
 % Colour schema
 % -------------------------------------------------------------------------------
 
-\definecolor{ONSgreen}{RGB}{168, 189, 58} % #a8bd3a
-\definecolor{ONSblue}{RGB}{0, 61, 89} % #003d59
-\definecolor{ONSpink}{RGB}{206, 53, 135} % #ce3587
-\definecolor{ONSorange}{RGB}{216, 66, 39} % #d84227
-\definecolor{ONSyellow}{RGB}{226, 188, 34} % #e2bc22
+\definecolor{ons-green}{RGB}{168, 189, 58} % #a8bd3a
+\definecolor{ons-blue}{RGB}{0, 61, 89} % #003d59
+\definecolor{ons-pink}{RGB}{206, 53, 135} % #ce3587
+\definecolor{ons-orange}{RGB}{216, 66, 39} % #d84227
+\definecolor{ons-yellow}{RGB}{226, 188, 34} % #e2bc22
 
-\definecolor{XLSpeach}{RGB}{252, 228, 214} % #fce4d6
-
-\definecolor{LightGrey}{RGB}{245, 245, 245}
-\definecolor{MidGrey}{RGB}{230, 230, 230}
-\definecolor{DarkGrey}{RGB}{100, 100, 100}
+\definecolor{ons-grey-900}{RGB}{245, 245, 245}
+\definecolor{ons-grey-700}{RGB}{230, 230, 230}
+\definecolor{ons-gray-100}{RGB}{100, 100, 100}
 \definecolor{LightBlue}{RGB}{206, 225, 255} 
 \definecolor{LightGreen}{RGB}{210, 255, 206}
 \definecolor{ExeterBlue}{RGB}{37, 85, 158} 
@@ -684,8 +682,8 @@
 
 \tikzset{
 	dlbuttonfill/.cd,
-	data/.style={draw=ONSblue,fill=ONSblue,text=white},
-	image/.style={draw=ONSblue,fill=none,text=ONSblue},
+	data/.style={draw=maindocumentcolour,fill=maindocumentcolour,text=white},
+	image/.style={draw=maindocumentcolour,fill=none,text=maindocumentcolour},
 	error/.style={draw=red,fill=none,text=red},
 	paint/.code={%
 		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
@@ -741,14 +739,14 @@
 	% Demo
 	% ----
 	% 
-	% \begin{doctor-plot}
-	% \end{doctor-plot}
+	% \begin{main-points}
+	% \end{main-points}
 	% ---------------------------------------------------------------------------
 	\begin{tikzpicture}%
 		\node[%
 			text width = \textwidth-48pt,
 			rounded corners = 4pt,
-			fill = LightGrey,
+			fill = ons-grey-900,
 			inner sep = 24pt,
 		] (list) {%
 			\begin{varwidth}{\linewidth}%
@@ -758,7 +756,7 @@
 				}
 				\justify
 				\begin{enumerate}[%
-					label=\bfseries\color{ONSblue}\theenumi.\:,
+					label=\bfseries\color{maindocumentcolour}\theenumi.\:,
 					wide,
 					labelwidth=!,
 					labelindent=0pt,
@@ -925,7 +923,7 @@
 \dottedcontents{subsection}[5.5em]{}{3.2em}{5pt}
 
 
-\@ifundefinedcolor{ONSblue}{% Fast compilation
+\@ifundefinedcolor{maindocumentcolour}{% Fast compilation
 %
 % TOC Chapter
 %
@@ -976,7 +974,7 @@
 			\fill[
 				rounded corners = 4pt,
 				inner sep = 11pt,
-				ONSblue,
+				maindocumentcolour,
 				text=white
 			] (-4.5,-.2) rectangle (-.8,.6);%
 		%
@@ -1052,15 +1050,13 @@
 \def\companylogo{}
 \def\companybanner{}
 
+\def\maincolour{}
+
 \newif\ifhourglass
 
-%\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
-\DeclareOptionX{logo}{%
-	\IfFileExists{#1}{\def\companylogo{#1}}{}%
-}
-\DeclareOptionX{banner}{%
-	\IfFileExists{#1}{\def\companybanner{#1}}{}%
-}
+\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
+\DeclareOptionX{logo}{\IfFileExists{#1}{\def\companylogo{#1}}{}}
+\DeclareOptionX{banner}{\IfFileExists{#1}{\def\companybanner{#1}}{}}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
