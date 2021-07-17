@@ -1,7 +1,7 @@
 \documentclass[
 	hourglass,
-	logo=img/ons-english,
-	banner=img/ons-morse
+%	logo=img/ons-english,
+%	banner=img/ons-morse
 ]{doctor}
 
 \title{PROJECT TITLE}
@@ -52,19 +52,15 @@
 
 \input{src/tables/mixed}
 
-Download this data: \newline%
-\vskip-.5\baselineskip%
-\button[image]{www.google.com}
-\button{www.google.com}
-
 \section{Plots}
 
 \input{src/graphs/timeseries}
 
 \input{src/graphs/doctor-plot}
 
-\end{document}
+\begin{downloads}
+	\button[image]{www.google.com}
+	\button{www.google.com}
+\end{downloads}
 
-%\begin{download}
-%	\button[]{website}
-%\end{download}
+\end{document}

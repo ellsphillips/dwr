@@ -720,6 +720,13 @@
 \RequirePackage{enumitem}
 \RequirePackage{environ}
 
+\newenvironment{downloads}{%
+	\noindent Download the data:\newline%
+	\vskip-.5\baselineskip%
+}{
+	\newline%
+}
+
 \NewEnviron{main-points}{
 	% ---------------------------------------------------------------------------
 	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
