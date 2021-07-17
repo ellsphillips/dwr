@@ -727,19 +727,23 @@
 
 \NewEnviron{main-points}{
 	% ---------------------------------------------------------------------------
-	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
-	% difference quiver plots and regions hatch-shading are supported. Set the  
-	% axis labels and title and allow Doctor to automatically populate the rest.
+	% Boxed section to summarise the main document's points as an enumerated
+	% list. Expand the list through the \item macro.
+	% 
 	% 
 	% Parameters
 	% ----------
 	% 
-	% #1: 
+	% None.
 	% 
 	% Demo
 	% ----
 	% 
 	% \begin{main-points}
+	%     \item Point 1
+	%     \item Point 2
+	%     \item ...
+	%     \item Point n
 	% \end{main-points}
 	% ---------------------------------------------------------------------------
 	\begin{tikzpicture}%
