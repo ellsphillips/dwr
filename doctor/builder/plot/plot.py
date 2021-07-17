@@ -17,6 +17,9 @@ class PlotBuilder():
     if data is None:
       print(f"{style.warning}I'm not much good without data, you know...{style.end}")
 
+  def pluck(opts: dict, *args):
+    return [opts[arg] for arg in args]
+
   def id_data(self) -> list:
     return [(name, series) for name, series in self.data.items()]
 
