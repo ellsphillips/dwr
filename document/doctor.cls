@@ -1055,8 +1055,12 @@
 \newif\ifhourglass
 
 %\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
-\DeclareOptionX{logo}{\def\companylogo{#1}}
-\DeclareOptionX{banner}{\def\companybanner{#1}}
+\DeclareOptionX{logo}{%
+	\IfFileExists{#1}{\def\companylogo{#1}}{}%
+}
+\DeclareOptionX{banner}{%
+	\IfFileExists{#1}{\def\companybanner{#1}}{}%
+}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
