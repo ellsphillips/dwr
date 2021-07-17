@@ -4,33 +4,9 @@
 %	banner=img/ons-morse
 ]{doctor}
 
-\title{PROJECT TITLE}
-\subtitle{PROJECT SUBTITLE}
-\author{Elliott Phillips}
-\credential{Data Scientist}
-\credential{BSc OR $\bm{\mathrm{II}}$}
-\date{\today}
-
 \begin{document}
-
-\frontpage
-
-{ % Document setup
-	\makeatletter
-		\@twosidetrue
-		\@openrighttrue
-	\makeatother
 	
-	\ifodd\thepage\relax\else\blankpage\fi
-	
-	\tableofcontents
-	\newpage
-	\ifodd\thepage\relax\else\blankpage\fi
-	
-%	\chaptertabs
-	
-	\setcounter{page}{1}
-}
+\input{src/init}
 
 \chapter{Typography}
 
