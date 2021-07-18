@@ -116,7 +116,7 @@
 % Graphics and helper functions
 % -------------------------------------------------------------------------------
 
-\RequirePackage[]{tcolorbox}
+\RequirePackage[most]{tcolorbox}
 \RequirePackage{tikz}
 \RequirePackage{tkz-euclide}
 \RequirePackage{pgfplots}
@@ -725,7 +725,19 @@
 	\newline%
 }
 
-\NewEnviron{main-points}{
+
+
+\newtcolorbox{main-points-wrapper}{
+	enhanced,
+	breakable,
+	rounded corners,
+	arc = 4pt,
+	boxrule = 0pt,
+	colback = ons-grey-900,
+	boxsep=12pt,
+}
+
+\newenvironment{main-points}{%
 	% ---------------------------------------------------------------------------
 	% Boxed section to summarise the main document's points as an enumerated
 	% list. Expand the list through the \item macro.
@@ -743,30 +755,21 @@
 	%     \item Point n
 	% \end{main-points}
 	% ---------------------------------------------------------------------------
-	\begin{tikzpicture}%
-		\node[%
-			text width = \textwidth-48pt,
-			rounded corners = 4pt,
-			fill = ons-grey-900,
-			inner sep = 24pt,
-		] (list) {%
-			\begin{varwidth}{\linewidth}%
-				{%
-					\Large\bfseries Main points%
-					\vskip.5\baselineskip\color{black!50}\hrule
-				}
-				\justify
-				\begin{enumerate}[%
-					label=\bfseries\color{maindocumentcolour}\theenumi.\:,
-					wide,
-					labelwidth=!,
-					labelindent=0pt,
-				]%
-					\BODY
-				\end{enumerate}%
-			\end{varwidth}%
-		};%
-	\end{tikzpicture}%
+	\begin{main-points-wrapper}%
+		{%
+			\vskip.25\baselineskip\Large\bfseries Main points%
+			\vskip.5\baselineskip\color{black!50}\hrule%
+		}
+		\justify%
+		\begin{enumerate}[%
+			label=\bfseries\color{maindocumentcolour}\theenumi.\:,
+			wide,
+			labelwidth=!,
+			labelindent=0pt,
+		]%
+}{%
+		\end{enumerate}%
+	\end{main-points-wrapper}%
 }
 
 
