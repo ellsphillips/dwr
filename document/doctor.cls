@@ -1,5 +1,5 @@
 %% Start of file `doctor.cls'.
-%% Copyright 2021 Elliott Phillips <elliott.phillips@ons.gov.uk>
+%% Copyright 2021 Elliott Phillips <https://github.com/ellsphillips>
 %
 
 % -------------------------------------------------------------------------------
@@ -1006,18 +1006,18 @@
 % Optional class parameters
 % -------------------------------------------------------------------------------
 
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{img/}{figures/}}% append
+\makeatother
+
 \RequirePackage{xkeyval}
-
-\def\companylogo{}
-\def\companybanner{}
-
-\def\maincolour{}
 
 \newif\ifhourglass
 
 \DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
-\DeclareOptionX{logo}{\IfFileExists{#1}{\def\companylogo{#1}}{}}
-\DeclareOptionX{banner}{\IfFileExists{#1}{\def\companybanner{#1}}{}}
+\DeclareOptionX{logo}{\IfFileExists{#1}{\def\companylogo{#1}}{\def\companylogo{}}}
+\DeclareOptionX{banner}{\IfFileExists{#1}{\def\companybanner{#1}}{\def\companybanner{}}}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
