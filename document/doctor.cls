@@ -858,7 +858,7 @@
 
 
 
-\newenvironment{doctor-plot}[1]{
+\newenvironment{doctor-plot}[1][]{
 	% ---------------------------------------------------------------------------
 	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
 	% difference quiver plots and regions hatch-shading are supported. Set the  
@@ -873,7 +873,7 @@
 	% \begin{doctor-plot}
 	% \end{doctor-plot}
 	% ---------------------------------------------------------------------------
-	#1
+%	#1
 	\noindent\begin{tikzpicture}[
 		hatch distance/.store in=\hatchdistance,
 		hatch distance=10pt,

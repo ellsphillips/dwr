@@ -4,7 +4,7 @@
 		hatch thickness/.store in=\hatchthickness,
 		hatch thickness=2pt
 	]
-	%
+%
 	\begin{axis}[%
 		% Abstract
 			axis x line=bottom,
@@ -26,6 +26,21 @@
 			xmin=0,
 		]
 		
+		\draw[
+			pattern=flexible hatch,
+			hatch distance=10pt,
+			hatch thickness=.5pt,
+			pattern color = ons-pink!20,
+			draw = none
+		]
+		(18, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (36, \pgfkeysvalueof{/pgfplots/ymax});
+		
+		\draw[
+			fill=ons-orange,
+			opacity=0.05,
+			draw = none
+		] (57, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (73, \pgfkeysvalueof{/pgfplots/ymax});
+		
 		\addplot[
 			gray!25,
 			quiver={v=\thisrow{difference}},
@@ -45,14 +60,5 @@
 			mark=none
 		] table[x=time, y=data2] {src/graphs/timeseries.dat};
 		\addlegendentry{data2}
-		
-		\draw[
-			pattern=flexible hatch,
-			hatch distance=10pt,
-			hatch thickness=.5pt,
-			pattern color = ons-pink!20,
-			draw = none
-		]
-		(0, \pgfkeysvalueof{/pgfplots/ymin}) rectangle (43, \pgfkeysvalueof{/pgfplots/ymax});
 	\end{axis}
 \end{tikzpicture}
