@@ -41,7 +41,7 @@ def main():
 
 if __name__ == "__main__":
   os.system('cls' if os.name == 'nt' else 'clear')
-  print("\n"*100)
   doctor.log.announce("The [Doctor] was called...")
+  doctor.log.notice(f"Currently operating on version ({doctor.__version__})")
 
   main()
