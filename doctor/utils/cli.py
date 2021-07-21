@@ -107,6 +107,23 @@ class log:
     self.content = content
     self.style = style
 
+  def highlighter(
+    input_str: str,
+    colour: style,
+    l_delim: str = "[",
+    r_delim: str = "]",
+  ):
+    matches = re.compile(r'\[([^]]*)\]')
+
+    l = []
+    def repl(m):
+      l.append(m.group(0))
+      return f'{colour}{m[1]}{style.end}'
+
+    out_str = matches.sub(repl, input_str)
+
+    return f"{out_str}\n"
+
   def warning(input_str: str) -> None:
     elements = [
       f"{style.emoji['cross']} ",
@@ -129,20 +146,11 @@ class log:
       ])
     )
 
-  def announce() -> None:
-    pass
+  def announce(input_str: str) -> None:
+    print(log.highlighter(input_str, style.announce))
 
   def comment(input_str: str) -> None:
-    matches = re.compile(r'\[([^]]*)\]')
-
-    l = []
-    def repl(m):
-      l.append(m.group(0))
-      return f'{style.comment}{m[1]}{style.end}'
-
-    out_str = matches.sub(repl, input_str)
-
-    print(f"{out_str}\n")
+    print(log.highlighter(input_str, style.comment))
 
   def notice(input_str: str) -> None:
     print(f"{style.notice}{input_str}{style.end}")
