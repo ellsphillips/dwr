@@ -113,7 +113,7 @@ class log:
     l_delim: str = "[",
     r_delim: str = "]",
   ):
-    matches = re.compile(r'\[([^]]*)\]')
+    matches = re.compile(f'\[({l_delim}^]{r_delim}*)\]')
 
     l = []
     def repl(m):
