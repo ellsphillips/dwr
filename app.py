@@ -5,10 +5,9 @@ import data
 
 @doctor.timer
 def main():
-  os.system('cls' if os.name == 'nt' else 'clear')
-  print("\n"*100)
-  print(f"The {doctor.style.announce}Doctor{doctor.style.end} was called...\n")
-
+  """
+  Scripting environment for Python data to TeX markup conversion.
+  """
   table = doctor.table(
     data.numerical((20, 8)),
     column_format=[0.1, 0.2, 0.3, 0.4],
@@ -16,10 +15,6 @@ def main():
     short_caption="Shorter caption for TOC",
     label="tabledemo"
   )
-
-  print(table.get_result())
-
-  # doctor.build(outfile="report", quick=False)
 
   #
 
@@ -42,7 +37,11 @@ def main():
 
   figure.export_data(out_path="graphs/test")
 
-  doctor.log.comment("[This is] not [a] test...")
+  # doctor.build(outfile="report", quick=False)
 
 if __name__ == "__main__":
+  os.system('cls' if os.name == 'nt' else 'clear')
+  print("\n"*100)
+  doctor.log.announce("The [Doctor] was called...")
+
   main()
