@@ -15,7 +15,7 @@ class PlotBuilder():
     self.options = options
 
     if data is None:
-      print(f"{style.warning}I'm not much good without data, you know...{style.end}")
+      log.warning("I'm not much good without data, you know...")
 
   def pluck(opts: dict, *args):
     return [opts[arg] for arg in args]
