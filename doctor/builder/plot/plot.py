@@ -64,14 +64,26 @@ class PlotBuilder():
     ]
 
     elements = [
-      r"\addplot[",
+      "\\addplot[",
       ",\n".join([f"{self.tab_space}{arg}" for arg in args]),
-		  "] table[x=time, y=data1] {src/graphs/timeseries.dat};"
+		  f"] table[x=time, y={self.data[self.add_plot.colour_index - 1]}] {{src/graphs/timeseries.dat}};"
     ]
 
-    return "\n".join(e for e in elements) 
+    return "\n".join(e for e in elements)
     
   #
+
+  def env_begin(self) -> str:
+    pass
+
+  def env_end(self) -> str:
+    pass
+
+  def env_body(self) -> str:
+    pass
+
+  def get_result():
+    pass
   
   def export_data(self, out_path: str) -> None:
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
