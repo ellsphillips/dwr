@@ -153,5 +153,5 @@ class log:
     print(log.highlighter(input_str, style.comment))
 
   def notice(input_str: str) -> None:
-    print(f"{style.notice}{input_str}{style.end}")
+    print(f"{style.notice}{input_str}{style.end}\n")
 

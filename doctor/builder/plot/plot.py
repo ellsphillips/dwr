@@ -10,6 +10,14 @@ class PlotBuilder():
   tab_space = " "*4
   double_backslash = "\\\\"
 
+  colours = [
+    "ons-blue",
+    "ons-green",
+    "ons-pink",
+    "ons-orange",
+    "ons-yellow",
+  ]
+
   def __init__(
     self,
     data: dict = None,
@@ -40,8 +48,21 @@ class PlotBuilder():
 
     return output[["time"] + [c for c in output.columns if c != "time" ] ]
 
-  def add_plot(self) -> str:
-    args = ["ons-blue","thick","mark=none"]
+  def cycle_colours(func):
+    def wrapper(*args, **kwargs):
+      wrapper.colour_index += 1
+      return func(*args, **kwargs)
+    wrapper.colour_index = 0
+    return wrapper
+
+  @cycle_colours
+  def add_plot(self):
+    args = [
+      self.colours[(self.add_plot.colour_index - 1) % len(self.colours)],
+      "thick",
+      "mark=none"
+    ]
+
     elements = [
       r"\addplot[",
       ",\n".join([f"{self.tab_space}{arg}" for arg in args]),
