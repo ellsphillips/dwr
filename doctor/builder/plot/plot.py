@@ -82,8 +82,19 @@ class PlotBuilder():
   def env_body(self) -> str:
     pass
 
-  def get_result():
-    pass
+  def get_result(self) -> str:
+    """
+    Compile the complete string representation of a LaTeX table.
+    """
+    elements = [
+      self.env_begin,
+      self.env_body,
+      self.env_end,
+    ]
+    result = "\n".join([item for item in elements if item])
+    trailing_newline = "\n"
+    result += trailing_newline
+    return result
   
   def export_data(self, out_path: str) -> None:
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
