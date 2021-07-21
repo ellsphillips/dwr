@@ -6,6 +6,10 @@ from ...utils.cli import *
 class PlotBuilder():
   """
   """
+
+  tab_space = " "*4
+  double_backslash = "\\\\"
+
   def __init__(
     self,
     data: dict = None,
@@ -35,6 +39,18 @@ class PlotBuilder():
     output["time"] = range(time_points)
 
     return output[["time"] + [c for c in output.columns if c != "time" ] ]
+
+  def add_plot(self) -> str:
+    args = ["ons-blue","thick","mark=none"]
+    elements = [
+      r"\addplot[",
+      ",\n".join([f"{self.tab_space}{arg}" for arg in args]),
+		  "] table[x=time, y=data1] {src/graphs/timeseries.dat};"
+    ]
+
+    return "\n".join(e for e in elements) 
+    
+  #
   
   def export_data(self, out_path: str) -> None:
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
