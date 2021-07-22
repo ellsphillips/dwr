@@ -78,7 +78,7 @@ class PlotBuilder():
     return "\\begin{doctor-plot}\n"
 
   def env_end(self) -> str:
-    pass
+    return "\\end{doctor-plot}\n"
 
   def env_body(self) -> str:
     pass
