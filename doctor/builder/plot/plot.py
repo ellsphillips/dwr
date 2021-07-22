@@ -61,12 +61,13 @@ class PlotBuilder():
       self.colours[(self.add_plot.colour_index - 1) % len(self.colours)],
       "thick",
       "mark=none"
-    ]
+    ] 
 
     elements = [
       "\\addplot[",
       ",\n".join([f"{self.tab_space}{arg}" for arg in args]),
-		  f"] table[x=time, y={self.data[self.add_plot.colour_index - 1]}] {{src/graphs/timeseries.dat}};"
+		  f"] table[x=time, y={list(self.data)[self.add_plot.colour_index - 1]}]",
+      "{src/graphs/timeseries.dat};\n"
     ]
 
     return "\n".join(e for e in elements)

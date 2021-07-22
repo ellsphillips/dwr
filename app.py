@@ -35,10 +35,10 @@ def main():
     }
   )
 
-  figure.add_plot()
-  figure.add_plot()
+  print(figure.add_plot())
+  print(figure.add_plot())
 
-  figure.export_data(out_path="graphs/test")
+  # figure.export_data(out_path="graphs/test")
 
 
   # doctor.build(outfile="report", quick=False)
