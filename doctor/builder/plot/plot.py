@@ -25,6 +25,7 @@ class PlotBuilder():
   ):
     self.data = data
     self.options = options
+    self.plot_declarations: list = []
 
     if data is None:
       log.warning("I'm not much good without data, you know...")
@@ -48,14 +49,14 @@ class PlotBuilder():
 
     return output[["time"] + [c for c in output.columns if c != "time" ] ]
 
-  def cycle_colours(func):
+  def plot_state(func):
     def wrapper(*args, **kwargs):
       wrapper.colour_index += 1
       return func(*args, **kwargs)
     wrapper.colour_index = 0
     return wrapper
 
-  @cycle_colours
+  @plot_state
   def add_plot(self):
     args = [
       self.colours[(self.add_plot.colour_index - 1) % len(self.colours)],
@@ -70,7 +71,10 @@ class PlotBuilder():
       "{src/graphs/timeseries.dat};\n"
     ]
 
-    return "\n".join(e for e in elements)
+    res = "\n".join(e for e in elements)
+    self.plot_declarations.append(res)
+
+    return res
     
   #
 
@@ -81,7 +85,8 @@ class PlotBuilder():
     return "\\end{doctor-plot}\n"
 
   def env_body(self) -> str:
-    pass
+    log.comment("[Timeseries passed into doctor.plot's data attribute:]")
+    print("\n".join(syn for syn in self.plot_declarations))
 
   def get_result(self) -> str:
     """
