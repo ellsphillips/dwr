@@ -139,7 +139,7 @@ class log:
     print(
       "".join([
         f"{style.emoji['write']} ",
-        "Data file generated at ",
+        "File generated at ",
         f"{style.output}",
         f"{file_path}",
         f"{style.end}\n"
