@@ -337,7 +337,7 @@
 
 \renewcommand{\subsection}[1]{
 	\stepcounter{doctorsubsection}
-	\addcontentsline{toc}{subsection}{\color{black!50} \thesection.\thedoctorsubsection \; #1}
+	\addcontentsline{toc}{subsection}{\thesection.\thedoctorsubsection \; #1}
 	\vspace{3mm}
 	\flushleft{
 		\begin{tikzpicture}[overlay]
@@ -975,9 +975,9 @@
 	\titlecontents{subsection}[5.1pc]
 	{\addvspace{5pt}}
 	{%
-		\color{black!50}\contentslabel[\thecontentslabel]{2pc}\color{black}}
-	{}
-	{\hfill\small\color{black!50}\thecontentspage\color{black}}
+		\contentslabel[\thecontentslabel]{2pc}}
+	{\color{black!50}}
+	{\hfill\small\color{black!50}\thecontentspage}
 	[\addvspace{0pt}]
 %
 % TOC Figure
