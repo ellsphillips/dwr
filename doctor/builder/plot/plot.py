@@ -47,9 +47,37 @@ class PlotBuilder():
     return [opts[arg] for arg in args]
 
   def id_data(self) -> list:
+    """
+    Split data input dict into data series name and values.
+
+    Args:
+      None.
+
+    Returns:
+      List of coupled series' names and values.
+
+    Raises:
+      None.
+    """
     return [(name, series) for name, series in self.data.items()]
 
   def build_dataframe(self) -> pd.DataFrame:
+    """
+    Build and prepare a DataFrame for export to user-specified data file type
+    and location. Handles all series passed to `data` dictionary and pads NaNs
+    to match longest timeseries. 
+
+    Args:
+      None.
+
+    Returns:
+      Pandas DataFrame object with initial time index, all timeseries specified
+      in `data` input, and additional value for special TeX-defined plot, e.g.
+      Quiver etc.
+
+    Raises:
+      None.
+    """
     time_points = max([len(ts[1]) for ts in self.id_data()])
     log.comment(f"Built dataframe of dimension [{len(self.data), time_points}]")
 
