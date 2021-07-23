@@ -35,15 +35,11 @@ def main():
     }
   )
 
-  figure.add_plot()
-  figure.add_plot()
-
-  figure.env_body()
+  print(figure.get_result())
 
   # figure.export_data(out_path="graphs/test")
 
-
-  doctor.build(outfile="report", quick=False)
+  # doctor.build(outfile="report", quick=False)
 
 if __name__ == "__main__":
   os.system('cls' if os.name == 'nt' else 'clear')

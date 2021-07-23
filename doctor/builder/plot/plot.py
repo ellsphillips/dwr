@@ -65,39 +65,42 @@ class PlotBuilder():
     ] 
 
     elements = [
-      "\\addplot[",
-      ",\n".join([f"{self.tab_space}{arg}" for arg in args]),
-		  f"] table[x=time, y={list(self.data)[self.add_plot.colour_index - 1]}]",
-      "{src/graphs/timeseries.dat};\n"
+      f"{self.tab_space}\\addplot[",
+      ",\n".join([f"{self.tab_space * 2}{arg}" for arg in args]),
+		  f"{self.tab_space}] table[x=time, y={list(self.data)[self.add_plot.colour_index - 1]}]",
+      f"{self.tab_space}{{src/graphs/timeseries.dat}};"
     ]
 
     res = "\n".join(e for e in elements)
     self.plot_declarations.append(res)
 
     return res
-    
-  #
 
+  @property
   def env_begin(self) -> str:
-    return "\\begin{doctor-plot}\n"
+    return r"\begin{doctor-plot}"
 
+  @property
   def env_end(self) -> str:
-    return "\\end{doctor-plot}\n"
+    return r"\end{doctor-plot}"
 
+  @property
   def env_body(self) -> str:
-    log.comment("[Timeseries passed into doctor.plot's data attribute:]")
-    print("\n".join(syn for syn in self.plot_declarations))
+    [self.add_plot() for _ in list(self.data)]
+    return "\n%\n".join(syn for syn in self.plot_declarations)
 
   def get_result(self) -> str:
     """
     Compile the complete string representation of a LaTeX table.
     """
+    log.comment("[TeX source generated for plotting:]")
+
     elements = [
       self.env_begin,
       self.env_body,
       self.env_end,
     ]
-    result = "\n".join([item for item in elements if item])
+    result = "\n".join([item for item in elements])
     trailing_newline = "\n"
     result += trailing_newline
     return result
