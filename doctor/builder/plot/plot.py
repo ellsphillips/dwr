@@ -91,6 +91,18 @@ class PlotBuilder():
     return output[["time"] + [c for c in output.columns if c != "time" ] ]
 
   def plot_state(func):
+    """
+    Decorator method to track number of plots added through input dict.
+
+    Args:
+      func: Function to be tracked for count.
+
+    Returns:
+      Wrapper method.
+
+    Raises:
+      None.
+    """
     def wrapper(*args, **kwargs):
       wrapper.colour_index += 1
       return func(*args, **kwargs)
@@ -99,6 +111,20 @@ class PlotBuilder():
 
   @plot_state
   def add_plot(self) -> str:
+    r"""
+    Individual `\addplot` builder, with appropriate indentation, generating
+    next colour space from `self.colours`, and appending result to plot
+    declaration state array.
+
+    Args:
+      None.
+
+    Returns:
+      Complete plotting macro for TikZ/PGF axis.
+
+    Raises:
+      None.
+    """
     args = [
       self.colours[(self.add_plot.colour_index - 1) % len(self.colours)],
       "thick",
