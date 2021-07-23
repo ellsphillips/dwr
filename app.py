@@ -41,11 +41,11 @@ def main():
   # figure.export_data(out_path="graphs/test")
 
 
-  # doctor.build(outfile="report", quick=False)
+  doctor.build(outfile="report", quick=False)
 
 if __name__ == "__main__":
   os.system('cls' if os.name == 'nt' else 'clear')
   doctor.log.announce("The [Doctor] was called...")
-  doctor.log.notice(f"Currently operating on version ({doctor.__version__})")
+  doctor.log.notice(f"Version: ({doctor.__version__})")
 
   main()

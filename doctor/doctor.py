@@ -21,7 +21,7 @@ def build(
   Run pdflatex shell to build the report.
   """
 
-  aux_list = (".aux", ".log", ".out")
+  aux_list = (".aux", ".log", ".out", ".synctex.gz")
 
   tex_path = f"{tex.options['document']['path']}"
   tex_file = f"{tex.options['document']['name']}.tex"
@@ -34,7 +34,7 @@ def build(
 
   shell_cmd = " ".join([
     "pdflatex",
-    "-interaction=nonstopmode",
+    "-interaction nonstopmode",
     "" if verbose else "-quiet",
     f"-job-name={outfile}" if outfile else "",
     "-output-directory",
