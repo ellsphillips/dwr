@@ -145,14 +145,34 @@ class PlotBuilder():
 
   @property
   def env_begin(self) -> str:
+    """
+    Define plotting environment start.
+    """
     return r"\begin{doctor-plot}"
 
   @property
   def env_end(self) -> str:
+    """
+    Define plotting environment end.
+    """
     return r"\end{doctor-plot}"
 
   @property
   def env_body(self) -> str:
+    r"""
+    Render and compile all plotting syntax declarations sequentially between
+    begin and end environment definitions.
+
+    Args:
+      None.
+
+    Returns:
+      Compilation of all plots declared in `self.data` input dict as formatted
+      TeX macros.
+
+    Raises:
+      None.
+    """
     [self.add_plot() for _ in list(self.data)]
     return "\n%\n".join(syn for syn in self.plot_declarations)
 
