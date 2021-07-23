@@ -31,6 +31,19 @@ class PlotBuilder():
       log.warning("I'm not much good without data, you know...")
 
   def pluck(opts: dict, *args) -> list:
+    """
+    Get corresponding value to dict key input.
+
+    Args:
+      opts: Options dictionary.
+      *args: Keys to retrieve values.
+
+    Returns:
+      Values based on set of input keys.
+
+    Raises:
+      None.
+    """
     return [opts[arg] for arg in args]
 
   def id_data(self) -> list:
