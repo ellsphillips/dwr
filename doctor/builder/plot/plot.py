@@ -189,8 +189,6 @@ class PlotBuilder():
     Raises:
       None.
     """
-    log.comment("[TeX source generated for plotting:]")
-
     elements = [
       self.env_begin,
       self.env_body,
@@ -199,6 +197,18 @@ class PlotBuilder():
     result = "\n".join([item for item in elements])
     trailing_newline = "\n"
     result += trailing_newline
+
+    log.comment(
+      "[TeX source generated] for plotting timeseries:\n"
+      + "\n".join([
+        "{",
+        ",\n".join([
+          f"{self.tab_space}[{ts}]" for ts in list(self.data)
+        ]),
+        "}"
+      ])
+    )
+
     return result
   
   def export_data(self, out_path: str) -> None:
