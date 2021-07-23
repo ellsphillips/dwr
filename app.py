@@ -35,8 +35,10 @@ def main():
     }
   )
 
-  print(figure.add_plot())
-  print(figure.add_plot())
+  figure.add_plot()
+  figure.add_plot()
+
+  figure.env_body()
 
   # figure.export_data(out_path="graphs/test")
 
