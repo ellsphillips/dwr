@@ -159,7 +159,7 @@ class PlotBuilder():
 
   @property
   def env_body(self) -> str:
-    r"""
+    """
     Render and compile all plotting syntax declarations sequentially between
     begin and end environment definitions.
 
@@ -178,7 +178,16 @@ class PlotBuilder():
 
   def get_result(self) -> str:
     """
-    Compile the complete string representation of a LaTeX table.
+    Compile the complete string representation of Doctor's plotting env macro.
+
+    Args:
+      None.
+
+    Returns:
+      Complete plotting environment ready for LaTeX ingestion.
+
+    Raises:
+      None.
     """
     log.comment("[TeX source generated for plotting:]")
 
@@ -193,6 +202,18 @@ class PlotBuilder():
     return result
   
   def export_data(self, out_path: str) -> None:
+    """
+    Write `self.data` to an external file to be read in by PGF plots.
+
+    Args:
+      out_path: Relative directory within the `src` folder to output dataset.
+
+    Returns:
+      None.
+
+    Raises:
+      None.
+    """
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
     dataframe = self.build_dataframe()
     dataframe.to_csv(destination, index=False, encoding='utf-8')
