@@ -228,3 +228,12 @@ class PlotBuilder():
     dataframe = self.build_dataframe()
     dataframe.to_csv(destination, index=False, encoding='utf-8')
     log.output(destination)
+
+  def export(self, out_path: str) -> None:
+    destination = f"{tex.options['document']['path']}src/{out_path}.tex"
+    with open(destination, "w") as f:
+      f.write(self.get_result())
+
+    self.export_data(out_path=out_path)
+
+    log.output(destination)
