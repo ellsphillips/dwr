@@ -30,7 +30,7 @@ class PlotBuilder():
     if data is None:
       log.warning("I'm not much good without data, you know...")
 
-  def pluck(opts: dict, *args):
+  def pluck(opts: dict, *args) -> list:
     return [opts[arg] for arg in args]
 
   def id_data(self) -> list:
@@ -57,7 +57,7 @@ class PlotBuilder():
     return wrapper
 
   @plot_state
-  def add_plot(self):
+  def add_plot(self) -> str:
     args = [
       self.colours[(self.add_plot.colour_index - 1) % len(self.colours)],
       "thick",
