@@ -198,7 +198,7 @@ class TabularBuilder:
     return input_number
 
   @property
-  def env_body(self) -> List[str]:
+  def env_body(self) -> str:
     r"""
     Return a str-type matrix of each row and column of the
     input dataframe. Rows end with "\\" to begin a new table
