@@ -189,8 +189,6 @@ class PlotBuilder():
     Raises:
       None.
     """
-    log.comment("[TeX source generated for plotting:]")
-
     elements = [
       self.env_begin,
       self.env_body,
@@ -199,6 +197,18 @@ class PlotBuilder():
     result = "\n".join([item for item in elements])
     trailing_newline = "\n"
     result += trailing_newline
+
+    log.comment(
+      "[TeX source generated] for plotting timeseries:\n"
+      + "\n".join([
+        "{",
+        ",\n".join([
+          f"{self.tab_space}[{ts}]" for ts in list(self.data)
+        ]),
+        "}"
+      ])
+    )
+
     return result
   
   def export_data(self, out_path: str) -> None:
@@ -217,4 +227,13 @@ class PlotBuilder():
     destination = f"{tex.options['document']['path']}src/{out_path}.csv"
     dataframe = self.build_dataframe()
     dataframe.to_csv(destination, index=False, encoding='utf-8')
+    log.output(destination)
+
+  def export(self, out_path: str) -> None:
+    destination = f"{tex.options['document']['path']}src/{out_path}.tex"
+    with open(destination, "w") as f:
+      f.write(self.get_result())
+
+    self.export_data(out_path=out_path)
+
     log.output(destination)

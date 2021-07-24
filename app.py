@@ -35,9 +35,7 @@ def main():
     }
   )
 
-  print(figure.get_result())
-
-  # figure.export_data(out_path="graphs/test")
+  figure.export("graphs/auto-gen")
 
   # doctor.build(outfile="report", quick=False)
 
