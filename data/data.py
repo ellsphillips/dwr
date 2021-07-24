@@ -6,7 +6,7 @@ from typing import (
   Union
 )
 
-def timeseries_singleton(
+def series_lognuniform(
   points: int = 10,
   places: Union[int, Tuple[int, int]] = 4
 ) -> list:
@@ -18,6 +18,22 @@ def timeseries_singleton(
       base=10
     )
   ]
+
+def series_brownian(
+  points: int = 100,
+  horizon: float = 1.
+) -> list:
+  """
+  Using Brownian motion's defining characteristic of independent, normally,
+  distributed increments [Bt2 - Bt1 ~ Normal(mu=0, sigma=t2-t1)]
+  """
+  times = np.linspace(0., horizon, points)
+  dt = times[1] - times[0]
+  delta_B = np.sqrt(dt) * np.random.normal(size=(points - 1,))
+  B_initial = np.zeros(shape=(1,))
+  B = np.concatenate((B_initial, np.cumsum(delta_B, axis=0)), axis=0)
+
+  return [f'{data:.5f}' for data in B.flatten()]
 
 def numerical(
   shape: Tuple[int, int] = (10, 10)
