@@ -20,8 +20,8 @@ def main():
 
   figure = doctor.plot(
     data = {
-      "data1": data.timeseries_singleton(points=20, places=4),
-      "data2": data.timeseries_singleton(points=34, places=4),
+      "data1": data.series_lognuniform(points=20, places=4),
+      "data2": data.series_lognuniform(points=34, places=4),
     },
     options = {
       "xlabel": "Horizontal",
@@ -45,3 +45,5 @@ if __name__ == "__main__":
   doctor.log.notice(f"Version: ({doctor.__version__})")
 
   main()
+
+  print(data.series_brownian())
