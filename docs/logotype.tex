@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{courier}
+
+\RequirePackage[]{helvet}
+\fontfamily{phv}\selectfont
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{monokai-yellow}{RGB}{255, 216, 102}
+\definecolor{background-200}{RGB}{45, 42, 46}
+
+\newcommand\doclogotype{Dr}
+
+\begin{document}%
+	\begin{tikzpicture}%
+		\node[%
+			minimum width=40pt,
+			minimum height=40pt,
+			fill=monokai-yellow,
+			draw=none,
+			text=white,
+			rounded corners=4pt,
+			label={%
+				[shift={(-6.1ex,3.6ex)}]south east:{%
+					\huge\bfseries\ttfamily\color{background-200}%
+					\doclogotype%
+				}%
+			}%
+		] (logo) {};%
+	\end{tikzpicture}%
+\end{document}
