@@ -1,3 +1,4 @@
+from typing import Tuple, Union, Optional
 import pandas as pd
 
 from ...utils.tex import TeXDefaults as tex
@@ -29,6 +30,13 @@ class PlotBuilder():
 
     if data is None:
       log.warning("I'm not much good without data, you know...")
+
+  def axis_bound(
+    self,
+    axis: str,
+    extrema: str
+  ) -> str:
+    return f"\pgfkeysvalueof{{/pgfplots/{axis}{extrema}}}"
 
   def pluck(opts: dict, *args) -> list:
     """
