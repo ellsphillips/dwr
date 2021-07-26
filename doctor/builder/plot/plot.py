@@ -143,6 +143,40 @@ class PlotBuilder():
 
     return res
 
+  def add_shade(
+    self,
+    domain: Tuple[Union[str, int], Union[str, int]],
+    range: Tuple[Union[str, int], Union[str, int]],
+    colour: Optional[str] = "",
+    fill: str = "solid",
+  ) -> str:
+    if not fill or fill not in ("hatch", "solid"):
+      log.warning("doctor.plot.add_shade('solid' | 'hatch')")
+      raise ValueError("Fill type must be solid or hatch.")
+
+    args = [
+      f"{self.tab_space}draw=none",
+      f",\n{self.tab_space * 2}".join([
+        "pattern=flexible hatch",
+        "hatch distance=10pt",
+        "hatch thickness=.5pt",
+        f"pattern color={str(colour if colour else 'gray')}!10",
+      ]) if fill == "hatch" else "",
+      f",\n{self.tab_space}".join([
+        f"fill={str(colour if colour else 'gray')}",
+        "opacity=0.1",
+      ]) if fill == "solid" else ""
+    ]
+
+    out = f"\n{self.tab_space}".join([
+      f"{self.tab_space}\\addplot[",
+      f",\n{self.tab_space * 2}".join(arg for arg in args if arg),
+      "]",
+      f"({domain[0]}, {domain[1]}) rectangle ({range[0]}, {range[1]})"
+    ]) + ";"
+
+    self.plot_declarations.insert(0, out)
+
   @property
   def env_begin(self) -> str:
     """
