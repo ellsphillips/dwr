@@ -185,6 +185,9 @@ class PlotBuilder():
 
     self.plot_declarations.insert(0, out)
 
+  def process_options():
+    pass
+
   @property
   def env_begin(self) -> str:
     """
