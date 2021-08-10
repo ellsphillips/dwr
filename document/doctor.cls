@@ -184,7 +184,7 @@
 
 \pgfkeys{/tikz/.cd,
 	point width/.store in=\maxpointwidth,
-	point width=4pt,
+	point width=5pt,
 	use points equal width/.is if=pointsamewidth,
 	use points equal width=false,
 	point style type/.is choice,
@@ -195,8 +195,19 @@
 	point fill color=orange,
 }
 
-\pgfmathdeclarerandomlist{tints}{%
-	{10}{40}{70}{100}%
+\newcommand{\choosepointstyles}
+{%
+	\pgfmathdeclarerandomlist{bannerpointtints}{%
+		{10}{40}{70}{100}%
+	}
+	\pgfmathrandomitem{\bannerpointtint}{bannerpointtints}
+	\edef\bannerpointtint{\bannerpointtint}
+
+	\pgfmathdeclarerandomlist{bannerpointsizes}{%
+		{.25}{.5}{.75}{1}%
+	}
+	\pgfmathrandomitem{\bannerpointsize}{bannerpointsizes}
+	\edef\bannerpointsize{\bannerpointsize}
 }
 
 \newcommand{\frontpage}{
@@ -211,13 +222,13 @@
 					\tikz{
 						\foreach \x in {0,...,18} {%
 							\foreach \y in {0,...,7} {%
-								\pgfmathrandomitem{\tint}{tints}
-								\pgfmathparse{random()}%
-								\pgfmathsetmacro\pointwidth{\maxpointwidth*\pgfmathresult}%
+								\choosepointstyles
+%								\pgfmathparse{random()}%
+								\pgfmathsetmacro\pointwidth{\maxpointwidth*\bannerpointsize}%
 								\node[%
 									circle,
 									inner sep=\pointwidth pt,
-									point fill color=white!\tint!maindocumentcolour,
+									point fill color=white!\bannerpointtint!maindocumentcolour,
 									\pointstyle%
 								] (point-\x-\y) at (\x,\y) {};%
 							}%
@@ -257,7 +268,6 @@
 				\huge\vskip\baselineskip%
 				\@title \par%
 				\large\@subtitle \par%
-				\ifrandombanner lmao\fi
 				\vskip10\baselineskip%
 				\normalsize Last updated: \@date%
 			}
