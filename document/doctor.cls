@@ -195,6 +195,7 @@
 	point fill color=orange,
 }
 
+\pgfmathsetseed{\number\pdfrandomseed}
 \newcommand{\choosepointstyles}
 {%
 	\pgfmathdeclarerandomlist{bannerpointtints}{%
