@@ -640,6 +640,32 @@
 % Colour schema
 % -------------------------------------------------------------------------------
 
+% Primary brand palette
+\definecolor{night-blue}{RGB}{0, 60, 87} % #003C57
+\definecolor{spring-green}{RGB}{168, 189, 58} % #A8BD3A
+\definecolor{ocean-blue}{RGB}{32, 96, 149} % #206095
+\definecolor{sky-blue}{RGB}{39, 160, 204} % #27A0CC
+\definecolor{aqua-teal}{RGB}{0, 163, 166} % #00A3A6
+
+% Supporting palette
+\definecolor{indigo-blue}{RGB}{60, 56, 142} % #3C388E
+\definecolor{plum-purple}{RGB}{144, 32, 130} % #902082
+\definecolor{flamingo-pink}{RGB}{223, 6, 103} % #DF0667
+\definecolor{ruby-red}{RGB}{208, 2, 27} % #D0021B
+\definecolor{jaffa-orange}{RGB}{250, 100, 1} % #FA6401
+\definecolor{sun-yellow}{RGB}{251, 201, 0} % #FBC900
+\definecolor{neon-yellow}{RGB}{240, 247, 98} % #F0F762
+\definecolor{leaf-green}{RGB}{15, 130, 67} % #0F8243
+
+% Grey palette
+\definecolor{grey-dark}{RGB}{34, 34, 34} % #222222
+\definecolor{grey-100}{RGB}{65, 64, 66} % #414042
+\definecolor{grey-75}{RGB}{112, 112, 113} % #707071
+\definecolor{grey-35}{RGB}{188, 188, 189} % #BCBCBD
+\definecolor{grey-15}{RGB}{226, 226, 227} % #E2E2E3
+\definecolor{grey-5}{RGB}{245, 245, 246} % #F5F5F6
+
+% Residue
 \definecolor{ons-green}{RGB}{168, 189, 58} % #a8bd3a
 \definecolor{ons-blue}{RGB}{0, 61, 89} % #003d59
 \definecolor{ons-pink}{RGB}{206, 53, 135} % #ce3587
