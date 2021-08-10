@@ -120,6 +120,7 @@
 \RequirePackage{tikz}
 \RequirePackage{tkz-euclide}
 \RequirePackage{pgfplots}
+\RequirePackage{pgffor}
 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{
@@ -179,19 +180,59 @@
 \gdef\@subtitle{}
 \def\subtitle#1{\gdef\@subtitle{#1}}
 
+\newif\ifpointsamewidth
+
+\pgfkeys{/tikz/.cd,
+	point width/.store in=\maxpointwidth,
+	point width=4pt,
+	use points equal width/.is if=pointsamewidth,
+	use points equal width=false,
+	point style type/.is choice,
+	point style type/fill/.style={fill=\pointcolor},
+	point style/.store in=\pointstyle,
+	point style={/tikz/point style type/fill},     
+	point fill color/.store in=\pointcolor,
+	point fill color=orange,
+}
+
+\pgfmathdeclarerandomlist{tints}{%
+	{10}{40}{70}{100}%
+}
+
 \newcommand{\frontpage}{
 	\pagestyle{empty}
 	
 	\begin{tikzpicture}[overlay, remember picture]%
 		\begin{scope}%
 			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);%
-			\ifx\companybanner\empty%
-				\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
-			\else%
+			\ifrandombanner%
 				\fill[maindocumentcolour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
-			%
-				\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
-			\fi%
+				\node[] at ($(current page.north)+(0\paperwidth, -0.165\paperheight)$) {
+					\tikz{
+						\foreach \x in {0,...,18} {%
+							\foreach \y in {0,...,7} {%
+								\pgfmathrandomitem{\tint}{tints}
+								\pgfmathparse{random()}%
+								\pgfmathsetmacro\pointwidth{\maxpointwidth*\pgfmathresult}%
+								\node[%
+									circle,
+									inner sep=\pointwidth pt,
+									point fill color=white!\tint!maindocumentcolour,
+									\pointstyle%
+								] (point-\x-\y) at (\x,\y) {};%
+							}%
+						}%
+					}
+				};
+			\else
+				\ifx\companybanner\empty%
+					\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
+				\else%
+					\fill[maindocumentcolour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+				%
+					\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
+				\fi%
+			\fi
 		\end{scope}
 		%
 		\draw[
@@ -216,6 +257,7 @@
 				\huge\vskip\baselineskip%
 				\@title \par%
 				\large\@subtitle \par%
+				\ifrandombanner lmao\fi
 				\vskip10\baselineskip%
 				\normalsize Last updated: \@date%
 			}
@@ -1039,11 +1081,19 @@
 
 \RequirePackage{xkeyval}
 
+\newif\ifrandombanner
 \newif\ifhourglass
 
 \DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
 \DeclareOptionX{logo}{\IfFileExists{#1}{\def\companylogo{#1}}{\def\companylogo{}}}
-\DeclareOptionX{banner}{\IfFileExists{#1}{\def\companybanner{#1}}{\def\companybanner{}}}
+\DeclareOptionX{banner}{%
+	\ifthenelse{\equal{\detokenize{#1}}{\detokenize{random}}}{%
+		\randombannertrue%
+	}{%
+		\randombannerfalse
+		\IfFileExists{#1}{\def\companybanner{#1}}{\def\companybanner{}}%
+	}%
+}
 \DeclareOptionX{hourglass}{\hourglasstrue}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptionsX \relax
