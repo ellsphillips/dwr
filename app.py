@@ -20,8 +20,8 @@ def main():
 
   figure = doctor.plot(
     data = {
-      "data1": data.series_lognuniform(points=20, places=4),
-      "data2": data.series_lognuniform(points=34, places=4),
+      "data1": data.series_brownian(points=20),
+      "data2": data.series_brownian(points=34),
     },
     options = {
       "xlabel": "Horizontal",
