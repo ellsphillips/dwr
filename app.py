@@ -35,7 +35,15 @@ def main():
     }
   )
 
-  figure.export("graphs/auto-gen")
+  figure.add_shade(
+    domain=(figure.axis_bound("x", "min"), 10),
+    range=(figure.axis_bound("y", "min"), figure.axis_bound("y", "max")),
+    fill="hatch"
+  )
+
+  print(figure.get_result())
+
+  # figure.export("graphs/auto-gen")
 
   # doctor.build(outfile="report", quick=False)
 
