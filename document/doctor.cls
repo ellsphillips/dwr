@@ -221,17 +221,17 @@
 				\fill[maindocumentcolour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
 				\node[] at ($(current page.north)+(0\paperwidth, -0.165\paperheight)$) {
 					\tikz{
-						\foreach \x in {0,...,18} {%
-							\foreach \y in {0,...,7} {%
+						\foreach \x in {0,...,27} {%
+							\foreach \y in {0,...,10} {%
 								\choosepointstyles
-%								\pgfmathparse{random()}%
 								\pgfmathsetmacro\pointwidth{\maxpointwidth*\bannerpointsize}%
+								\pgfmathsetmacro\pointdist{\maxpointwidth / (1.5*\maxpointwidth)}
 								\node[%
 									circle,
 									inner sep=\pointwidth pt,
 									point fill color=white!\bannerpointtint!maindocumentcolour,
 									\pointstyle%
-								] (point-\x-\y) at (\x,\y) {};%
+								] (point-\x-\y) at (\x*\pointdist,\y*\pointdist) {};%
 							}%
 						}%
 					}
