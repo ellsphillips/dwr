@@ -32,7 +32,6 @@ class PlotBuilder():
       log.warning("I'm not much good without data, you know...")
 
   def axis_bound(
-    self,
     axis: str,
     extrema: str
   ) -> str:
@@ -186,18 +185,21 @@ class PlotBuilder():
     self.plot_declarations.insert(0, out)
 
   def apply_shading(self) -> None:
-    if self.options["shade"]:
-      obj = self.options["shade"]
+    obj = self.options["shade"] if "shade" in self.options else ""
+    
+    print(obj)
 
-      if "scope" in obj.keys():
-        log.announce("You passed a scope")
+    # if ["domain", "range"] in obj:
+    # x1, x2 = obj["domain"]
+    # y1, y2 = obj["range"]
+    # else:
 
-      self.add_shade(
-        domain=(self.axis_bound("x", "min"), 10),
-        range=(self.axis_bound("y", "min"), self.axis_bound("y", "max")),
-        fill=obj["fill"],
-        colour=obj["colour"]
-      )
+    self.add_shade(
+      domain=(obj["domain"]),
+      range=(obj["range"]),
+      fill=obj["fill"],
+      colour=obj["colour"]
+    )
 
   @property
   def env_begin(self) -> str:
@@ -230,6 +232,7 @@ class PlotBuilder():
       None.
     """
     [self.add_plot() for _ in list(self.data)]
+    self.apply_shading()
     return "\n%\n".join(syn for syn in self.plot_declarations)
 
   def get_result(self) -> str:

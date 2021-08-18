@@ -30,13 +30,10 @@ def main():
       "shade": {
         "fill": "solid",
         "colour": "ONSpink",
-        "scope": ((9, 27), (50, "end"))
+        "domain": (9, doctor.plot.axis_bound("x", "min")),
+        "range": (doctor.plot.axis_bound("y", "min"), doctor.plot.axis_bound("y", "max"))
       }
     }
-  )
-
-  doctor.log.comment(
-    str(figure.apply_shading())
   )
 
   print(figure.get_result())
