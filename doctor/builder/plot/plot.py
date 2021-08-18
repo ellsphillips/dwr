@@ -33,16 +33,14 @@ class PlotBuilder():
 
   def bound_converter(
     self,
-    bound: str
+    bounds: Tuple[str, str]
   ) -> str:
     acceptance = ("x_min", "x_max", "y_min", "y_max")
-    
-    if bound not in acceptance:
-      raise ValueError(log.warning(
-        f"Input bound must be equivalent to any of ({acceptance})"
-      ))
 
-    return self.axis_bound(*bound.split("_"))
+    return [
+      self.axis_bound(*(bound.split("_")))
+      if bound in acceptance else bound for bound in bounds
+    ]
 
   def axis_bound(
     self,
@@ -200,17 +198,10 @@ class PlotBuilder():
 
   def apply_shading(self) -> None:
     obj = self.options["shade"] if "shade" in self.options else ""
-    
-    print(obj)
-
-    # if ["domain", "range"] in obj:
-    # x1, x2 = obj["domain"]
-    # y1, y2 = obj["range"]
-    # else:
 
     self.add_shade(
-      domain=(obj["domain"]),
-      range=(obj["range"]),
+      domain=(self.bound_converter(obj["domain"])),
+      range=(self.bound_converter(obj["range"])),
       fill=obj["fill"],
       colour=obj["colour"]
     )

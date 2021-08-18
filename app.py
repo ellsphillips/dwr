@@ -30,11 +30,13 @@ def main():
       "shade": {
         "fill": "solid",
         "colour": "ONSpink",
-        "domain": (9, doctor.plot.axis_bound("x", "min")),
-        "range": (doctor.plot.axis_bound("y", "min"), doctor.plot.axis_bound("y", "max"))
+        "domain": (9, "x_min"),
+        "range": ("y_min", "y_max")
       }
     }
   )
+
+  doctor.log.notice(figure.bound_converter((6, "y_max")))
 
   print(figure.get_result())
 
