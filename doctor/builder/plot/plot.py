@@ -155,9 +155,9 @@ class PlotBuilder():
     self,
     domain: Tuple[Union[str, int], Union[str, int]],
     range: Tuple[Union[str, int], Union[str, int]],
-    colour: Optional[str] = "",
+    colour: Optional[str] = "black!2",
     fill: str = "solid",
-  ) -> str:
+  ) -> None:
     if not fill or fill not in ("hatch", "solid"):
       log.warning("doctor.plot.add_shade('solid' | 'hatch')")
       raise ValueError("Fill type must be solid or hatch.")
@@ -170,7 +170,7 @@ class PlotBuilder():
         "hatch thickness=.5pt",
         f"pattern color={str(colour if colour else 'gray')}!10",
       ]) if fill == "hatch" else "",
-      f",\n{self.tab_space}".join([
+      f",\n{self.tab_space * 2}".join([
         f"fill={str(colour if colour else 'gray')}",
         "opacity=0.1",
       ]) if fill == "solid" else ""
@@ -185,8 +185,19 @@ class PlotBuilder():
 
     self.plot_declarations.insert(0, out)
 
-  def process_options():
-    pass
+  def apply_shading(self) -> None:
+    if self.options["shade"]:
+      obj = self.options["shade"]
+
+      if "scope" in obj.keys():
+        log.announce("You passed a scope")
+
+      self.add_shade(
+        domain=(self.axis_bound("x", "min"), 10),
+        range=(self.axis_bound("y", "min"), self.axis_bound("y", "max")),
+        fill=obj["fill"],
+        colour=obj["colour"]
+      )
 
   @property
   def env_begin(self) -> str:
