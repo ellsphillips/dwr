@@ -30,15 +30,13 @@ def main():
       "shade": {
         "fill": "solid",
         "colour": "ONSpink",
-        "regions": [[9, 27], [50, "end"]]
+        "scope": ((9, 27), (50, "end"))
       }
     }
   )
 
-  figure.add_shade(
-    domain=(figure.axis_bound("x", "min"), 10),
-    range=(figure.axis_bound("y", "min"), figure.axis_bound("y", "max")),
-    fill="hatch"
+  doctor.log.comment(
+    str(figure.apply_shading())
   )
 
   print(figure.get_result())
@@ -53,5 +51,3 @@ if __name__ == "__main__":
   doctor.log.notice(f"Version: ({doctor.__version__})")
 
   main()
-
-  print(data.series_brownian())
