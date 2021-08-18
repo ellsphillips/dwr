@@ -31,7 +31,21 @@ class PlotBuilder():
     if data is None:
       log.warning("I'm not much good without data, you know...")
 
+  def bound_converter(
+    self,
+    bound: str
+  ) -> str:
+    acceptance = ("x_min", "x_max", "y_min", "y_max")
+    
+    if bound not in acceptance:
+      raise ValueError(log.warning(
+        f"Input bound must be equivalent to any of ({acceptance})"
+      ))
+
+    return self.axis_bound(*bound.split("_"))
+
   def axis_bound(
+    self,
     axis: str,
     extrema: str
   ) -> str:
