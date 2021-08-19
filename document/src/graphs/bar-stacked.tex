@@ -1,0 +1,68 @@
+\begin{figure}[H]% 
+	\centering%
+	\begin{tikzpicture}% 
+		\begin{axis}[%
+			ybar stacked,
+			xlabel= Horizontal,
+			ylabel = Vertical,
+			ymajorgrids = true,
+			width = 0.9\textwidth,
+			height = 0.5\textwidth,
+			xmin = 1999.5,
+			xmax = 2009.5,
+			ymin = 0,
+			ymax = 70000,
+			axis x line* = bottom,
+			axis y line* = left,
+			xticklabels = none,
+			extra x ticks = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009},
+			extra x tick labels = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009},
+			legend style = {
+				at={(0.5, 1.025)}, 
+				anchor = south, 
+				legend columns = -1, 
+				column sep=2mm,
+				draw = none,
+				area legend%
+			},
+			area legend,
+			scaled ticks = false
+		]
+			\addplot+[%
+				mark=none,
+				fill=ons-blue,
+				draw = none,
+				bar width = 8mm%
+			] table[x=time, y=col1]%
+			{src/graphs/bar-stacked.dat};%
+		%
+			\addplot+[%
+				mark=none,
+				fill=ons-green,
+				draw = none,
+				bar width = 8mm%
+			] table[x=time, y=col2]%
+			{src/graphs/bar-stacked.dat};%
+		%
+			\addplot+[%
+				mark=none,
+				fill=ons-yellow,
+				draw = none,
+				bar width = 8mm%
+			] table[x=time, y=col3]%
+			{src/graphs/bar-stacked.dat};%
+		%
+			\addplot+[%
+				mark=none,
+				fill=ons-orange,
+				draw = none,
+				bar width = 8mm%
+			] table[x=time, y=col4]%
+			{src/graphs/bar-stacked.dat};%
+		%
+			\legend{$data_{blue}$, $data_{green}$, $data_{yellow}$, $data_{orange}$}%
+		\end{axis}%
+	\end{tikzpicture}%
+	\caption[Stacked bar chart]{Demonstration of the stacked bar chart environment}%
+	\label{fig:bar-stacked}%
+\end{figure}
