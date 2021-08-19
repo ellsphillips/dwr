@@ -137,6 +137,14 @@
 \pgfdeclarelayer{middle}
 \pgfsetlayers{background,middle,main}
 
+\pgfplotsset{
+	/pgfplots/area legend/.style={%
+		/pgfplots/legend image code/.code={%
+			\fill[##1] (0cm,-0.1cm) rectangle (0.6cm,0.1cm);
+		}%
+	},
+}
+
 
 
 % -------------------------------------------------------------------------------
