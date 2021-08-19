@@ -36,8 +36,6 @@ def main():
     }
   )
 
-  doctor.log.notice(figure.bound_converter((6, "y_max")))
-
   print(figure.get_result())
 
   # figure.export("graphs/auto-gen")

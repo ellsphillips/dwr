@@ -154,10 +154,10 @@ class PlotBuilder():
       f"{self.tab_space}\\addplot[",
       ",\n".join([f"{self.tab_space * 2}{arg}" for arg in args]),
 		  f"{self.tab_space}] table[x=time, y={list(self.data)[self.add_plot.colour_index - 1]}]",
-      f"{self.tab_space}{{src/graphs/timeseries.dat}};"
+      f"{self.tab_space}{{src/graphs/timeseries.dat}};%"
     ]
 
-    res = "\n".join(e for e in elements)
+    res = "%\n".join(e for e in elements)
     self.plot_declarations.append(res)
 
     return res
@@ -187,12 +187,14 @@ class PlotBuilder():
       ]) if fill == "solid" else ""
     ]
 
-    out = f"\n{self.tab_space}".join([
+    out = f"%\n{self.tab_space}".join([
       f"{self.tab_space}\\addplot[",
       f",\n{self.tab_space * 2}".join(arg for arg in args if arg),
       "]",
-      f"({domain[0]}, {domain[1]}) rectangle ({range[0]}, {range[1]})"
-    ]) + ";"
+      f"({domain[0]}, {domain[1]})",
+      "rectangle",
+      f"({range[0]}, {range[1]})"
+    ]) + ";%"
 
     self.plot_declarations.insert(0, out)
 
@@ -211,14 +213,14 @@ class PlotBuilder():
     """
     Define plotting environment start.
     """
-    return r"\begin{doctor-plot}"
+    return r"\begin{doctor-plot}%"
 
   @property
   def env_end(self) -> str:
     """
     Define plotting environment end.
     """
-    return r"\end{doctor-plot}"
+    return r"\end{doctor-plot}%"
 
   @property
   def env_body(self) -> str:
