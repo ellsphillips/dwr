@@ -121,3 +121,5 @@ Reference the [architecture below](#architecture) for an example.
   │   └── doctor.py
   └── app.py
 ```
+
+![](https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg?token=AGVNX54WD2GL5WU2PO2GO4LBEP3SA)
