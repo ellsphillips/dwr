@@ -63,10 +63,7 @@
 	top=4cm
 ]{geometry}
 
-\RequirePackage{graphicx}
-\RequirePackage{caption}
 \RequirePackage{fp}
-\RequirePackage{epstopdf}
 \RequirePackage{framed}
 \RequirePackage{amsmath}
 \RequirePackage[absolute]{textpos}
@@ -115,6 +112,21 @@
 % -------------------------------------------------------------------------------
 % Graphics and helper functions
 % -------------------------------------------------------------------------------
+
+\RequirePackage{graphicx}
+\RequirePackage{epstopdf}
+
+\RequirePackage[%
+	font=scriptsize,
+	labelfont={
+		color=maindocumentcolour,
+		bf,
+	},
+	textfont=it,
+	justification=raggedright,
+	singlelinecheck=false,
+	format=hang,
+]{caption}
 
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{tikz}
