@@ -122,22 +122,28 @@ Reference the [architecture below](#architecture) for an example.
   └── app.py
 ```
 
-<img alt="Choropleth example" src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" width="100%">
-
-<!-- <svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100" height="100" rx="10" />
-</svg> -->
-
-<div style="width: 100%">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="rounded-img">
-  <defs>
-    <clipPath id="rounded-corners">
-      <rect width="200" height="150" rx="10" />
-    </clipPath>
-  </defs>
-
-  <image href="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" width="200" height="150" clip-path="url(#rounded-corners)" />
+<svg fill="none" viewBox="0 0 600 400" width="100%"  xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+				.container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          width: 100%;
+          height: 400px;
+          background: white;
+          border-radius: 10px;
+        }
+        img {
+          height: 100%;
+        }
+      </style>
+      <div class="container">
+        <img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg"">
+      </div>
+    </div>
+  </foreignObject>
 </svg>
-</div>
-
-<img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" style="border: 1rem solid white; border-radius: 1rem; width: calc(100% - 2rem)">
