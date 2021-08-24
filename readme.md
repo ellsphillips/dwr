@@ -124,8 +124,8 @@ Reference the [architecture below](#architecture) for an example.
 
 <div align="center">
 	<br>
-	<a href="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg">
-		<img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" width="800" height="400" alt="Choropleth example">
+	<a href="docs/assets/choropleth.svg">
+		<img src="docs/assets/choropleth.svg" width="800" height="400" alt="Choropleth example">
 	</a>
 	<br>
 </div>
