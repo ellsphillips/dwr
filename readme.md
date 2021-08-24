@@ -122,4 +122,10 @@ Reference the [architecture below](#architecture) for an example.
   └── app.py
 ```
 
-<img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg"">
+<div align="center">
+	<br>
+	<a href="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg">
+		<img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" width="800" height="400" alt="Choropleth example">
+	</a>
+	<br>
+</div>
