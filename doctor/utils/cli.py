@@ -3,6 +3,7 @@ from shutil import get_terminal_size
 from threading import Thread
 import time
 import re
+from typing import Union
 
 """
 Utility classes for Doctor
@@ -155,3 +156,43 @@ class log:
   def notice(input_str: str) -> None:
     print(f"{style.notice}{input_str}{style.end}\n")
 
+  def prettify(
+    self,
+    value: Union[str, tuple, list, dict],
+    tab: str = " "*2,
+    line_end: str = '\n',
+    indent: int = 0
+  ) -> str:
+    newline = line_end + tab * (indent + 1)
+
+    if type(value) is dict:
+      items = [
+        newline + repr(key) + ': ' + self.prettify(value[key], tab, line_end, indent + 1)
+        for key in value
+      ]
+      return f"{{{','.join(items) + line_end + tab * indent}}}"
+
+    elif type(value) is list:
+      items = [
+        newline + self.prettify(item, tab, line_end, indent + 1)
+        for item in value
+      ]
+      return f"[{','.join(items) + line_end + tab * indent}]"
+    
+    elif type(value) is tuple:
+      items = [
+        newline + self.prettify(item, tab, line_end, indent + 1)
+        for item in value
+      ]
+      return f"({','.join(items) + line_end + tab * indent})"
+    
+    else:
+      return repr(value)
+
+  def pretty(
+    self,
+    value: Union[str, tuple, list, dict]
+  ) -> None:
+    print(
+      self.prettify(value)
+    )
