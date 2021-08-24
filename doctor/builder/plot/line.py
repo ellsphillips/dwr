@@ -4,7 +4,7 @@ import pandas as pd
 from ...utils.tex import TeXDefaults as tex
 from ...utils.cli import *
 
-class PlotBuilder():
+class Line:
   """
   """
 
