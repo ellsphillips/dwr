@@ -19,6 +19,7 @@ def main():
   #
 
   figure = doctor.plot(
+    type = "line",
     data = {
       "data1": data.series_brownian(points=20),
       "data2": data.series_brownian(points=34),

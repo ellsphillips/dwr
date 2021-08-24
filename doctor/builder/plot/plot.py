@@ -11,9 +11,11 @@ class Plot:
   """
   def __init__(
     self,
+    type: str,
     data: dict = None,
     options: dict = None
   ):
+    self.type = type
     self.data = data
     self.options = options
 
@@ -26,12 +28,8 @@ class Plot:
       Bar: ["bar", "stacked-bar", "grouped-bar", "histogram"]
     }
 
-    for _type, terms in lut.items():
-      print(
-        f"_type: {_type}",
-        f"terms: {terms}",
-      )
-      if self.options["type"] in terms:
-        return _type()
+    for builder, terms in lut.items():
+      if self.type in terms:
+        return builder()
 
     raise ValueError("Provide a valid plot type from below:")
