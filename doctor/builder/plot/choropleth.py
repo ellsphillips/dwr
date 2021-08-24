@@ -28,3 +28,55 @@ geography = load_geojson("GeoJSON/nuts3_uk_buc-la.geojson")
 test_data = generate_ids(geog=geography)
 
 test_data['values'] = [np.random.randint(1, 100) for _ in range(len(test_data))]
+
+
+def map_plot():
+    fig = px.choropleth(
+        test_data,
+        locations='code',
+        geojson=geography,
+        featureidkey="properties.LAD21CD",
+        scope='europe',
+        color='values',
+        range_color=(0, 100),
+        color_continuous_scale="YlGnBu",
+        color_continuous_midpoint=0,
+        labels={'values': ''},
+        center={"lat": 55, "lon": 0}
+    )
+
+    fig.update_layout(
+        margin={
+            "r": 0,
+            "t": 0,
+            "l": 0,
+            "b": 0,
+            "autoexpand": False
+        },
+        width=800,
+        height=600,
+        legend_title_side='top'
+    )
+
+    fig.update_geos(
+        fitbounds='locations',
+        visible=False
+    )
+
+    fig.update_traces(
+      marker_line_width=0.35
+    )
+
+    fig.update_coloraxes(
+      # showscale=False,
+      colorbar_len=.8,
+      colorbar_thickness=20,
+      colorbar_x=0,
+      colorbar_xpad=0,
+      colorbar_ypad=0
+    )
+
+    fig.write_image("projectile.pdf")
+    fig.write_image("map.pdf")
+    os.remove("projectile.pdf")
+    
