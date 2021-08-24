@@ -2,4 +2,7 @@
 Plot builder for Doctor.
 """
 
-from .line import *
+from . import (
+    line,
+    bar
+)
