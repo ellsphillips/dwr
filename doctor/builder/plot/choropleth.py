@@ -4,6 +4,8 @@ import numpy as np
 import geojson
 import os
 
+from doctor.utils.cli import log
+
 
 def load_geojson(file_path: str):
   with open(file_path) as f:
@@ -22,13 +24,6 @@ def generate_ids(
     id_map.items(),
     columns=['area', 'code']
   )
-
-geography = load_geojson("GeoJSON/nuts3_uk_buc-la.geojson")
-
-test_data = generate_ids(geog=geography)
-
-test_data['values'] = [np.random.randint(1, 100) for _ in range(len(test_data))]
-
 
 def map_plot():
     fig = px.choropleth(
@@ -79,4 +74,10 @@ def map_plot():
     fig.write_image("projectile.pdf")
     fig.write_image("map.pdf")
     os.remove("projectile.pdf")
-    
+
+
+if __name__ == "__main__":
+  log.notice("Testing the choropleth script")
+  geography = load_geojson("GeoJSON/nuts3_uk_buc-la.geojson")
+  test_data = generate_ids(geog=geography)
+  test_data['values'] = [np.random.randint(1, 100) for _ in range(len(test_data))]
