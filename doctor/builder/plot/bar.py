@@ -1,7 +1,11 @@
-class Bar:
+class Bar():
   """
   """
-  def __init__(self) -> None:
+  def __init__(
+    self,
+    data: dict = None,
+    options: dict = None
+  ) -> None:
     pass
 
   def intro(self) -> None:
@@ -11,3 +15,4 @@ class Bar:
       "\33[0m",
       sep=""
     )
+    return ""
