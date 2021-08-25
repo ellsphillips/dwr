@@ -1,35 +1,30 @@
-from doctor.builder.plot.line import Line
 from typing import Union
-from . import (
+
+from doctor.utils.cli import *
+from .line import Line
+from .bar import Bar
+
+
+def plot_builder(
+  type: str,
+  data: dict = None,
+  options: dict = None
+) -> Union[
   Line,
   Bar
-)
+]:
+  lut = {
+    Line: ["line", "timeseries"],
+    Bar: ["bar", "stacked-bar", "grouped-bar", "histogram"]
+  }
 
+  for constructor, terms in lut.items():
+    if type in terms:
+      return constructor(data, options)
 
-class Plot:
-  """
-  """
-  def __init__(
-    self,
-    type: str,
-    data: dict = None,
-    options: dict = None
-  ):
-    self.type = type
-    self.data = data
-    self.options = options
+  log.warning(
+    "Available plotting types:\n"
+    + log.prettify(lut)
+  )
 
-  def builder(self) -> Union[
-    Line,
-    Bar
-  ]:
-    lut = {
-      Line: ["line", "timeseries"],
-      Bar: ["bar", "stacked-bar", "grouped-bar", "histogram"]
-    }
-
-    for builder, terms in lut.items():
-      if self.type in terms:
-        return builder()
-
-    raise ValueError("Provide a valid plot type from below:")
+  raise ValueError("Provide a valid plot type from above.")
