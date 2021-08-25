@@ -19,7 +19,7 @@ def main():
   #
 
   figure = doctor.plot(
-    type = "line",
+    type = "bar",
     data = {
       "data1": data.series_brownian(points=20),
       "data2": data.series_brownian(points=34),
@@ -37,7 +37,7 @@ def main():
     }
   )
 
-  print(figure.get_result())
+  print(figure.intro())
 
   # figure.export("graphs/auto-gen")
 
