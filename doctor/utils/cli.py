@@ -157,7 +157,6 @@ class log:
     print(f"{style.notice}{input_str}{style.end}\n")
 
   def prettify(
-    self,
     value: Union[str, tuple, list, dict],
     tab: str = " "*2,
     line_end: str = '\n',
@@ -167,21 +166,21 @@ class log:
 
     if type(value) is dict:
       items = [
-        newline + repr(key) + ': ' + self.prettify(value[key], tab, line_end, indent + 1)
+        newline + repr(key) + ': ' + log.prettify(value[key], tab, line_end, indent + 1)
         for key in value
       ]
       return f"{{{','.join(items) + line_end + tab * indent}}}"
 
     elif type(value) is list:
       items = [
-        newline + self.prettify(item, tab, line_end, indent + 1)
+        newline + log.prettify(item, tab, line_end, indent + 1)
         for item in value
       ]
       return f"[{','.join(items) + line_end + tab * indent}]"
     
     elif type(value) is tuple:
       items = [
-        newline + self.prettify(item, tab, line_end, indent + 1)
+        newline + log.prettify(item, tab, line_end, indent + 1)
         for item in value
       ]
       return f"({','.join(items) + line_end + tab * indent})"
@@ -190,9 +189,8 @@ class log:
       return repr(value)
 
   def pretty(
-    self,
     value: Union[str, tuple, list, dict]
   ) -> None:
     print(
-      self.prettify(value)
+      log.prettify(value)
     )
