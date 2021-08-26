@@ -1095,7 +1095,15 @@
 % \begin{doctor-bar}
 % \end{doctor-bar}
 % ---------------------------------------------------------------------------
-%	#1
+	\pgfkeys{%
+		/doctor-bar/.cd,
+		default,
+		#1,
+	}%
+	\ifx\doctorlabel\empty\relax\else%
+		\raisebox{1.5\ht\strutbox}{\hypertarget{fig:\doctorlabel}{}}%
+		\vskip-1.5\ht\strutbox%
+	\fi%
 	\begin{figure}[H] 
 		\centering
 		\noindent\begin{tikzpicture}
@@ -1103,32 +1111,32 @@
 			% Abstract
 				ybar,
 				x label style={at={(axis description cs:.5,-.1)},anchor=north},
-				y label style={at={(axis description cs:-.075,.5)},rotate=90,anchor=south},
+				y label style={at={(axis description cs:-.075,.5)},anchor=south},
+				set layers=axis lines on top,
 				axis x line* = bottom,
 				axis y line* = left,
-				axis on top,
 				ymajorgrids = true,
 				width=.975\textwidth,
 				height=\axisdefaultheight,
+				enlargelimits=false,
 			% Variables	
-				xlabel = Horizontal,
-				ylabel= Vertical,
-				xmin = 0.5,
-				xmax = 13.5,
-				ymin = 0,
-				ymax = 35,
 				bar width = 5mm,
+				xmin=\fpeval{\doctorxmin-0.5},
+				xmax=\fpeval{\doctorxmax+0.5},
+				ymin=\doctorymin,
+				ymax=\doctorymax,
 				xticklabels = \empty,
-				extra x ticks = {1,2,3,4,5,6,7,8,9,10,11,12,13},
+				extra x ticks = {0,1,2,3,4,5,6,7,8,9,10,11,12},
 				extra x tick labels = {Jan '09, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan '10},
 			% User-defined
-				#1
-			]
+				xlabel = \doctorxlabel,
+				ylabel= \doctorylabel,
+			]%
 }{
 			\end{axis}
 		\end{tikzpicture}
-		\caption[Bar chart]{Demonstration of the bar chart environment}
-		\label{fig:bar}
+		\ifx\doctorcaption\empty\relax\else\caption{\doctorcaption}\fi%
+		\ifx\doctorlabel\empty\relax\else\label{fig:\doctorlabel}\fi%
 	\end{figure}
 }
 
