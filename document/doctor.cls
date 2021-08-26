@@ -1110,8 +1110,9 @@
 			\begin{axis}[%
 			% Abstract
 				ybar,
-				x label style={at={(axis description cs:.5,-.1)},anchor=north},
-				y label style={at={(axis description cs:-.075,.5)},anchor=south},
+				x label style={at={(axis description cs:.5,-.15)},anchor=north},
+				y label style={at={(axis description cs:-.05,.5)},anchor=south},
+				ticklabel style = {font=\small},
 				set layers=axis lines on top,
 				axis x line* = bottom,
 				axis y line* = left,
@@ -1127,7 +1128,7 @@
 				ymax=\doctorymax,
 				xticklabels = \empty,
 				extra x ticks = {0,1,2,3,4,5,6,7,8,9,10,11,12},
-				extra x tick labels = {Jan '09, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan '10},
+				extra x tick labels = {Jan '20, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan '21},
 			% User-defined
 				xlabel = \doctorxlabel,
 				ylabel= \doctorylabel,
