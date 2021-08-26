@@ -145,6 +145,20 @@
 }
 \pgfplotsset{compat=1.12}
 
+\pgfplotsset{
+	layers/axis lines on top/.define layer set={
+		axis background,
+		axis grid,
+		axis ticks,
+		axis tick labels,
+		pre main,
+		main,
+		axis lines,
+		axis descriptions,
+		axis foreground,
+	}{/pgfplots/layers/standard},
+}
+
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{middle}
 \pgfsetlayers{background,middle,main}
@@ -1013,6 +1027,60 @@
 }{
 		\end{axis}
 	\end{tikzpicture}
+}
+
+
+
+\newenvironment{doctor-bar}[1][]{
+% ---------------------------------------------------------------------------
+% Flexible bar chart plotting environment based on pd.DataFrame input. Set
+% the axis labels and title and allow Doctor to automatically populate the
+% rest.
+%
+% Parameters
+% ----------
+% #1: User-define input args to axis environment
+% 
+% Demo
+% ----
+% \begin{doctor-bar}
+% \end{doctor-bar}
+% ---------------------------------------------------------------------------
+%	#1
+	\begin{figure}[H] 
+		\centering
+		\noindent\begin{tikzpicture}
+			\begin{axis}[%
+			% Abstract
+				ybar,
+				x label style={at={(axis description cs:.5,-.1)},anchor=north},
+				y label style={at={(axis description cs:-.075,.5)},rotate=90,anchor=south},
+				axis x line* = bottom,
+				axis y line* = left,
+				axis on top,
+				ymajorgrids = true,
+				width=.975\textwidth,
+				height=\axisdefaultheight,
+			% Variables	
+				xlabel = Horizontal,
+				ylabel= Vertical,
+				xmin = 0.5,
+				xmax = 13.5,
+				ymin = 0,
+				ymax = 35,
+				bar width = 5mm,
+				xticklabels = \empty,
+				extra x ticks = {1,2,3,4,5,6,7,8,9,10,11,12,13},
+				extra x tick labels = {Jan '09, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan '10},
+			% User-defined
+				#1
+			]
+}{
+			\end{axis}
+		\end{tikzpicture}
+		\caption[Bar chart]{Demonstration of the bar chart environment}
+		\label{fig:bar}
+	\end{figure}
 }
 
 
