@@ -1055,6 +1055,31 @@
 
 
 
+\newif\ifsomebool%
+\pgfkeys{%
+	/doctor-bar/.is family, /doctor-bar,
+	caption/.store in = \doctorcaption,
+	label/.store in = \doctorlabel,
+	somebool/.is if = somebool,
+	xlabel/.store in = \doctorxlabel,
+	ylabel/.store in = \doctorylabel,
+	xmin/.store in = \doctorxmin,
+	ymin/.store in = \doctorymin,
+	xmax/.store in = \doctorxmax,
+	ymax/.store in = \doctorymax,
+	default/.style = {%
+		somebool=true,
+		caption={},
+		label={},
+		xlabel={Independent variable},
+		ylabel={Dependent variable},
+		xmin={0},
+		xmax={},
+		ymin={0},
+		ymax={},
+	},
+}
+
 \newenvironment{doctor-bar}[1][]{
 % ---------------------------------------------------------------------------
 % Flexible bar chart plotting environment based on pd.DataFrame input. Set
