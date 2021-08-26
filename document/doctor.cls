@@ -95,6 +95,28 @@
 % -------------------------------------------------------------------------------
 
 \RequirePackage[verbose]{hyperref}
+\RequirePackage[all]{hypcap}
+
+\RequirePackage[capitalise]{cleveref}
+\AtBeginDocument{%
+	\crefname{equation}{eEquation}{equations}%
+	\crefname{chapter}{Chapter}{chapters}%
+	\crefname{section}{Section}{sections}%
+	\crefname{appendix}{Appendix}{appendices}%
+	\crefname{enumi}{Item}{items}%
+	\crefname{footnote}{Footnote}{footnotes}%
+	\crefname{figure}{Figure}{figures}%
+	\crefname{table}{Table}{tables}%
+	\crefname{theorem}{Theorem}{theorems}%
+	\crefname{lemma}{Lemma}{lemmas}%
+	\crefname{corollary}{Corollary}{corollaries}%
+	\crefname{proposition}{Proposition}{propositions}%
+	\crefname{definition}{Definition}{definitions}%
+	\crefname{result}{Result}{results}%
+	\crefname{example}{Example}{examples}%
+	\crefname{remark}{Remark}{remarks}%
+	\crefname{note}{Note}{notes}%
+}
 
 \hypersetup{hidelinks}
 \addto\extrasenglish{
@@ -103,8 +125,10 @@
 }
 \setlength{\XeTeXLinkMargin}{-1pt}
 
-\newcommand{\refer}[1]{
-	\hspace{-.15em}\textcolor{maindocumentcolour}{\bfseries Figure\ref{#1}}\hspace{-.4em}
+\newcommand{\refer}[1]{%
+	\hyperlink{#1}{%
+		\textcolor{maindocumentcolour}{\bfseries\cref{#1}}%
+	}%
 }
 
 
