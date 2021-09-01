@@ -1057,7 +1057,9 @@
 
 \newif\ifsomebool%
 \pgfkeys{%
-	/doctor-bar/.is family, /doctor-bar,
+	/doctor-bar/.is family, /doctor-bar/.cd,
+	plot type/.store in = \doctorplottype,
+	data source/.store in = \doctordatasource,
 	caption/.store in = \doctorcaption,
 	label/.store in = \doctorlabel,
 	somebool/.is if = somebool,
@@ -1073,10 +1075,6 @@
 		label={},
 		xlabel={Independent variable},
 		ylabel={Dependent variable},
-		xmin={0},
-		xmax={},
-		ymin={0},
-		ymax={},
 	},
 }
 
