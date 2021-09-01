@@ -1,39 +1,29 @@
-\begin{figure}[H] 
-	\centering%
-	\begin{tikzpicture} %
-		\begin{axis}[%
-			ybar,
-			xlabel = Horizontal,
-			ylabel= Vertical,
-			xticklabels = none,
-			xtick=\empty,
-			extra x ticks = {1,2,3,4,5},
-			extra x tick labels = {2000,2005,2010,2015,2020},
-			ymin = 0,
-			ymax = 900,
-			axis x line* = bottom,
-			axis y line* = left,
-			width= \textwidth,
-			height = 0.5\textwidth,
-			ymajorgrids = true,
-			bar width = 6mm,
-			legend style = {%
-				at={(0.5, 1.025)},
-				anchor = south,
-				legend columns = -1,
-				column sep=2mm,
-				draw=none,
-				area legend%
-			},
-			area legend,
-		]%
-			\addplot+[mark=none, ons-blue, very thick] table[x=time, y=col1] {src/graphs/bar-grouped.dat};%
-		%
-			\addplot+[mark=none, ons-green, very thick] table[x=time, y=col2] {src/graphs/bar-grouped.dat};%
-		%
-			\legend{$data_{blue}$, $data_{green}$}%
-		\end{axis}%
-	\end{tikzpicture}%
-	\caption[Grouped bar chart]{Demonstration of the grouped bar chart environment}%
-	\label{fig:bar-grouped}%
-\end{figure}
+\begin{doctor-bar}[%
+	plot type={ybar},
+	data source={bar-grouped.dat},
+	somebool=false,
+	caption={Testing multiple bar charts...},
+	label={bar-grouped},
+	xmin=0,
+	xmax=4,
+	ymin=0,
+	ymax=100,
+]%
+	\addplot+[%
+		nodes near coords,
+		point meta=explicit symbolic,
+		mark=none,
+		ons-blue,
+		very thick
+	] table [x=index, y=values1, meta=values1]%
+	{\doctordatasource};
+%
+	\addplot+[%
+		nodes near coords,
+		point meta=explicit symbolic,
+		mark=none,
+		ons-green,
+		very thick
+	] table [x=index, y=values2, meta=values2]%
+	{\doctordatasource};
+\end{doctor-bar}
