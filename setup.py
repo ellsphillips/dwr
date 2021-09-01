@@ -15,6 +15,15 @@ setup(
   long_description=long_description,
   long_description_content_type="text/markdown",
   url='https://github.com/ellsphillips/doctor',
+  install_requires=[
+    'geojson',
+    'kaleido',
+    'matplotlib',
+    'numpy',
+    'pandas',
+    'Pillow',
+    'plotly',
+  ],
   keywords='python, latex, report-generator ',
   packages=find_namespace_packages(
     where=['doctor', 'doctor.*']
