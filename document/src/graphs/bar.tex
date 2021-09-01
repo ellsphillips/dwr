@@ -1,18 +1,20 @@
 \begin{doctor-bar}[%
-	somebool=false,
-	caption={Hello, world!},
-	label={bar-test},
-	xmin=0,
-	xmax=12,
-	ymin=0,
-	ymax=35,
+		plot type={ybar},
+		data source={bar.dat},
+		somebool=false,
+		caption={Hello, world!},
+		label={bar-test},
+		xmin=0,
+		xmax=12,
+		ymin=0,
+		ymax=35,
 ]%
-	\addplot[
+	\addplot+[%
 		nodes near coords,
 		point meta=explicit symbolic,
 		mark=none,
 		ons-blue,
 		very thick
 	] table [x=index, y=values, meta=values]%
-	{src/graphs/bar.dat};
+	{\doctordatasource};
 \end{doctor-bar}
