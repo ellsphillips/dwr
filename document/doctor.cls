@@ -1078,7 +1078,7 @@
 	},
 }
 
-\newenvironment{doctor-bar}[1][]{
+\newenvironment{doctor-bar}[1][]{%
 % ---------------------------------------------------------------------------
 % Flexible bar chart plotting environment based on pd.DataFrame input. Set
 % the axis labels and title and allow Doctor to automatically populate the
@@ -1102,15 +1102,15 @@
 		\raisebox{1.5\ht\strutbox}{\hypertarget{fig:\doctorlabel}{}}%
 		\vskip-1.5\ht\strutbox%
 	\fi%
-	\begin{figure}[H] 
-		\centering
-		\noindent\begin{tikzpicture}
+	\begin{figure}[H] %
+		\centering%
+		\noindent\begin{tikzpicture}%
 		% Collect attributes
-			\pgfplotstableread{\doctordatasource}\data
-			\pgfplotstablegetcolumn{label}\of\data\to\labelslist
+			\pgfplotstableread{\doctordatasource}\data%
+			\pgfplotstablegetcolumn{label}\of\data\to\labelslist%
 		%
-			\pgfplotstablegetcolsof{\data}
-			\pgfmathparse{int(\pgfplotsretval-1)}
+			\pgfplotstablegetcolsof{\data}%
+			\pgfmathparse{int(\pgfplotsretval-1)}%
 			\xdef\colcount{\pgfmathresult}%
 		%	
 			\begin{axis}[%
@@ -1139,12 +1139,12 @@
 							 \pgfplotslistselect\pgfmathresult\of\labelslist\to\datalabel%
 							 \datalabel,
 			],
-}{
-			\end{axis}
-		\end{tikzpicture}
+}{%
+			\end{axis}%
+		\end{tikzpicture}%
 		\ifx\doctorcaption\empty\relax\else\caption{\doctorcaption}\fi%
 		\ifx\doctorlabel\empty\relax\else\label{fig:\doctorlabel}\fi%
-	\end{figure}
+	\end{figure}%
 }
 
 
