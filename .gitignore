@@ -1,7 +1,8 @@
 
 ### Documentation build ###
 
-docs/
+docs/*
+docs/*.pdf
 !docs/doctor-pkg-manual.pdf
 
 
@@ -11,6 +12,7 @@ docs/
 TO-DO.*
 
 img/
+document/*.pdf
 document/src/graphs/
 document/src/tables/
 
