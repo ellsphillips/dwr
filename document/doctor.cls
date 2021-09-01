@@ -1105,6 +1105,14 @@
 	\begin{figure}[H] 
 		\centering
 		\noindent\begin{tikzpicture}
+		% Collect attributes
+			\pgfplotstableread{\doctordatasource}\data
+			\pgfplotstablegetcolumn{label}\of\data\to\labelslist
+		%
+			\pgfplotstablegetcolsof{\data}
+			\pgfmathparse{int(\pgfplotsretval-1)}
+			\xdef\colcount{\pgfmathresult}%
+		%	
 			\begin{axis}[%
 			% Abstract
 				ybar,
