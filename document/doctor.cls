@@ -1115,11 +1115,9 @@
 		%	
 			\begin{axis}[%
 			% Abstract
-				ybar,
-				x label style={at={(axis description cs:.5,-.15)},anchor=north},
-				y label style={at={(axis description cs:-.05,.5)},anchor=south},
-				ticklabel style = {font=\small},
-				xticklabels from table={src/graphs/bar.dat}{labels},
+				\doctorplottype,
+				x label style={at={(axis description cs:.5,-.1)},anchor=north},
+				y label style={at={(axis description cs:-.075,.5)},anchor=south},
 				set layers=axis lines on top,
 				axis x line* = bottom,
 				axis y line* = left,
@@ -1135,9 +1133,12 @@
 				ymax=\doctorymax,
 			% User-defined
 				xlabel = \doctorxlabel,
-				ylabel= \doctorylabel,
-				xticklabels from table={src/graphs/bar.dat}{label}
-			]%
+				ylabel = \doctorylabel,
+				xtick distance={1},
+				xticklabel = \pgfmathparse{int(\tick)}%
+							 \pgfplotslistselect\pgfmathresult\of\labelslist\to\datalabel%
+							 \datalabel,
+			],
 }{
 			\end{axis}
 		\end{tikzpicture}
