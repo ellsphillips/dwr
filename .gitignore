@@ -1,5 +1,12 @@
 
-# Custom file attributes
+### Documentation build ###
+
+docs/*
+!docs/doctor-pkg-manual.pdf
+
+
+
+### Placeholder dev content ###
 
 TO-DO.*
 
@@ -7,8 +14,7 @@ img/
 document/src/graphs/
 document/src/tables/
 
-# Created by https://www.toptal.com/developers/gitignore/api/tex
-# Edit at https://www.toptal.com/developers/gitignore?templates=tex
+
 
 ### TeX ###
 ## Core latex/pdflatex auxiliary files:
@@ -304,12 +310,7 @@ TSWLatexianTemp*
 # glossaries
 *.glstex
 
-# End of https://www.toptal.com/developers/gitignore/api/tex
 
-
-
-# Created by https://www.toptal.com/developers/gitignore/api/python
-# Edit at https://www.toptal.com/developers/gitignore?templates=python
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -534,5 +535,3 @@ Thumbs.db
 # 3D Images
 *.3dm
 *.max
-
-# End of https://www.toptal.com/developers/gitignore/api/images
