@@ -11,20 +11,28 @@ def load_geojson(file_path: str):
   with open(file_path) as f:
       return geojson.load(f)
 
+def select_matching(
+        geog:geojson.feature.FeatureCollection,
+        lookup:str):
+    for value in geog['features'][0]['properties']:
+        if lookup.lower() in value.lower():
+            return value
+
 def generate_ids(
-    geog: geojson.feature.FeatureCollection,
-    area_code: str = "LAD21CD",
-    area_name: str = "LAD21NM"
+        geog:geojson.feature.FeatureCollection,
+        area_code: str = "",
+        area_name: str = ""
 ) -> pd.DataFrame:
-  id_map = {}
-  for _dict in geog['features']:
-      id_map[_dict["properties"][area_name]] = _dict["properties"][area_code]
-
-  return pd.DataFrame(
-    id_map.items(),
-    columns=['area', 'code']
-  )
-
+    code = area_code if area_code else select_matching(geog,'CD')
+    name = area_name if area_name else select_matching(geog,'NM')
+    id_map={}
+    for _dict in geog['features']:
+        id_map[_dict["properties"][name]] = _dict["properties"][code]
+    return pd.DataFrame(
+        id_map.items(),
+        columns=['area','code']
+        )   
+    
 def map_plot():
     fig = px.choropleth(
         test_data,
