@@ -38,7 +38,7 @@ def map_plot():
         test_data,
         locations='code',
         geojson=geography,
-        featureidkey="properties.LAD21CD",
+        featureidkey = f"properties.{select_matching(geography,'CD')}",
         scope='europe',
         color='values',
         range_color=(0, 100),
