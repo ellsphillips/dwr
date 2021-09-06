@@ -1,10 +1,13 @@
 [repo-card-api]: https://github-readme-stats.vercel.app/api/pin/?username=ellsphillips&theme=react&repo=doctor&card_width=100%
 [repo-card]: https://github.com/ellsphillips/doctor
 [doctor-build]: https://i.imgur.com/8iuEgjZ.gif
+[doctor-logo]: https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg
 
-[![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor)
+<p align="center">
+  <a href="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg" rel="noopener" target="_blank"><img width="250" src="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg" alt="Material-UI logo"></a></p>
+</p>
 
-# Doctor
+<h1 align="center">Doctor</h1>
 
 An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
 
