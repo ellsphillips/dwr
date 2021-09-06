@@ -6,8 +6,8 @@ from .utils.cli import *
 from .utils.tex import TeXDefaults as tex
 
 
-if sys.version_info < (3, 6):
-  raise RuntimeError("This module requires Python 3.6 or higher")
+if sys.version_info < (3, 8):
+  raise RuntimeError("This module requires Python 3.8 or higher")
 
 
 def build(
