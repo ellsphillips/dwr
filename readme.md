@@ -13,6 +13,8 @@ An automated documentation assitant built in Python and TeX for procedural, data
 
 Doctor simplifies the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
 
+---
+
 ## Installation
 
 Clone the repo
@@ -31,7 +33,7 @@ $ pip install -r requirements.txt
 
 ## Usage
 
-To get started, import `doctor` into your python script. You have immediate access to 2 classes, `table` and `plot`- feed Doctor a dataframe object and watch it build beautiful `LaTeX` code. Returned as a literal, you can pass this result to any of the available methods to further build on or output to your `LaTeX` directory.
+Once installed, you readily have access to Doctor's `table` and `plot` builder methods. Basic examples of each are listed here, but for more complex example usage and a complete list of options from the API, head over to our documentation.
 
 ```python
   import doctor
@@ -44,10 +46,31 @@ To get started, import `doctor` into your python script. You have immediate acce
     label="tabledemo"
   )
 
-  print(table.get_result())
+  figure = doctor.plot(
+    type = "timeseries",
+    data = {
+      "data1": data.series_brownian(points=20),
+      "data2": data.series_brownian(points=34),
+    },
+    options = {
+      "xlabel": "Horizontal",
+      "ylabel": "Vertical",
+      "caption": "Test caption",
+      "shade": {
+        "fill": "solid",
+        "colour": "ONSpink",
+        "domain": (9, "x_min"),
+        "range": ("y_min", "y_max")
+      }
+    }
+  )
+
+  figure.export("path/to/file")
 
   doctor.build(outfile="report")
 ```
+
+Define each of your LaTeX figures with a new builder method. If your IDE doesn't provide intellisense, please see the manual for reference.
 
 ![Build your PDF with Doctor][doctor-build]
 
