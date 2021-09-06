@@ -1,3 +1,9 @@
+from typing import Tuple, Union, Optional
+import pandas as pd
+
+from ...utils.tex import TeXDefaults as tex
+from ...utils.cli import *
+
 class Bar():
   """
   """
@@ -6,11 +12,16 @@ class Bar():
     data: dict = None,
     options: dict = None
   ) -> None:
-    pass
+    self.data = data
+    self.options = options
+    self.plot_declarations: list = []
+
+    if data is None:
+      log.warning("I'm not much good without data, you know...")
 
   @staticmethod
   def _template() -> None:
-    """
+    r"""
     \begin{doctor-bar}[%
       plot type={ybar},
       data source={src/plots/bar.dat},
