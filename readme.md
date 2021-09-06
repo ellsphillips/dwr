@@ -106,9 +106,11 @@ The example project structure given as demo in this repo has architecture:
   └── app.py
 ```
 
-This generates a new file if the name space is undefined, otherwise overwrites the content of the file. Doctor assumes you organise your LaTeX code through `input{}` calls.
+## Outputs
 
-Reference the [architecture below](#architecture) for an example.
+[](#outputs)
+
+Doctor returns your custom LaTeX syntax as string objects. View these directly with `doctor.get_result()` or save to file through the builder options.
 
 ```latex
   \begin{doctor-table}{4}
@@ -140,32 +142,27 @@ Reference the [architecture below](#architecture) for an example.
   \end{doctor-table}
 ```
 
-## Architecture
-
-[](#architecture)
-
-```shell
-  doctor/
-  ├── data
-  │   ├── __init__.py
-  │   └── data.py
-  ├── demo
-  │   ├── src
-  │   │   └── ...
-  │   ├── doctor.cls
-  │   ├── main.tex
-  │   └── report.pdf
-  ├── doctor
-  │   ├── builder
-  │   │   ├── plot
-  │   │   └── table
-  │   ├── utils
-  │   │   ├── __init__.py
-  │   │   ├── cli.py
-  │   │   └── tex.py
-  │   ├── __init__.py
-  │   └── doctor.py
-  └── app.py
+```latex
+  \begin{doctor-bar}[%
+		plot type={ybar},
+		data source={src/plots/bar.dat},
+		somebool=false,
+		caption={Hello, world!},
+		label={bar-test},
+		xmin=0,
+		xmax=12,
+		ymin=0,
+		ymax=35,
+  ]%
+	\addplot+[%
+		nodes near coords,
+		point meta=explicit symbolic,
+		mark=none,
+		ons-blue,
+		very thick,
+	] table [x=index, y=values, meta=values]%
+	{\doctordatasource};
+  \end{doctor-bar}
 ```
 
-<img src="https://raw.githubusercontent.com/ellsphillips/doctor-assets/main/map.svg" alt="Choropleth example">
+<!-- [![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor) -->
