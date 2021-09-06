@@ -74,16 +74,36 @@ Define each of your LaTeX figures with a new builder method. If your IDE doesn't
 
 ![Build your PDF with Doctor][doctor-build]
 
-## Outputs
+## Project structure
 
-[](#outputs)
+Doctor makes no assumption to how you structure you LaTeX project - you specify output paths per figure build. Output code is written to individual`.tex` and data files, allowing you to optionally load LaTeX code with `\input{}` for streamlined, maintainable workflows.
 
-You can inspect the result through the console with `doctor.get_result()`, or use the provided `write_to()` method to output your LaTeX result to a relative directory path.
+The example project structure given as demo in this repo has architecture:
 
-```python
-  table = doctor.table(...)
+[](#architecture)
 
-  doctor.write_to("path/to/file")
+```tree
+  doctor/
+  ├── data
+  │   ├── __init__.py
+  │   └── data.py
+  ├── doctor
+  │   ├── builder
+  │   │   ├── plot
+  │   │   └── table
+  │   ├── utils
+  │   │   ├── __init__.py
+  │   │   ├── cli.py
+  │   │   └── tex.py
+  │   ├── __init__.py
+  │   └── doctor.py
+  ├── document
+  │   ├── src
+  │   │   └── ...
+  │   ├── doctor.cls
+  │   ├── main.tex
+  │   └── report.pdf
+  └── app.py
 ```
 
 This generates a new file if the name space is undefined, otherwise overwrites the content of the file. Doctor assumes you organise your LaTeX code through `input{}` calls.
