@@ -1149,6 +1149,41 @@
 
 
 
+\makeatletter
+\newcommand{\passcustomticks}[2][,]{%
+	\def\nextitem{\def\nextitem{#1}}%
+	\@for \el:=#2\do{\nextitem\el}%
+}
+\makeatother
+
+\newif\ifcustomticklabels%
+\pgfkeys{%
+	/doctor-plot/.is family, /doctor-plot/.cd,
+	plot type/.store in = \doctorplottype,
+	data source/.store in = \doctordatasource,
+	caption/.store in = \doctorcaption,
+	label/.store in = \doctorlabel,
+	label ticks from file/.is if=customticklabels,
+	set x ticks/.store in = \doctorsetxticks,
+	xlabel/.store in = \doctorxlabel,
+	ylabel/.store in = \doctorylabel,
+	xmin/.store in = \doctorxmin,
+	ymin/.store in = \doctorymin,
+	xmax/.store in = \doctorxmax,
+	ymax/.store in = \doctorymax,
+	default/.style = {%
+		plot type={},
+		label ticks from file=false,
+		set x ticks={},
+		caption={},
+		label={},
+		xlabel={Independent variable},
+		ylabel={Dependent variable},
+	},
+}
+
+
+
 % -------------------------------------------------------------------------------
 % Table of Contents
 % -------------------------------------------------------------------------------
