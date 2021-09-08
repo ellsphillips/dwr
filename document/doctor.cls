@@ -1182,6 +1182,75 @@
 	},
 }
 
+\newenvironment{doctor-plot}[1][]{%
+	\pgfkeys{%
+		/doctor-plot,
+		default,
+		#1,
+	}%
+%
+	\ifx\doctorlabel\empty\relax\else%
+		\raisebox{1.5\ht\strutbox}{\hypertarget{fig:\doctorlabel}{}}%
+		\vskip-1.5\ht\strutbox%
+	\fi%
+	\begin{figure}[H]%
+		\centering%
+		\noindent\begin{tikzpicture}%
+		% Collect attributes
+			\pgfplotstableread{\doctordatasource}\data%
+		%
+			\pgfplotstablegetcolumn{index}\of\data\to\indexlist%
+			\ifcustomticklabels%
+			\pgfplotstablegetcolumn{label}\of\data\to\labelslist%
+			\fi%
+		%
+			\pgfplotstablegetcolsof{\data}%
+			\pgfmathparse{int(\pgfplotsretval-1)}%
+			\xdef\colcount{\pgfmathresult}%
+		%	
+			\begin{axis}[%
+			% Abstract
+				\ifx\detokenize{\doctorplottype}\else\doctorplottype\fi,
+				x label style={at={(axis description cs:.5,-.1)},anchor=north},
+				y label style={at={(axis description cs:-.075,.5)},anchor=south},
+				set layers=axis lines on top,
+				axis x line* = bottom,
+				axis y line* = left,
+				ymajorgrids = true,
+				width=.975\textwidth,
+				height=\axisdefaultheight,
+				enlargelimits=false,
+			% Variables	
+				bar width = 5mm,
+				xmin=\fpeval{\doctorxmin-0.5},
+				xmax=\fpeval{\doctorxmax+0.5},
+				ymin=\doctorymin,
+				ymax=\doctorymax,
+			% User-defined
+				xlabel = \doctorxlabel,
+				ylabel = \doctorylabel,
+				xtick = \ifx\doctorsetxticks\empty%
+							data%
+						\else%
+							\doctorsetxticks%
+						\fi,%
+				xtick distance={1},
+				xticklabel = \pgfmathparse{int(\tick)}%
+							 \ifcustomticklabels%
+							 	 \pgfplotslistselect\pgfmathresult\of\labelslist\to\datalabel%
+							 \else%
+							 	 \pgfplotslistselect\pgfmathresult\of\indexlist\to\datalabel%
+							 \fi%
+							 \datalabel,
+				],
+}{%
+			\end{axis}%
+		\end{tikzpicture}%
+		\ifx\doctorcaption\empty\relax\else\caption{\doctorcaption}\fi%
+		\ifx\doctorlabel\empty\relax\else\label{fig:\doctorlabel}\fi%
+	\end{figure}%
+}
+
 
 
 % -------------------------------------------------------------------------------
