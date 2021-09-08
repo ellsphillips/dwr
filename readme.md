@@ -144,24 +144,24 @@ Doctor returns your custom LaTeX syntax as string objects. View these directly w
 
 ```latex
   \begin{doctor-bar}[%
-		plot type={ybar},
-		data source={src/plots/bar.dat},
-		somebool=false,
-		caption={Hello, world!},
-		label={bar-test},
-		xmin=0,
-		xmax=12,
-		ymin=0,
-		ymax=35,
+    plot type={ybar},
+    data source={src/plots/bar.dat},
+    somebool=false,
+    caption={Hello, world!},
+    label={bar-test},
+    xmin=0,
+    xmax=12,
+    ymin=0,
+    ymax=35,
   ]%
-	\addplot+[%
-		nodes near coords,
-		point meta=explicit symbolic,
-		mark=none,
-		ons-blue,
-		very thick,
-	] table [x=index, y=values, meta=values]%
-	{\doctordatasource};
+    \addplot+[%
+      nodes near coords,
+      point meta=explicit symbolic,
+      mark=none,
+      ons-blue,
+      very thick,
+    ] table [x=index, y=values, meta=values]%
+    {\doctordatasource};
   \end{doctor-bar}
 ```
 
