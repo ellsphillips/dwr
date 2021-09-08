@@ -1004,54 +1004,54 @@
 
 
 
-\newenvironment{doctor-plot}[1][]{
-	% ---------------------------------------------------------------------------
-	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
-	% difference quiver plots and regions hatch-shading are supported. Set the  
-	% axis labels and title and allow Doctor to automatically populate the rest.
-	% 
-	% Parameters
-	% ----------
-	% #1: 
-	% 
-	% Demo
-	% ----
-	% \begin{doctor-plot}
-	% \end{doctor-plot}
-	% ---------------------------------------------------------------------------
-%	#1
-	\noindent\begin{tikzpicture}[
-		hatch distance/.store in=\hatchdistance,
-		hatch distance=10pt,
-		hatch thickness/.store in=\hatchthickness,
-		hatch thickness=2pt
-	]
-	%
-		\begin{axis}[%
-		% Abstract
-			set layers,
-			axis x line=bottom,
-			axis y line=middle,
-			axis line style={-stealth, shorten >=-2mm},
-			hide obscured x ticks=false,
-			x label style={at={(axis description cs:.5,-.1)},anchor=north},
-			y label style={at={(axis description cs:-.075,.5)},rotate=90,anchor=south},
-			axis on top,
-			width=.975\textwidth,
-			height=\axisdefaultheight,
-			legend style={at={(1,1)},anchor=north east,font=\small,line width=1pt,mark size=.6pt,rounded corners=1pt},
-		% Fitting data to boundaries
-			clip mode=individual,
-			enlarge y limits={abs=0.4pt},
-		% Variables
-			xlabel={Time (weeks)},
-			ylabel={Independent variable},
-			xmin=0,
-		]
-}{
-		\end{axis}
-	\end{tikzpicture}
-}
+%\newenvironment{doctor-plot}[1][]{
+%	% ---------------------------------------------------------------------------
+%	% Flexible plotting environment based on pd.DataFrame input. Line plots, 
+%	% difference quiver plots and regions hatch-shading are supported. Set the  
+%	% axis labels and title and allow Doctor to automatically populate the rest.
+%	% 
+%	% Parameters
+%	% ----------
+%	% #1: 
+%	% 
+%	% Demo
+%	% ----
+%	% \begin{doctor-plot}
+%	% \end{doctor-plot}
+%	% ---------------------------------------------------------------------------
+%%	#1
+%	\noindent\begin{tikzpicture}[
+%		hatch distance/.store in=\hatchdistance,
+%		hatch distance=10pt,
+%		hatch thickness/.store in=\hatchthickness,
+%		hatch thickness=2pt
+%	]
+%	%
+%		\begin{axis}[%
+%		% Abstract
+%			set layers,
+%			axis x line=bottom,
+%			axis y line=middle,
+%			axis line style={-stealth, shorten >=-2mm},
+%			hide obscured x ticks=false,
+%			x label style={at={(axis description cs:.5,-.1)},anchor=north},
+%			y label style={at={(axis description cs:-.075,.5)},rotate=90,anchor=south},
+%			axis on top,
+%			width=.975\textwidth,
+%			height=\axisdefaultheight,
+%			legend style={at={(1,1)},anchor=north east,font=\small,line width=1pt,mark size=.6pt,rounded corners=1pt},
+%		% Fitting data to boundaries
+%			clip mode=individual,
+%			enlarge y limits={abs=0.4pt},
+%		% Variables
+%			xlabel={Time (weeks)},
+%			ylabel={Independent variable},
+%			xmin=0,
+%		]
+%}{
+%		\end{axis}
+%	\end{tikzpicture}
+%}
 
 
 
