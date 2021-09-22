@@ -125,11 +125,23 @@
 }
 \setlength{\XeTeXLinkMargin}{-1pt}
 
-\newcommand{\refer}[1]{%
-	\hyperlink{#1}{%
-		\textcolor{maindocumentcolour}{\bfseries\cref{#1}}%
-	}%
+\makeatletter
+\newcommand{\refer}[2][\@nil]{%
+	% ----------------------------------
+	% #1: Custom text
+	% #2: The label
+	% ----------------------------------
+	\def\tmp{#1}%
+	\begingroup
+		\bfseries\color{purple}%
+		\ifx\tmp\@nnil
+			\cref{#2}%
+		\else%
+			\hyperref[#2]{#1}%
+		\fi%
+	\endgroup
 }
+\makeatother
 
 
 
