@@ -1,0 +1,29 @@
+\newcommand{\draw@header}[1]{% Regular page headers
+	\ifodd\value{page}%
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick, monokai-fg!50!monokai-bg] ([yshift = -0.1\paperheight]current page.north west) -- ([xshift = -\marginparwidth, yshift = -0.1\paperheight]current page.north east);
+		%
+			\node[anchor = base west, xshift = -4mm, yshift = 2mm-0.1\paperheight] at (current page.north west){
+				\Large\phantom{Gg}\color{monokai-fg}\doctorsection
+			};
+		%
+			\node[anchor = south east, xshift = 4mm-\marginparwidth, yshift = -0.1\paperheight]  at (current page.north east){
+				\raggedleft
+				\Large\color{monokai-fg}\thepage\phantom{Gg}
+			};
+		\end{tikzpicture}
+	\else
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw[thick, monokai-fg!50!monokai-bg] ([xshift = \marginparwidth, yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
+		%
+			\node[anchor = base east, xshift = 4mm, yshift = 2mm-0.1\paperheight] at (current page.north east){
+				\Large\color{monokai-fg}\ellschaptertitle\phantom{Gg}
+			};
+		%
+			\node[anchor = south west, xshift = \marginparwidth-4mm, yshift = -0.1\paperheight]  at (current page.north west){
+				\raggedleft
+				\Large\phantom{Gg}\color{monokai-fg}\thepage
+			};
+		\end{tikzpicture}
+	\fi
+}

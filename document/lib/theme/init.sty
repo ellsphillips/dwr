@@ -1,0 +1,32 @@
+\RequirePackage{assoccnt}
+\RequirePackage{totcount}
+\newtotcounter{totalchapters}
+\regtotcounter{chapter}
+\DeclareAssociatedCounters{chapter}{totalchapters} % Associate the driven counter `totalchapters` to the master counter `chapter`
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+\setlength{\footskip}{50pt}
+
+\fancypagestyle{plain}{\fancyhf{}}
+
+\fancypagestyle{monokai}{%
+	\fancyfoot{\draw@footer}%
+	\fancyhead{\draw@header}%
+}%
+
+\def\@makechapterhead#1{%
+	\hypertarget{chapter \thetotalchapters}{}%
+	\parindent 0pt%
+	\draw@chapterheader{#1}%
+	\draw@footer%
+}%
+
+
+
+\usepackage{lib/theme/sectioning}
+
+\usepackage{lib/theme/header}
+\usepackage{lib/theme/footer}
+
+\pagestyle{monokai}
