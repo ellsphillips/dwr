@@ -1,0 +1,113 @@
+%% Start of file `monokai-theme.sty'.
+%% Copyright 2021 Elliott Phillips <https://github.com/ellsphillips>
+
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]
+\ProvidesPackage{monokai-theme}[
+	Definitions for Monokai colour theme.
+]
+
+\RequirePackage{
+	xcolor,
+	color,
+	tikz,
+}
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+	family=monokai,
+	prefix=monokai@
+}
+
+\DeclareStringOption[monokai-]{prefix}
+\DeclareDefaultOption{%
+	\OptionNotUsed
+	\PackageError{monokai-theme}{Unknown `\CurrentOption' option}
+}
+\ProcessKeyvalOptions*
+
+\newcommand\monokai@definecolor[2]{
+	\expandafter\definecolor\expandafter{\monokai@prefix #1}{RGB}{#2}
+}
+
+\monokai@definecolor{grey-100} {193, 192, 192}
+\monokai@definecolor{grey-200} {114, 112, 114}
+\monokai@definecolor{grey-400} {064, 062, 065}
+\monokai@definecolor{grey-500} {034, 031, 034}
+\monokai@definecolor{grey-700} {031, 029, 032}
+\monokai@definecolor{grey-900} {025, 024, 026}
+\monokai@definecolor{error}    {255, 097, 136}
+\monokai@definecolor{pink}     {255, 097, 136}
+\monokai@definecolor{orange}   {252, 152, 103}
+\monokai@definecolor{yellow}   {255, 216, 102}
+\monokai@definecolor{green}    {169, 220, 118}
+\monokai@definecolor{blue}     {120, 220, 232}
+\monokai@definecolor{purple}   {171, 157, 242}
+
+
+
+\newcommand\monokaiPalette[1][3em]{%
+	\newcommand\monokai@squircle{%
+		\tikz\fill[rounded corners=1em] (0,0) rectangle (#1, #1);
+	}
+	\newcommand\monokai@showcolor[1]{%
+		\textcolor{\monokai@prefix ##1}{\monokai@squircle}%
+	}
+	\noindent\hfill%
+	\begin{tabular}{cccccc}%
+		\monokai@showcolor{grey-100} &
+		\monokai@showcolor{grey-200} &
+		\monokai@showcolor{grey-400} &
+		\monokai@showcolor{grey-500} &
+		\monokai@showcolor{grey-700} &
+		\monokai@showcolor{grey-900} \\
+		grey-100 & grey-200 & grey-400 &
+		grey-500 & grey-700 & grey-900 \\[#1]
+		\monokai@showcolor{pink}   &
+		\monokai@showcolor{orange} &
+		\monokai@showcolor{yellow} &
+		\monokai@showcolor{green}  &
+		\monokai@showcolor{blue}   &
+		\monokai@showcolor{purple} \\
+		pink  & orange & yellow &
+		green & blue   & purple %
+	\end{tabular}%
+	\hfill%
+}
+
+
+
+\colorlet{code-background}{monokai-grey-400}
+\colorlet{console-background}{monokai-grey-400}
+
+
+
+\newcommand{\fontcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color%
+}
+
+\newcommand{\monokailightmode}{%
+	\AtBeginDocument{
+		\pagecolor{white}
+		\fontcolor{monokai-grey-900!10!black}
+		\colorlet{monokai-fg}{monokai-grey-900!10!black}
+		\colorlet{monokai-bg}{white}
+	}
+}
+
+\newcommand{\monokaidarkmode}{%
+	\AtBeginDocument{
+		\pagecolor{monokai-grey-700}
+		\fontcolor{monokai-grey-100!10!white}
+		\colorlet{monokai-fg}{monokai-grey-100!10!white}
+		\colorlet{monokai-bg}{monokai-grey-700}
+	}
+}
+
+\newcommand{\setmaincolour}[1][monokai-yellow]{
+	\colorlet{monokai-accent-colour}{#1}
+}
+
+\endinput
+
+%%
+%% End of file `monokai-theme.sty'.

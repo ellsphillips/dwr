@@ -1,0 +1,79 @@
+%% Start of file `languages.sty'.
+%% Copyright 2021 Elliott Phillips <https://github.com/ellsphillips>
+
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]
+\ProvidesPackage{languages}[
+	Definitions for language brand colour.
+]
+
+\RequirePackage{
+	xcolor,
+	color,
+	tikz,
+}
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+	family=language,
+	prefix=language@
+}
+
+\DeclareStringOption[language-]{prefix}
+\DeclareDefaultOption{%
+	\OptionNotUsed
+	\PackageError{languages}{Unknown `\CurrentOption' option}
+}
+\ProcessKeyvalOptions*
+
+\newcommand\language@definecolor[2]{
+	\expandafter\definecolor\expandafter{\language@prefix #1}{HTML}{#2}
+}
+
+\language@definecolor{sass}       {CC6699}
+\language@definecolor{typescript} {2B7489}
+\language@definecolor{html}       {E34C26}
+\language@definecolor{css}        {264DE4}
+\language@definecolor{javascript} {F0DB4F}
+\language@definecolor{python}     {4B8BBE}
+\language@definecolor{flask}      {000000}
+\language@definecolor{github}     {211F1F}
+\language@definecolor{jupyter}    {EB7325}
+\language@definecolor{nodejs}     {3C873A}
+\language@definecolor{pycharm}    {18D68C}
+\language@definecolor{nodejs}     {3C873A}
+\language@definecolor{vscode}     {0078D7}
+
+
+\newcommand\languagePalette[1][3em]{%
+	\newcommand\language@squircle{%
+		\tikz\fill[rounded corners=1em] (0,0) rectangle (#1, #1);
+	}
+	\newcommand\language@showcolor[1]{%
+		\textcolor{\language@prefix ##1}{\language@squircle}%
+	}
+	\noindent\hfill%
+	\begin{tabular}{cccccc}%
+		\language@showcolor{sass} &
+		\language@showcolor{typescript} &
+		\language@showcolor{html} &
+		\language@showcolor{css} &
+		\language@showcolor{javascript} &
+		\language@showcolor{python} \\
+		sass & typescript & html &
+		css & javascript & python \\[#1]
+		\language@showcolor{flask}   &
+		\language@showcolor{github} &
+		\language@showcolor{jupyter} &
+		\language@showcolor{nodejs}  &
+		\language@showcolor{pycharm}   &
+		\language@showcolor{nodejs} \\
+		flask  & github & jupyter &
+		nodejs & pycharm   & nodejs %
+	\end{tabular}%
+	\hfill%
+}
+
+\endinput
+
+%%
+%% End of file `monokai-theme.sty'.
