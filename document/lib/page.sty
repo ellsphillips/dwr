@@ -1,0 +1,17 @@
+\RequirePackage[
+	a4paper,
+	left=2.5cm,
+	right=2.5cm,
+	bottom=3cm,
+	top=4cm
+]{geometry}
+
+\RequirePackage{emptypage}
+\RequirePackage{afterpage}
+
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{0}% change to -1 if you don't want page numbers additive
+	\newpage
+}
