@@ -27,6 +27,20 @@
 }
 \pgfplotsset{compat=1.12}
 
+\pgfplotsset{
+	layers/axis lines on top/.define layer set={
+		axis background,
+		axis grid,
+		axis ticks,
+		axis tick labels,
+		pre main,
+		main,
+		axis lines,
+		axis descriptions,
+		axis foreground,
+	}{/pgfplots/layers/standard},
+}
+
 
 
 \pgfdeclarelayer{background}
