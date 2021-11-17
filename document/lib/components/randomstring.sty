@@ -1,0 +1,56 @@
+\ProvidesPackage{randomstring}[2014/11/06 v. 0.2]
+
+\RequirePackage{ifxetex}
+
+\newcommand{\setrandomstringlength}[1]{%
+  \chardef\rstr@length=#1\relax
+}
+\setrandomstringlength{26}% default
+
+\ifxetex
+
+  \input{random}
+  \newcount\randomlen
+  \newcount\randomletter
+  \newcount\randomnumber
+
+  \newcommand{\rstr@randomstring}[1]{%
+    \setrannum{\randomlen}{\rstr@length}{\rstr@length}%
+    \loop\ifnum\randomlen>\z@
+      \setrannum{\randomletter}{1}{26}%
+      #1%
+      \advance\randomlen\m@ne
+    \repeat
+  }
+
+  \newcommand{\randomstring}{%
+    \rstr@randomstring{\@alph{\randomletter}}%
+  }
+  \newcommand{\defrandomstring}[1]{%
+    \@ifdefinable#1{\def#1{}\rstr@randomstring{\rstr@add{#1}}}%
+  }
+  \newcommand{\rstr@add}[1]{%
+    \edef#1{#1\@alph{\randomletter}}%
+  }
+
+\else
+
+  \newcommand{\randomstring}{%
+    \expandafter\rstr@generate\expandafter{\pdfuniformdeviate \rstr@length}%
+  }
+  \newcommand{\rstr@generate}[1]{%
+    \expandafter\@alph\expandafter{\number\numexpr1+\pdfuniformdeviate 26}%
+    \ifnum#1>\z@
+      \expandafter\@firstofone
+    \else
+      \expandafter\@gobble
+    \fi
+    {\expandafter\rstr@generate\expandafter{\number\numexpr#1-1}}%
+  }
+  \newcommand{\defrandomstring}[1]{%
+    \@ifdefinable#1{\edef#1{\randomstring}}%
+  }
+
+\fi
+
+\endinput

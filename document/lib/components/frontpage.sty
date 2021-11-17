@@ -1,0 +1,111 @@
+\gdef\@credentialtext{}
+\gdef\credential#1{%
+	\g@addto@macro\@credentialtext{%
+		#1 \par%
+	}
+}
+
+\gdef\@subtitle{}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+
+
+
+\newif\ifpointsamewidth
+
+\pgfkeys{/tikz/.cd,
+	point width/.store in=\maxpointwidth,
+	point width=5pt,
+	use points equal width/.is if=pointsamewidth,
+	use points equal width=false,
+	point style type/.is choice,
+	point style type/fill/.style={fill=\pointcolor},
+	point style/.store in=\pointstyle,
+	point style={/tikz/point style type/fill},     
+	point fill color/.store in=\pointcolor,
+	point fill color=orange,
+}
+
+%\pgfmathsetseed{\number\pdfrandomseed}
+\newcommand{\choosepointstyles}
+{%
+	\pgfmathdeclarerandomlist{bannerpointtints}{%
+		{10}{40}{70}{100}%
+	}
+	\pgfmathrandomitem{\bannerpointtint}{bannerpointtints}
+	\edef\bannerpointtint{\bannerpointtint}
+	
+	\pgfmathdeclarerandomlist{bannerpointsizes}{%
+		{.25}{.5}{.75}{1}%
+	}
+	\pgfmathrandomitem{\bannerpointsize}{bannerpointsizes}
+	\edef\bannerpointsize{\bannerpointsize}
+}
+
+
+
+\newcommand{\frontpage}{%
+	\pagestyle{empty}
+%
+	\begin{tikzpicture}[overlay, remember picture]%
+		\begin{scope}%
+			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);%
+			\ifrandombanner%
+				\fill[monokai-accent-colour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+				\node[] at ($(current page.north)+(0\paperwidth, -0.165\paperheight)$) {
+					\tikz{
+						\foreach \x in {0,...,27} {%
+							\foreach \y in {0,...,10} {%
+								\choosepointstyles
+								\pgfmathsetmacro\pointwidth{\maxpointwidth*\bannerpointsize}%
+								\pgfmathsetmacro\pointdist{\maxpointwidth / (1.5*\maxpointwidth)}
+								\node[%
+									circle,
+									inner sep=\pointwidth pt,
+									point fill color=white!\bannerpointtint!monokai-accent-colour,
+									\pointstyle%
+								] (point-\x-\y) at (\x*\pointdist,\y*\pointdist) {};%
+							}%
+						}%
+					}
+				};
+				\else
+				\ifx\companybanner\empty%
+					\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
+				\else%
+					\fill[monokai-accent-colour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+				%
+					\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
+				\fi%
+			\fi
+		\end{scope}
+	%
+		\draw[
+			fill = none,
+			draw = monokai-bg,
+			line width = 0.033\paperwidth,
+			rounded corners = 16pt
+		]
+		($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+			-- ($(current page.north west)+(0.0165\paperwidth, -0.0165\paperwidth)$)
+			-- ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$)
+			-- ($(current page.north east)+(-0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$)
+			-- cycle;
+	%%%
+		\node[anchor = north, yshift = -1cm] (maketitle) at (current page.center) {%
+			\parbox{0.4\paperwidth}{
+				\def\baselinestretch{1.2}%
+				\centering\bfseries%
+				\Huge\@author \par%
+				\vskip\baselineskip%
+				\large\@credentialtext \par%
+				\huge\vskip\baselineskip%
+				\@title \par%
+				\large\@subtitle \par%
+				\vskip10\baselineskip%
+				\normalsize Last updated: \@date%
+			}
+		};
+	\end{tikzpicture}
+%
+	\null\newpage\pagestyle{monokai}
+}
