@@ -1,0 +1,55 @@
+\RequirePackage{color}
+
+\definecolor{background-100}{RGB}{64, 62, 65}
+\definecolor{background-200}{RGB}{45, 42, 46}
+\definecolor{background-300}{RGB}{34, 31, 34}
+\definecolor{background-400}{RGB}{31, 29, 32}
+\definecolor{background-500}{RGB}{25, 24, 26}
+
+\colorlet{code-background}{background-200}
+\definecolor{console-background}{RGB}{64, 62, 65}
+\definecolor{monokai-underline-error}{RGB}{255, 97, 136}
+\definecolor{monokai-pink}{RGB}{255, 97, 136}
+\definecolor{monokai-orange}{RGB}{252, 152, 103}
+\definecolor{monokai-yellow}{RGB}{255, 216, 102}
+\definecolor{monokai-green}{RGB}{169, 220, 118}
+\definecolor{monokai-blue}{RGB}{120, 220, 232}
+\definecolor{monokai-purple}{RGB}{171, 157, 242}
+\definecolor{monokai-grey}{RGB}{114, 112, 114}
+\definecolor{monokai-grey-light}{RGB}{193, 192, 192}
+
+\definecolor{LightGrey}{RGB}{245, 245, 245}
+\definecolor{MidGrey}{RGB}{230, 230, 230}
+\definecolor{DarkGrey}{RGB}{100, 100, 100}
+
+\definecolor{clr-green}{RGB}{168, 189, 58} % #a8bd3a
+\definecolor{clr-blue}{RGB}{0, 61, 89} % #003d59
+\definecolor{clr-pink}{RGB}{206, 53, 135} % #ce3587
+\definecolor{clr-orange}{RGB}{216, 66, 39} % #d84227
+\definecolor{clr-yellow}{RGB}{226, 188, 34} % #e2bc22
+
+\definecolor{sass}{HTML}{CC6699}
+\definecolor{typescript}{HTML}{2B7489}
+\definecolor{html}{HTML}{E34C26}
+\definecolor{css}{HTML}{264DE4}
+\definecolor{javascript}{HTML}{F0DB4F}
+\definecolor{python}{HTML}{4B8BBE}
+\definecolor{flask}{HTML}{000000}
+\definecolor{github}{HTML}{211F1F}
+\definecolor{jupyter}{HTML}{EB7325}
+\definecolor{nodejs}{HTML}{3C873A}
+\definecolor{pycharm}{HTML}{18D68C}
+\definecolor{nodejs}{HTML}{3C873A}
+\definecolor{vscode}{HTML}{0078D7}
+
+\pagecolor{background-400}
+
+\newcommand{\globalcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color
+}
+\AtBeginDocument{\globalcolor{background-100!10!white}}
+
+\newcommand{\setmaincolour}[1][monokai-yellow]{
+	\colorlet{maindocumentcolour}{#1}
+}
+%\setmaincolour
