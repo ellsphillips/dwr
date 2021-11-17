@@ -1,0 +1,44 @@
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{gensymb}
+\RequirePackage[english]{babel}
+\RequirePackage[document]{ragged2e}
+\RequirePackage{float}
+\RequirePackage{bm}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{cancel}
+\RequirePackage{varwidth}
+\RequirePackage{blindtext}
+\RequirePackage{underscore}
+\RequirePackage{lipsum}
+
+% Configure a directory location for fonts(default: 'fonts/')
+\newcommand*{\fontdir}[1][fonts/]{\def\@fontdir{#1}}
+\fontdir
+
+\RequirePackage[]{helvet}
+\fontfamily{phv}\selectfont
+\renewcommand{\familydefault}{\sfdefault}
+
+
+
+\usepackage{fontspec}
+\setmonofont{JetBrainsMono-SemiBold}[ % Fira Code, JetBrains Mono
+	Contextuals=Alternate,
+%	Ligatures=TeX,
+]
+
+\usepackage{listings}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+}
+
+\makeatletter
+\renewcommand*\verbatim@nolig@list{}
+\makeatother
+
+\newcommand{\codefontsize}{\fontsize{8}{10}\selectfont}

@@ -1,0 +1,106 @@
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{fp}
+\RequirePackage{epstopdf}
+\RequirePackage{framed}
+\RequirePackage{amsmath}
+\RequirePackage[absolute]{textpos}
+\RequirePackage{fancyhdr}
+\RequirePackage{alphalph}
+\RequirePackage{ifthen}
+\RequirePackage{appendix}
+\RequirePackage{titletoc}
+\RequirePackage{etoolbox}
+
+\RequirePackage{tikz}
+\RequirePackage{tkz-euclide}
+\RequirePackage{pgfplots}
+\RequirePackage{pgfmath}
+\RequirePackage{pgffor}
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{
+	intersections,
+	calc,
+	decorations.pathmorphing,
+	fit,
+}
+\pgfplotsset{compat=1.12}
+
+\pgfplotsset{
+	layers/axis lines on top/.define layer set={
+		axis background,
+		axis grid,
+		axis ticks,
+		axis tick labels,
+		pre main,
+		main,
+		axis lines,
+		axis descriptions,
+		axis foreground,
+	}{/pgfplots/layers/standard},
+}
+
+
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+
+\tikzstyle{inner box} = [box, clip]
+\tikzstyle{outer box} = [box, fill=none, thick, draw]
+\tikzstyle{box} = [inner sep=0pt, outer sep=0pt, rounded corners]
+
+\newcommand{\inlineimg}[2][\textwidth]{%
+	\vskip\baselineskip
+	\noindent\tikz{%
+		\node[inner box] (inlineimg) {%
+			\includegraphics[width=#1]{#2}%
+		};%
+	%
+		\node[outer box, fit=(inlineimg), draw=white, line width = 1mm] (inlineimg-wrapper) {};%
+	}
+}
+
+
+
+\makeatletter
+\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+{\pgfpoint{\hatchdistance-1pt}{\hatchdistance-1pt}}%
+{
+	\pgfsetcolor{\tikz@pattern@color}
+	\pgfsetlinewidth{\hatchthickness}
+	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+	\pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
+	\pgfusepath{stroke}
+}
+
+
+
+\tikzset{
+	uipanel/.style={%
+		fill = white,
+		rounded corners = 0.75mm,
+		blur shadow = {%
+			shadow blur steps = 30,
+			shadow xshift = 0ex,
+			shadow yshift = 0ex,
+			shadow blur radius = 5mm,
+			shadow opacity = 10
+		}
+	}
+}
+
+
+
+\pgfplotsset{
+	/pgfplots/area legend/.style={%
+		/pgfplots/legend image code/.code={%
+			\fill[##1] (0cm,-0.1cm) rectangle (0.6cm,0.1cm);
+		}%
+	},
+}
