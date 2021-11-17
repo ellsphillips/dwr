@@ -1,0 +1,28 @@
+\tikzset{
+	dlbuttonfill/.cd,
+	data/.style={draw=maindocumentcolour,fill=maindocumentcolour,text=white},
+	image/.style={draw=maindocumentcolour,fill=none,text=maindocumentcolour},
+	error/.style={draw=red,fill=none,text=red},
+	paint/.code={%
+		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
+			\ifthenelse{\isin{#1}{data}}{\tikzset{dlbuttonfill/data}}{
+				\tikzset{dlbuttonfill/error}
+			}
+		}
+	},
+}
+
+\newcommand{\button}[2][data]{%
+	\noindent\href{#2}{%
+		\begin{tikzpicture}%
+			\node[%
+			dlbuttonfill/paint=#1,
+			rectangle,
+			inner sep = 6pt,
+			rounded corners = 2pt,
+			] {%
+				\small\bfseries\MakeUppercase{#1}%
+			};%
+		\end{tikzpicture}%
+	}%
+}
