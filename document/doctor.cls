@@ -33,8 +33,6 @@
 	lib/refs,
 }
 
-\usepackage{lib/theme/init}
-
 \usepackage{lib/code-blocks/init}
 
 \usepackage{lib/xltabular}
@@ -48,6 +46,8 @@
 	lib/components/main-points,
 	lib/components/toc,
 }
+
+\usepackage{lib/theme/init}
 
 % ------------------------------------------------------------------------------
 
