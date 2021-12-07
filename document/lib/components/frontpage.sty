@@ -50,7 +50,7 @@
 		\begin{scope}%
 			\clip [] ($(current page.north west)+(0.0165\paperwidth, 0.0165\paperwidth)-(0, 0.33\paperheight)$) rectangle coordinate (centerpoint) ($(current page.north east)+(-0.0165\paperwidth, -0.0165\paperwidth)$);%
 			\ifrandombanner%
-				\fill[monokai-accent-colour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+				\fill[clr-accent] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
 				\node[] at ($(current page.north)+(0\paperwidth, -0.165\paperheight)$) {
 					\tikz{
 						\foreach \x in {0,...,27} {%
@@ -61,7 +61,7 @@
 								\node[%
 									circle,
 									inner sep=\pointwidth pt,
-									point fill color=white!\bannerpointtint!monokai-accent-colour,
+									point fill color=white!\bannerpointtint!clr-accent,
 									\pointstyle%
 								] (point-\x-\y) at (\x*\pointdist,\y*\pointdist) {};%
 							}%
@@ -72,7 +72,7 @@
 				\ifx\companybanner\empty%
 					\node[] at ($(current page.north)+(0\paperwidth, - 0.165\paperheight)$) {\includegraphics[width = 1\paperwidth]{example-image-a}};%
 				\else%
-					\fill[monokai-accent-colour] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
+					\fill[clr-accent] (current page.north west) rectangle ([yshift=-0.33\paperheight]current page.north east);
 				%
 					\node[anchor = south] at ($(current page.north)+(0\paperwidth, 3pt+0.033\paperwidth-0.33\paperheight)$) {\includegraphics[width = 1\paperwidth]{\companybanner}};%
 				\fi%
@@ -81,7 +81,7 @@
 	%
 		\draw[
 			fill = none,
-			draw = monokai-bg,
+			draw = clr-bg,
 			line width = 0.033\paperwidth,
 			rounded corners = 16pt
 		]

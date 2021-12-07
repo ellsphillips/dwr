@@ -9,7 +9,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{ctable}
 
-\newcommand{\dashrule}[1][monokai-yellow]{%
+\newcommand{\dashrule}[1][clr-accent]{%
 	\color{#1}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}\xleaders\hbox{\rule{4pt}{0pt}\rule[\dimexpr.5ex-.2pt]{4pt}{.4pt}}\hfill\kern0pt%
 }
 \newcommand{\rulecolor}[1]{%
@@ -80,7 +80,7 @@
 	\rowcolor{white}\caption[]{#4 (cont.)} \\%
 	\rowcolor{white}\multicolumn{#1}{c}{
 		\raisebox{.15em}{\resizebox{0.95\textwidth}{!}{
-				\makebox[\textwidth]{\dashrule[monokai-yellow]}
+				\makebox[\textwidth]{\dashrule[clr-accent]}
 		}}
 	} \\%
 	\rowcolor{white}#3%
@@ -91,7 +91,7 @@
 		\multirow{2}{*}{%
 			\parbox{0.95\textwidth}{%
 				\raisebox{.15em}{\resizebox{0.95\textwidth}{!}{
-						\makebox[\textwidth]{\dashrule[monokai-yellow]}
+						\makebox[\textwidth]{\dashrule[clr-accent]}
 				}}
 				\raggedleft\footnotesize\textit{Continued on next page}
 			}

@@ -33,6 +33,8 @@
 	lib/refs,
 }
 
+\usepackage{lib/code-blocks/init}
+
 \usepackage{lib/xltabular}
 
 \usepackage{%
@@ -58,7 +60,7 @@
 
 
 
-\DeclareOptionX{theme}{\colorlet{maindocumentcolour}{#1}}
+\DeclareOptionX{theme}{\colorlet{clr-accent}{#1}}
 
 \DeclareOptionX{logo}{\IfFileExists{#1}{\def\companylogo{#1}}{\def\companylogo{}}}
 
