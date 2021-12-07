@@ -14,11 +14,11 @@
 
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
-	family=monokai,
-	prefix=monokai@
+	family=clr,
+	prefix=clr@
 }
 
-\DeclareStringOption[monokai-]{prefix}
+\DeclareStringOption[clr-]{prefix}
 \DeclareDefaultOption{%
 	\OptionNotUsed
 	\PackageError{monokai-theme}{Unknown `\CurrentOption' option}
@@ -76,8 +76,8 @@
 
 
 
-\colorlet{code-background}{monokai-grey-400}
-\colorlet{console-background}{monokai-grey-400}
+\colorlet{code-background}{clr-grey-400}
+\colorlet{console-background}{clr-grey-400}
 
 
 
@@ -88,23 +88,23 @@
 \newcommand{\monokailightmode}{%
 	\AtBeginDocument{
 		\pagecolor{white}
-		\fontcolor{monokai-grey-900!10!black}
-		\colorlet{monokai-fg}{monokai-grey-900!10!black}
-		\colorlet{monokai-bg}{white}
+		\fontcolor{clr-grey-900!10!black}
+		\colorlet{clr-fg}{clr-grey-900!10!black}
+		\colorlet{clr-bg}{white}
 	}
 }
 
 \newcommand{\monokaidarkmode}{%
 	\AtBeginDocument{
-		\pagecolor{monokai-grey-700}
-		\fontcolor{monokai-grey-100!10!white}
-		\colorlet{monokai-fg}{monokai-grey-100!10!white}
-		\colorlet{monokai-bg}{monokai-grey-700}
+		\pagecolor{clr-grey-700}
+		\fontcolor{clr-grey-100!10!white}
+		\colorlet{clr-fg}{clr-grey-100!10!white}
+		\colorlet{clr-bg}{clr-grey-700}
 	}
 }
 
-\newcommand{\setmaincolour}[1][monokai-yellow]{
-	\colorlet{monokai-accent-colour}{#1}
+\newcommand{\setmaincolour}[1][clr-yellow]{
+	\colorlet{clr-accent-colour}{#1}
 }
 
 \endinput
