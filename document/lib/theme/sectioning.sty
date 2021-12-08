@@ -4,9 +4,9 @@
 %	\addcontentsline{toc}{section}{\thesection \; #1}
 	\vskip 1cm
 	\flushleft{
-		\Large\bfseries\thesection\;\textcolor{monokai-fg}{#1}
+		\Large\bfseries\thesection\;\textcolor{clr-fg}{#1}
 		\vskip -3mm
-		\textcolor{monokai-fg!50!monokai-bg}{\hrule}
+		\textcolor{clr-fg!50!clr-bg}{\hrule}
 		\vskip 3mm
 	}
 	\vskip 3mm
@@ -22,12 +22,12 @@
 
 \renewcommand{\subsection}[1]{%
 	\stepcounter{doctorsubsection}%
-	\addcontentsline{toc}{subsection}{\color{monokai-fg!50!monokai-bg} \thesection.\thedoctorsubsection \; #1}%
+	\addcontentsline{toc}{subsection}{\color{clr-fg!50!clr-bg} \thesection.\thedoctorsubsection \; #1}%
 	\vskip3\baselineskip%
 	\flushleft{%
 		\begin{tikzpicture}[overlay]
 			\node[%
-				color = monokai-fg,
+				color = clr-fg,
 				anchor = west,
 			] (subsection-text) at (-.33em, 0) {\large\bfseries\strut#1};
 		%
@@ -37,13 +37,13 @@
 				inner sep = 4pt,
 				baseline = (subsection-text.base),
 			] (subsection-label) at ([xshift=-.66em]subsection-text.west) {%
-				\ttfamily\bfseries\color{monokai-bg}%
+				\ttfamily\bfseries\color{clr-bg}%
 				\strut\thesection.\thedoctorsubsection%
 			};
 		%
 			\begin{pgfonlayer}{background}%
 				\fill[
-					monokai-accent-colour,
+					clr-accent,
 					rounded corners = 1pt,
 				]%
 				([yshift=-1pt]subsection-label.north west)%
@@ -62,16 +62,16 @@
 \newcommand{\draw@chapterheader}[1]{% Regular chapters header
 	\renewcommand{\ellschaptertitle}{#1}
 	\begin{tikzpicture}[overlay, remember picture]
-		\fill[monokai-bg!90!monokai-fg] (current page.north west) rectangle ([yshift = -0.1\paperheight]current page.north east);
+		\fill[clr-bg!90!clr-fg] (current page.north west) rectangle ([yshift = -0.1\paperheight]current page.north east);
 	%
-		\draw[color = monokai-fg!50!monokai-bg] ([yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
+		\draw[color = clr-fg!50!clr-bg] ([yshift = -0.1\paperheight]current page.north west) -- ([yshift = -0.1\paperheight]current page.north east);
 	%
 		\node[
 			rectangle,
 			rounded corners = 4pt,
 			inner sep = 11pt,
-			draw = monokai-fg!50!monokai-bg,
-			fill = monokai-grey-400,
+			draw = clr-fg!50!clr-bg,
+			fill = clr-grey-400,
 			line width = 0.25mm,
 			yshift = -0.1\paperheight
 		] at (current page.north){
@@ -100,12 +100,12 @@
 \renewcommand\labelitemi{%
 	\raisebox{1.5pt}{%
 		\tikz\fill[%
-			monokai-accent-colour,
+			clr-accent,
 			rounded corners = .75pt,
 		] (-1.5pt, -1.5pt) rectangle (1.5pt, 1.5pt);
 	}%
 }
 
 \renewcommand\labelenumi{%
-	\textcolor{monokai-accent-colour}{\bfseries\theenumi.}%
+	\textcolor{clr-accent}{\bfseries\theenumi.}%
 }

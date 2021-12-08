@@ -5,6 +5,18 @@
 }
 \makeatother
 
+
+
+\pgfplotsset{
+	/pgfplots/area legend/.style={%
+		/pgfplots/legend image code/.code={%
+			\fill[##1] (0cm,-0.1cm) rectangle (0.6cm,0.1cm);
+		}%
+	},
+}
+
+
+
 \newif\ifcustomticklabels%
 \pgfkeys{%
 	/doctor-plot/.is family, /doctor-plot/.cd,
@@ -91,7 +103,24 @@
 							 	 \pgfplotslistselect\pgfmathresult\of\indexlist\to\datalabel%
 							 \fi%
 							 \datalabel,
-				],
+			% Legend
+				legend image code/.code={%
+					\draw[##1,yshift=.1\baselineskip] (-.25\baselineskip, -.25\baselineskip) rectangle (.25\baselineskip, .25\baselineskip);%
+				},
+				legend columns=4,
+				legend cell align=left,
+				legend style={%
+					at={(.5, 1.025)},
+					anchor=south,
+					font=\scriptsize,
+					draw=none,
+					line width=1pt,
+					mark size=.6pt,
+					rounded corners=1pt,
+					inner sep=5pt,
+					column sep=5pt,
+				}
+			],	
 }{%
 			\end{axis}%
 		\end{tikzpicture}%

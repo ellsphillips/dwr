@@ -17,13 +17,13 @@
 	\else
 		\begin{tikzpicture}[overlay, remember picture]
 			\node[anchor = north west, xshift = 2mm+\marginparwidth, yshift = 0.066\paperheight-0.66mm]  at (current page.south west){
-				\includegraphics[height = 0.04\textwidth]{img/logos/git.pdf}
+				\includegraphics[height = 0.04\textwidth]{\companylogo}
 			};
 		\end{tikzpicture}
 	\fi
 %
 	\begin{tikzpicture}[overlay, remember picture]
-		\draw[thick, monokai-fg] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
+		\draw[thick, clr-fg] ([xshift = \marginparwidth, yshift = 0.066\paperheight]current page.south west) -- ([xshift = -\marginparwidth, yshift = 0.066\paperheight]current page.south east);
 	%
 		\node[anchor = south] at ([yshift = 0.033\paperheight]current page.south) {
 			\begin{tikzpicture}%
@@ -36,13 +36,13 @@
 						\equal{\thetotalchapters}{\x}
 					}{%
 						%%% IF CURRENT CHAPTER
-						\draw[fill=monokai-accent-colour, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+						\draw[fill=clr-accent, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
 					%
 						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 						
 					}{%
 						%%% OTHER CHAPTERS
-						\draw[fill=monokai-fg!25!monokai-bg, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
+						\draw[fill=clr-fg!25!clr-bg, draw = none, line width = 0.05mm] (\z\miniframemodule, 0.005\paperwidth) circle (0.005\paperwidth);
 					%
 						\node at (\z\miniframemodule, -0.25\miniframemodule) {\hyperlink{chapter \x}{\XeTeXLinkBox{\phantom{\rule{\miniframemodule}{0.5\miniframemodule}}}}};
 					}

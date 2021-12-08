@@ -1,7 +1,7 @@
 \tikzset{
 	dlbuttonfill/.cd,
-	data/.style={draw=maindocumentcolour,fill=maindocumentcolour,text=white},
-	image/.style={draw=maindocumentcolour,fill=none,text=maindocumentcolour},
+	data/.style={draw=clr-accent,fill=clr-accent,text=white},
+	image/.style={draw=clr-accent,fill=none,text=clr-accent},
 	error/.style={draw=red,fill=none,text=red},
 	paint/.code={%
 		\ifthenelse{\isin{#1}{image}}{\tikzset{dlbuttonfill/image}}{
@@ -16,10 +16,10 @@
 	\noindent\href{#2}{%
 		\begin{tikzpicture}%
 			\node[%
-			dlbuttonfill/paint=#1,
-			rectangle,
-			inner sep = 6pt,
-			rounded corners = 2pt,
+				dlbuttonfill/paint=#1,
+				rectangle,
+				inner sep = 6pt,
+				rounded corners = 2pt,
 			] {%
 				\small\bfseries\MakeUppercase{#1}%
 			};%

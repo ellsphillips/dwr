@@ -1,11 +1,13 @@
+\usepackage{enumitem}
+
 \newtcolorbox{main-points-wrapper}{
 	enhanced,
 	breakable,
 	rounded corners,
 	arc = 4pt,
 	boxrule = 0pt,
-	colback = ons-grey-900,
-	boxsep=12pt,
+	colback = clr-bg!95!clr-fg,
+	boxsep = 12pt,
 }
 
 \newenvironment{main-points}{%
@@ -32,11 +34,15 @@
 			\vskip.5\baselineskip\color{black!50}\hrule%
 		}
 		\justify%
-		\begin{enumerate}[%
-			label=\bfseries\color{maindocumentcolour}\theenumi.\:,
-			wide,
-			labelwidth=!,
-			labelindent=0pt,
+		\begin{enumerate}[
+			label={\bfseries\color{clr-accent}\theenumi.\:},
+			labelsep=8pt,
+%			labelindent=0.5\parindent,
+			itemindent=0pt,
+			leftmargin=*,
+			listparindent=-\leftmargin,
+%			wide,
+%			labelwidth=!,
 		]%
 }{%
 		\end{enumerate}%

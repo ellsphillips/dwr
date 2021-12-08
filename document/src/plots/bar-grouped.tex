@@ -1,7 +1,6 @@
-\begin{doctor-bar}[%
+\begin{doctor-plot}[%
 	plot type={ybar},
 	data source={src/plots/bar-grouped.dat},
-	somebool=false,
 	caption={Testing multiple bar charts...},
 	label={bar-grouped},
 	xmin=0,
@@ -13,7 +12,7 @@
 		nodes near coords,
 		point meta=explicit symbolic,
 		mark=none,
-		ons-blue,
+		clr-blue,
 		very thick
 	] table [x=index, y=values1, meta=values1]%
 	{\doctordatasource};
@@ -22,8 +21,10 @@
 		nodes near coords,
 		point meta=explicit symbolic,
 		mark=none,
-		ons-green,
+		clr-green,
 		very thick
 	] table [x=index, y=values2, meta=values2]%
 	{\doctordatasource};
-\end{doctor-bar}
+%
+	\legend{$D_1$, $D_2$}
+\end{doctor-plot}
