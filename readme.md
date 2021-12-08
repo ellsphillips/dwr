@@ -3,11 +3,7 @@
 [doctor-build]: https://i.imgur.com/8iuEgjZ.gif
 [doctor-logo]: https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg
 
-<p align="center">
-  <a href="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg" rel="noopener" target="_blank"><img width="250" src="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg" alt="Material-UI logo"></a></p>
-</p>
-
-<h1 align="center">Doctor</h1>
+# Doctor <img align="right" width="200" height="200" title="Doctor" src="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/assets/doctor-logo.svg">
 
 An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
 
