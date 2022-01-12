@@ -1,0 +1,66 @@
+\makeatletter%
+\newcommand\colorwave[1][monokai-red]{%
+	\font\uwavefont=lasyb10 scaled 652%
+	\bgroup%
+	\markoverwith{%
+		\lower3.5\p@\hbox{\uwavefont\textcolor{#1}{\char58}}%
+	}%
+	\ULon%
+}
+\makeatother
+
+
+
+\makeatletter
+\newcommand*\idstyle[1]{%
+	\expandafter\id@style\the\lst@token{#1}\relax%
+}
+\def\id@style#1#2\relax{%
+	\ifnum\pdfstrcmp{#1}{@}=0%
+		\codefontsize\ttfamily\slshape\color{monokai-blue} \the\lst@token%
+	\else%
+		\edef\tempa{\uccode`#1}%
+		\edef\tempb{`#1}%
+		\ifnum\tempa=\tempb%
+			\ttfamily\color{monokai-blue} \the\lst@token%
+		\else%
+			\the\lst@token%
+		\fi%
+	\fi%
+}
+\makeatother
+
+
+
+\makeatletter
+	% Patch to colour pairs of parentheses
+	\patchcmd{\lsthk@SelectCharTable}{%
+		\lst@ifbreaklines\lst@Def{`)}{\lst@breakProcessOther)}\fi%
+	}{%
+	}{%
+	}{%
+	}%
+%
+	% Appending literate declarations
+	\def\lst@Literatekey#1\@nil@{%
+		\let\lst@ifxliterate\lst@if%
+		\expandafter\def\expandafter\lst@literate\expandafter{\lst@literate#1}%
+	}
+\makeatother
+
+
+\makeatletter
+\newcommand*{\tsstring}[2]{%
+	\ifnum\lst@mode=\lst@Pmode%
+		\color{#1}%
+	\else%
+		\ifx#2\empty%
+			\relax%
+		\else%
+			\color{#2}%
+		\fi%
+	\fi%
+}
+\makeatother
+
+
