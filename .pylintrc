@@ -1,0 +1,8 @@
+[MASTER]
+docstring-min-length=10
+disable=missing-function-docstring,
+        missing-class-docstring,
+        missing-module-docstring,
+        too-few-public-methods
+[FORMAT]
+good-names=i,j,x,y,id
