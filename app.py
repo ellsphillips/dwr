@@ -16,7 +16,7 @@ def main():
         label="tabledemo",
     )
 
-    print(table)
+    print(table.get_result())
 
 
 if __name__ == "__main__":
