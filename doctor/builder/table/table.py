@@ -1,12 +1,16 @@
-import os
-from typing import List, Optional, Union
+# pyright: reportUnknownMemberType=false
+# pyright: reportUnknownArgumentType=false
+# pyright: reportUnknownVariableType=false
 
-import numpy as np
+from dataclasses import dataclass
+from typing import List, Optional
+
 import pandas as pd
 
-from ...utils.tex import TeXDefaults as tex
+DataframeColumnType = List[str]
 
 
+@dataclass
 class TabularBuilder:
     """
     Comprehensive table builder that outputs LaTeX markup
@@ -17,22 +21,14 @@ class TabularBuilder:
     user-defined column behaviour.
     """
 
-    tab_space = " "*4
+    tab_space = " " * 4
     double_backslash = "\\\\"
 
-    def __init__(
-        self,
-        dataframe: pd.DataFrame = None,
-        column_format: Optional[List[float]] = None,
-        caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",
-        short_caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}",
-        label: Optional[str] = None,
-    ):
-        self.dataframe = dataframe
-        self.column_format = column_format
-        self.caption = caption
-        self.short_caption = short_caption
-        self.label = label
+    dataframe: pd.DataFrame
+    column_format: Optional[List[float]] = None
+    caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}"
+    short_caption: Optional[str] = r"\textcolor{red}{Tabular caption not provided.}"
+    label: Optional[str] = None
 
     @property
     def caption_macro(self) -> str:
@@ -46,9 +42,9 @@ class TabularBuilder:
         if self.caption:
             return "".join(
                 [
-                r"\caption",
-                f"[{self.short_caption}]" if self.short_caption else "",
-                f"{{{self.caption}}}",
+                    r"\caption",
+                    f"[{self.short_caption}]" if self.short_caption else "",
+                    f"{{{self.caption}}}",
                 ]
             )
         return ""
@@ -82,12 +78,14 @@ class TabularBuilder:
         if self.caption:
             return "\n".join(
                 [
-                r"{% Caption",
-                f"{self.tab_space * 2}{{{self.short_caption}}}," if self.short_caption else "{{}},",
-                f"{self.tab_space * 2}{{{self.caption}}}",
-                f"{self.tab_space}" + r"}{% Label",
-                f"{self.tab_space * 2}{self.label}" if self.label else "%",
-                f"{self.tab_space}" + "}"
+                    r"{% Caption",
+                    f"{self.tab_space * 2}{{{self.short_caption}}},"
+                    if self.short_caption
+                    else "{{}},",
+                    f"{self.tab_space * 2}{{{self.caption}}}",
+                    f"{self.tab_space}" + r"}{% Label",
+                    f"{self.tab_space * 2}{self.label}" if self.label else "%",
+                    f"{self.tab_space}" + "}",
                 ]
             )
         return ""
@@ -106,19 +104,22 @@ class TabularBuilder:
             return (
                 f"{self.tab_space}{{% Column format\n"
                 + "\n".join(
-                [
-                    f"{self.tab_space * 2 }>{{\\raggedleft\\arraybackslash\\hsize={w}\\hsize}}X"
-                    for w in self.column_format
-                ]
+                    [
+                        f"{self.tab_space * 2 }>{{\\raggedleft\\arraybackslash\\hsize={w}\\hsize}}X"
+                        for w in self.column_format
+                    ]
                 )
                 + f"\n{self.tab_space}}}"
             )
 
-        return "".join([
-            f"{self.tab_space}{{% Column format\n",
-            f"{self.tab_space * 2}>{{\\raggedleft\\arraybackslash\\hsize=\\hsize}}X\n" * self.dataframe.shape[1],
-            f"{self.tab_space}}}"
-        ])
+        return "".join(
+            [
+                f"{self.tab_space}{{% Column format\n",
+                f"{self.tab_space * 2}>{{\\raggedleft\\arraybackslash\\hsize=\\hsize}}X\n"
+                * self.dataframe.shape[1],
+                f"{self.tab_space}}}",
+            ]
+        )
 
     @property
     def table_column_headers(self) -> str:
@@ -131,16 +132,19 @@ class TabularBuilder:
             colm \\
         }
         """
-        return "".join([
-            "{% Column headers\n",
-            " &\n".join(
+        return "".join(
             [
-                f"{self.tab_space * 2}\\bfseries {col}"
-                for col in list(self.dataframe.columns.values)
+                "{% Column headers\n",
+                " &\n".join(
+                    [
+                        f"{self.tab_space * 2}\\bfseries {col}"
+                        for col in list(self.dataframe.columns.values)
+                    ]
+                )
+                + f" {self.double_backslash}\n",
+                f"{self.tab_space}" + "}",
             ]
-            ) + f" {self.double_backslash}\n",
-            f"{self.tab_space}" + "}"
-        ])
+        )
 
     @property
     def env_begin(self) -> str:
@@ -151,8 +155,7 @@ class TabularBuilder:
         elements = [
             f"\\begin{{plutotable}}{{{int(self.dataframe.shape[1])}}}\n",
             f"{self.table_column_format}",
-            f"{self.table_column_headers}"
-            f"{self.table_caption_and_label}"
+            f"{self.table_column_headers}" f"{self.table_caption_and_label}",
         ]
         return "".join([item for item in elements if item])
 
@@ -162,25 +165,20 @@ class TabularBuilder:
         Close the table environment with \end{}.
         """
         return r"\end{plutotable}"
-    
+
     @property
     def header(self) -> str:
         """
         Method for column headers' bolding markup.
         """
-        bold_headers = [f"\\bfseries{{{col}}}" for col in list(self.dataframe.columns.values)]
+        bold_headers = [
+            f"\\bfseries{{{col}}}" for col in list(self.dataframe.columns.values)
+        ]
         return " & ".join([head for head in bold_headers]) + " \\\\"
 
-    @property
-    def find_minmax_cell_length(self):
-        measurer = np.vectorize(len)
-        vectoriser = measurer(self.dataframe.values.astype(str))
-        _min, _max = vectoriser.min(), vectoriser.max()
-        return _min, _max
-
-    def pad_spaces(self, input_number, col_index):
+    def pad_spaces(self, input_number: int, col_index: int) -> str:
         num = str(input_number)
-        lengths = [
+        lengths: List[int] = [
             self.dataframe[col].astype(str).str.len().max()
             for col in self.dataframe.columns
         ]
@@ -188,9 +186,9 @@ class TabularBuilder:
         #
 
         if len(num) < lengths[col_index]:
-            return " "*(lengths[col_index] - len(num)) + num
+            return " " * (lengths[col_index] - len(num)) + num
 
-        return input_number
+        return num
 
     @property
     def env_body(self) -> str:
@@ -201,13 +199,15 @@ class TabularBuilder:
         of the longest cell's contents, separated with an "&".
         """
         export = []
-        for i, row in self.dataframe.iterrows():
+        for _, row in self.dataframe.iterrows():
             export.append(
                 self.tab_space
-                + " & ".join([
-                    self.pad_spaces(str(cell), col_index)
-                    for col_index, cell in enumerate(row.values)
-                ])
+                + " & ".join(
+                    [
+                        self.pad_spaces(cell, col_index)
+                        for col_index, cell in enumerate(row.values)
+                    ]
+                )
                 + f" {self.double_backslash}"
             )
         return "\n".join([item for item in export if item])
