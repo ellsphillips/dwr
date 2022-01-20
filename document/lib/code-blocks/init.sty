@@ -1,0 +1,26 @@
+\RequirePackage[many]{tcolorbox}
+\tcbuselibrary{%
+	listings,
+	skins,
+	hooks,
+	breakable,
+}
+\tcbset{%
+	listing engine={listings},
+}
+\RequirePackage{listings}
+\RequirePackage{lstautogobble}
+\RequirePackage[normalem]{ulem}
+
+\usepackage{%
+	lib/code-blocks/macros,
+	lib/code-blocks/inline,
+	lib/code-blocks/environment,
+}
+
+\usepackage{%
+	lib/code-blocks/languages/python,
+	lib/code-blocks/languages/typescript,
+	lib/code-blocks/languages/javascript,
+	lib/code-blocks/languages/console,
+}

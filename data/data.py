@@ -1,74 +1,73 @@
-import pandas as pd
-import numpy as np
 import random
-from typing import (
-  Tuple,
-  Union
-)
+from typing import List, Tuple, Union
+
+import numpy as np
+from pandas import DataFrame
+
 
 def series_lognuniform(
-  points: int = 10,
-  places: Union[int, Tuple[int, int]] = 4
-) -> list:
-  return [
-    *lognuniform(
-      size=points,
-      low=places[0] if isinstance(places, tuple) else 0,
-      high=places[1] if isinstance(places, tuple) else places,
-      base=10
+    points: int = 10, places: Union[int, Tuple[int, int]] = 4
+) -> List[float]:
+    return [
+        *lognuniform(
+            size=points,
+            low=places[0] if isinstance(places, tuple) else 0,
+            high=places[1] if isinstance(places, tuple) else places,
+            base=10,
+        )
+    ]
+
+
+def series_brownian(points: int = 100, horizon: float = 1.0) -> List[str]:
+    """
+    Using Brownian motion's defining characteristic of independent, normally,
+    distributed increments [Bt2 - Bt1 ~ Normal(mu=0, sigma=t2-t1)]
+    """
+    times: List[float] = np.linspace(0.0, horizon, points)
+    delta_t = times[1] - times[0]
+    delta_b: float = np.sqrt(delta_t) * np.random.normal(size=(points - 1,))
+    b_initial: List[float] = np.zeros(shape=(1,))
+    b: List[float] = np.concatenate((b_initial, np.cumsum(delta_b, axis=0)), axis=0)
+
+    return [f"{data:.5f}" for data in b.flatten()]
+
+
+def numerical(shape: Tuple[int, int] = (10, 10)) -> DataFrame:
+    return DataFrame(
+        lognuniform(size=shape), columns=["col" + str(i + 1) for i in range(shape[1])]
     )
-  ]
 
-def series_brownian(
-  points: int = 100,
-  horizon: float = 1.
-) -> list:
-  """
-  Using Brownian motion's defining characteristic of independent, normally,
-  distributed increments [Bt2 - Bt1 ~ Normal(mu=0, sigma=t2-t1)]
-  """
-  times = np.linspace(0., horizon, points)
-  dt = times[1] - times[0]
-  delta_B = np.sqrt(dt) * np.random.normal(size=(points - 1,))
-  B_initial = np.zeros(shape=(1,))
-  B = np.concatenate((B_initial, np.cumsum(delta_B, axis=0)), axis=0)
-
-  return [f'{data:.5f}' for data in B.flatten()]
-
-def numerical(
-  shape: Tuple[int, int] = (10, 10)
-) -> pd.DataFrame:
-  return pd.DataFrame(
-    lognuniform(size=shape),
-    columns=["col" + str(i + 1) for i in range(shape[1])]
-  )
 
 def mixed():
-  return pd.DataFrame(
-    {
-      'Numbers': [lognuniform() for _ in range(10)],
-      'More numbers': [lognuniform() for _ in range(10)],
-      'Text': lorem(10),
-      'Mash': [
-        "iswdufvbouwesdb",
-        "abc",
-        "sdvcsdv",
-        "sdvdssdvdvvn",
-        "yumyumyum",
-        "wqoe",
-        "qphjpgh",
-        "owperjgpowegjwjgwh",
-        "wepogjwpeog",
-        "oi"
-      ]
-    }
-  )
+    return DataFrame(
+        {
+            "Numbers": [lognuniform() for _ in range(10)],
+            "More numbers": [lognuniform() for _ in range(10)],
+            "Text": lorem(10),
+            "Mash": [
+                "iswdufvbouwesdb",
+                "abc",
+                "sdvcsdv",
+                "sdvdssdvdvvn",
+                "yumyumyum",
+                "wqoe",
+                "qphjpgh",
+                "owperjgpowegjwjgwh",
+                "wepogjwpeog",
+                "oi",
+            ],
+        }
+    )
 
-def lognuniform(low=0, high=10, size=None, base=np.e):
-  return np.power(base, np.random.uniform(low, high, size)).astype(int)
 
-def lorem(count: int) -> list:
-  return ["Lorem", "ipsum", *random.choices(dummy_text.split(), k=count - 2)]
+def lognuniform(
+    low: int = 0, high: int = 10, size: Union[int, None] = None, base: float = np.e
+) -> float:
+    return np.power(base, np.random.uniform(low, high, size)).astype(int)
+
+
+def lorem(count: int) -> List[str]:
+    return ["Lorem", "ipsum", *random.choices(dummy_text.split(), k=count - 2)]
 
 
 dummy_text = """
