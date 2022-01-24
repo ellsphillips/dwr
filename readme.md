@@ -76,14 +76,14 @@ Define each of your LaTeX figures with a new builder method. If your IDE doesn't
 
 ## Project structure
 
-Doctor makes no assumption to how you structure you LaTeX project - you specify output paths per figure build. Output code is written to individual`.tex` and data files, allowing you to optionally load LaTeX code with `\input{}` for streamlined, maintainable workflows.
+Doctor makes no assumption to how you structure you LaTeX project - you specify output paths per figure build. Output code is written to individual `.tex` and data files, allowing you to optionally load LaTeX code with `\input{}` for streamlined, maintainable workflows.
 
 The example project structure given as demo in this repo has architecture:
 
 [](#architecture)
 
 ```tree
-  doctor/
+  .
   ├── data
   │   ├── __init__.py
   │   └── data.py
