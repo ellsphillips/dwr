@@ -3,10 +3,11 @@
 
 
 ### Documentation build ###
-
+*/fonts/*
 docs/*
 docs/*.pdf
 !docs/doctor-pkg-manual.pdf
+!docs/doctor-pkg-slides.pdf
 
 
 
