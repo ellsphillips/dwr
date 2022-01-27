@@ -1,0 +1,65 @@
+\newcommand\lstprompt[1]{\phantom{#1}\color{monokai-blue}\$\hspace*{-2em}}
+\newcommand\numberwithprompt[1]{\color{monokai-grey-100}#1 \color{monokai-blue}\lstprompt}
+
+\lstdefinelanguage{git-bash}{
+%	language=JavaScript,
+	escapeinside={(*@}{@*)},
+	alsoletter={\\,@},
+	identifierstyle=\idstyle, 
+%
+	basicstyle=\codefontsize\ttfamily\bfseries\color{white},
+	numberstyle=\codefontsize\ttfamily\bfseries \lstprompt,
+	stringstyle=\color{monokai-green},
+	morestring=[b]{"},
+	morestring=[b]{'},
+	morestring=[b]{`},
+%
+	comment=[l]{//},
+	commentstyle=\color{monokai-grey-400},
+%
+	keywords={git},
+	keywordstyle=\color{monokai-yellow},
+	keywords=[2]{let, var, const, function, number, string, boolean, enum, void, null, undefined, any, never, tuple, type, interface},
+	keywordstyle=[2]\slshape\color{monokai-blue},
+	keywords=[3]{this},
+	keywordstyle=[3]\slshape\color{monokai-grey-400},
+	keywords=[4]{},
+	keywordstyle=[4]\color{monokai-orange},
+	keywords=[5]{log},
+	keywordstyle=[5]\color{monokai-green},
+%
+	numbers=left,
+	xleftmargin=-2em,
+	framexleftmargin=10mm,
+	framextopmargin=0pt,
+	framexbottommargin=0pt,
+	rulecolor=\color{monokai-grey-400},
+	frame=l,
+	framerule=0pt,
+	breaklines=true,
+	tabsize=2,
+	showstringspaces=false,
+	aboveskip=.75\baselineskip,
+	belowskip=.5\baselineskip,
+	autogobble=true,
+	upquote=true,
+%
+	literate=
+		{0}{{{\tsstring{monokai-yellow}{monokai-green}0}}}1
+		{1}{{{\tsstring{monokai-yellow}{monokai-green}1}}}1
+		{2}{{{\tsstring{monokai-yellow}{monokai-green}2}}}1
+		{3}{{{\tsstring{monokai-yellow}{monokai-green}3}}}1
+		{4}{{{\tsstring{monokai-yellow}{monokai-green}4}}}1
+		{5}{{{\tsstring{monokai-yellow}{monokai-green}5}}}1
+		{6}{{{\tsstring{monokai-yellow}{monokai-green}6}}}1
+		{7}{{{\tsstring{monokai-yellow}{monokai-green}7}}}1
+		{8}{{{\tsstring{monokai-yellow}{monokai-green}8}}}1
+		{9}{{{\tsstring{monokai-yellow}{monokai-green}9}}}1,
+%
+%	morekeywords={def\ ,},
+%	morekeywords=[2]{def\ ,},
+	moredelim = [is][\slshape\color{monokai-orange}]{¬}{¬},
+	moredelim = [is][\normalcolor]{¬¬}{¬¬},
+	moredelim = [is][\color{monokai-purple}]{¬¬¬}{¬¬¬},
+	moredelim = [is][\squiggly]{~}{~},
+}
