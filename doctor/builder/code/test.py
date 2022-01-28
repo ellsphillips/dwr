@@ -1,9 +1,9 @@
 import inspect
 
-def foo(arg1, arg2):
-    #do something with args
-    a = arg1 + arg2
-    return a
+
+def foo(a: int, b: int) -> int:
+    # do something with args
+    return a + b
 
 
 if __name__ == "__main__":
