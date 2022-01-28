@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List
 
+from ..constants import Formatting
+
 
 @dataclass
 class Plot:
@@ -16,11 +18,25 @@ class Plot:
 
     @property
     def options(self) -> str:
-        return ""
+        if not self.plot_options:
+            return ""
+
+        return "%\n".join(
+            [
+                "[",
+                ",\n".join(
+                    [
+                        f"{Formatting.TAB}{k}={{{v}}}"
+                        for k, v in self.plot_options.items()
+                    ]
+                ),
+                "]",
+            ]
+        )
 
     @property
     def body(self) -> str:
-        return ""
+        return "\n%\n".join(self.chart_list)
 
     @property
     def end(self) -> str:
