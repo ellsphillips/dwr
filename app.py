@@ -4,9 +4,24 @@ import data
 import doctor as dr
 
 
-def main():
-    """Scripting environment for Python data to TeX markup conversion."""
-    pass
+def main() -> None:
+
+    result = dr.plot(
+        "line",
+        [
+            data.series.brownian(),
+            data.series.brownian(),
+            data.series.brownian(),
+        ],
+        options={
+            "plot type": "ybar",
+            "data source": "src/plots/example.dat",
+            "caption": "Demonstration of the doctor-plot environment",
+            "label": "example-plot",
+        },
+    )
+
+    dr.render(result)
 
 
 if __name__ == "__main__":
