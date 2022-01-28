@@ -1,5 +1,1 @@
-"""
-Calibration data for Doctor module.
-"""
-
-from .data import *
+from . import series as series
