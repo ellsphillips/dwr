@@ -1,6 +1,15 @@
-from itertools import cycle
+from itertools import cycle, product
 
-iterator = cycle([1, 2, 3, 4])
+COLOURS = ["red", "green", "blue"]
 
-for _ in range(10):
-    print(next(iterator))
+OPACITIES = ["100", "70", "40"]
+
+COLOUR_WHEEL = cycle(product(OPACITIES, COLOURS))
+
+
+def get_colour_spec() -> str:
+    return "!".join(reversed(next(COLOUR_WHEEL)))
+
+
+for _ in range(30):
+    print(get_colour_spec())
