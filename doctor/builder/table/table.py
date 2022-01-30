@@ -1,6 +1,4 @@
-# pyright: reportUnknownMemberType=false
-# pyright: reportUnknownArgumentType=false
-# pyright: reportUnknownVariableType=false
+
 
 from dataclasses import dataclass
 from typing import List, Optional
