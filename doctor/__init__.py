@@ -2,6 +2,8 @@
 Put on the LaTeX gloves.
 """
 
+from .config.config import read_config as read_config
+from . import data as data
 from .plot.plot import plot as plot
 from .render import render as render
 
