@@ -22,10 +22,16 @@ class CfgPlot:
 
 
 @dataclass
+class CfgTable:
+    size: str
+
+
+@dataclass
 class DoctorConfig:
     about: CfgAbout
     paths: CfgPaths
     plot: CfgPlot
+    table: CfgTable
 
 
 def read_config(config_path: str) -> DoctorConfig:

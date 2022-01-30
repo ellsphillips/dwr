@@ -1,17 +1,20 @@
 import os
 
-import data
 import doctor as dr
 
 
 def main() -> None:
+    
+    cfg = dr.read_config("./doctor/config/config.yaml")
+
+    print(cfg.about)
 
     result = dr.plot(
         "line",
         [
-            data.series.brownian(),
-            data.series.brownian(),
-            data.series.brownian(),
+            dr.data.series.brownian(),
+            dr.data.series.brownian(),
+            dr.data.series.brownian(),
         ],
         options={
             "plot type": "ybar",
