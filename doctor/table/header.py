@@ -5,12 +5,11 @@ from doctor.constants import Formatting
 
 
 @dataclass
-class Header:
+class TableHeader:
 
-    column_names: List[str]  # dataframe.columns.values
+    column_names: List[str]
 
-    @property
-    def header(self) -> str:
+    def create(self) -> str:
         bold_headers = [f"\\bfseries{{{col}}}" for col in self.column_names]
         return " & ".join([head for head in bold_headers]) + f" {Formatting.NEWLINE}"
 
