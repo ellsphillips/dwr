@@ -39,12 +39,12 @@ Once installed, you readily have access to Doctor's `table` and `plot` builder m
     cfg = dr.read_config("./doctor/config/config.yaml")
 
     tabular = dr.table(
-        dr.data.table(
+      dr.data.table(
         [
-            dr.data.text.lorem(10),
-            dr.data.text.lorem(10),
-            dr.data.text.lorem(10),
-            dr.data.text.lorem(10),
+          dr.data.text.lorem(10),
+          dr.data.text.lorem(10),
+          dr.data.text.lorem(10),
+          dr.data.text.lorem(10),
         ]
         )
     )
@@ -52,23 +52,23 @@ Once installed, you readily have access to Doctor's `table` and `plot` builder m
     dr.render(tabular)
 
     figure = dr.plot(
-        "line",
-        [
-            dr.data.series.brownian(),
-            dr.data.series.brownian(),
-            dr.data.series.brownian(),
-        ],
-        options={
+      "line",
+      [
+        dr.data.series.brownian(),
+        dr.data.series.brownian(),
+        dr.data.series.brownian(),
+      ],
+      options={
         "plot type": "ybar",
         "data source": "src/plots/example.dat",
         "caption": "Demonstration of the doctor-plot environment",
         "label": "example-plot",
-        },
+      },
     )
 
-  dr.render(figure)
+    dr.render(figure)
 
-  doctor.build(outfile="report")
+    dr.build(outfile="report")
 ```
 
 Define each of your LaTeX figures with a new builder method. If your IDE doesn't provide intellisense, please see the manual for reference.
@@ -144,7 +144,7 @@ Doctor returns your custom LaTeX syntax as string objects. View these directly w
 ```
 
 ```latex
-  \begin{doctor-bar}[%
+  \begin{doctor-plot}[%
     plot type={ybar},
     data source={src/plots/bar.dat},
     somebool=false,
@@ -163,7 +163,7 @@ Doctor returns your custom LaTeX syntax as string objects. View these directly w
       very thick,
     ] table [x=index, y=values, meta=values]%
     {\doctordatasource};
-  \end{doctor-bar}
+  \end{doctor-plot}
 ```
 
 <!-- [![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor) -->
