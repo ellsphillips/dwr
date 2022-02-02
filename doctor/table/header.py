@@ -10,8 +10,12 @@ class TableHeader:
     column_names: List[str]
 
     def create(self) -> str:
-        bold_headers = [f"\\bfseries{{{col}}}" for col in self.column_names]
-        return " & ".join([head for head in bold_headers]) + f" {Formatting.NEWLINE}"
+        bold_headers = [f"\\textbf{{{col}}}" for col in self.column_names]
+        return (
+            Formatting.TAB
+            + " & ".join([head for head in bold_headers])
+            + f" {Formatting.NEWLINE}"
+        )
 
     @property
     def table_column_headers(self) -> str:
