@@ -1,8 +1,19 @@
 from dataclasses import dataclass
+from typing import Iterable, List, Protocol
 
 from pandas import DataFrame
 
 from ..table.body import TableBody
+from ..table.header import TableHeader
+
+
+class TableElement(Protocol):
+    def create(self) -> str:
+        ...
+
+
+def compile_table(elements: Iterable[TableElement]) -> List[str]:
+    return [e.create() for e in elements]
 
 
 @dataclass
@@ -21,7 +32,14 @@ class Table:
 
     @property
     def body(self) -> str:
-        return TableBody(self.dataframe).create()
+        return "\n".join(
+            compile_table(
+                [
+                    TableHeader(self.dataframe.columns.values),  # type: ignore
+                    TableBody(self.dataframe),
+                ]
+            )
+        )
 
     @property
     def end(self) -> str:
