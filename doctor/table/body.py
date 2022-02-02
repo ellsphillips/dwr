@@ -3,6 +3,8 @@ from typing import List, Tuple, Union
 
 from pandas import DataFrame
 
+from ..constants import Formatting
+
 
 @dataclass
 class TableBody:
@@ -26,3 +28,18 @@ class TableBody:
             return _cell.ljust(self.column_widths[col_index][1])
 
         return _cell.rjust(self.column_widths[col_index][1])
+
+    def create(self) -> str:
+        export: List[str] = []
+        for _, row in self.dataframe.iterrows():
+            export.append(
+                Formatting.TAB
+                + " & ".join(
+                    [
+                        self.pad_spaces(cell, col_index)  # type: ignore
+                        for col_index, cell in enumerate(row.values)  # type: ignore
+                    ]
+                )
+                + f" {Formatting.NEWLINE}"
+            )
+        return "\n".join([item for item in export if item])
