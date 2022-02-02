@@ -1,13 +1,15 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+
 from pandas import DataFrame
 
-from ..constants import Formatting
+from ..table.body import TableBody
 
 
 @dataclass
 class Table:
 
     dataframe: DataFrame
+    header: bool = True
 
     @property
     def begin(self) -> str:
@@ -19,7 +21,7 @@ class Table:
 
     @property
     def body(self) -> str:
-        return ""
+        return TableBody(self.dataframe).get_result()
 
     @property
     def end(self) -> str:

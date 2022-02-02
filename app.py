@@ -4,12 +4,27 @@ import doctor as dr
 
 
 def main() -> None:
-    
+
     cfg = dr.read_config("./doctor/config/config.yaml")
 
-    print(cfg.about)
+    #
 
-    result = dr.plot(
+    tabular = dr.table(
+        dr.data.table(
+            [
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+            ]
+        )
+    )
+
+    dr.render(tabular)
+
+    #
+
+    figure = dr.plot(
         "line",
         [
             dr.data.series.brownian(),
@@ -24,9 +39,10 @@ def main() -> None:
         },
     )
 
-    dr.render(result)
+    dr.render(figure)
 
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
+    print(f"Doctor {dr.__version__}", dr.__doc__, sep="\n")
     main()
