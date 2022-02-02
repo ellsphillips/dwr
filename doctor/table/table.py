@@ -21,7 +21,7 @@ class Table:
 
     @property
     def body(self) -> str:
-        return TableBody(self.dataframe).get_result()
+        return TableBody(self.dataframe).create()
 
     @property
     def end(self) -> str:
