@@ -20,7 +20,9 @@ def main() -> None:
         )
     )
 
-    dr.render(tabular)
+    render = dr.render(tabular)
+
+    dr.save(render, "/path/to/save_dir")
 
     #
 
