@@ -39,31 +39,31 @@ Once installed, you readily have access to Doctor's `table` and `plot` builder m
     cfg = dr.read_config("./doctor/config/config.yaml")
 
     tabular = dr.table(
-      dr.data.table(
-        [
-          dr.data.text.lorem(10),
-          dr.data.text.lorem(10),
-          dr.data.text.lorem(10),
-          dr.data.text.lorem(10),
-        ]
+        dr.data.table(
+            [
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+                dr.data.text.lorem(10),
+            ]
         )
     )
 
     dr.render(tabular)
 
     figure = dr.plot(
-      "line",
-      [
-        dr.data.series.brownian(),
-        dr.data.series.brownian(),
-        dr.data.series.brownian(),
-      ],
-      options={
-        "plot type": "ybar",
-        "data source": "src/plots/example.dat",
-        "caption": "Demonstration of the doctor-plot environment",
-        "label": "example-plot",
-      },
+        "line",
+        [
+            dr.data.series.brownian(),
+            dr.data.series.brownian(),
+            dr.data.series.brownian(),
+        ],
+        options={
+            "plot type": "ybar",
+            "data source": "src/plots/example.dat",
+            "caption": "Demonstration of the doctor-plot environment",
+            "label": "example-plot",
+        },
     )
 
     dr.render(figure)
@@ -164,6 +164,20 @@ Doctor returns your custom LaTeX syntax as string objects. View these directly w
     ] table [x=index, y=values, meta=values]%
     {\doctordatasource};
   \end{doctor-plot}
+```
+
+## Citing Doctor
+
+If you use Doctor in your research or as your reproting assistant, please use the following BibTeX entry:
+
+```BibTeX
+@Misc{EP2022Doctor,
+  author =       {Elliott Phillips},
+  title =        {Doctor - A documentation assistant to simplify the reporting of data-oriented, beautiful, lightweight documents},
+  howpublished = {Github},
+  year =         {2022},
+  url =          {https://github.com/ellsphillips/doctor}
+}
 ```
 
 <!-- [![Doctor summary][repo-card-api]](https://github.com/ellsphillips/doctor) -->
