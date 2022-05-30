@@ -4,20 +4,7 @@ from itertools import cycle
 from shutil import get_terminal_size
 from threading import Thread
 from types import TracebackType
-from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
-
-
-def timer(f: Callable[[Any], Any]):
-    def wrapper(*args: Any, **kwargs: Any):
-        start = time.perf_counter()
-        f(*args, **kwargs)
-        end = time.perf_counter()
-        print(
-            f"{Style.emoji['lightning']} Finished in "
-            f"{Style.announce}{end - start:.02f}s{Style.end}\n"
-        )
-
-    return wrapper
+from typing import Dict, List, Optional, Tuple, Type, Union
 
 
 class Loader:

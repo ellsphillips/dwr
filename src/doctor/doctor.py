@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 
-from .utils.cli import *
+from .utils.cli import Loader, Style
 from .utils.tex import TeXDefaults as tex
 
 if sys.version_info < (3, 8):
@@ -21,12 +21,12 @@ def build(
 
     aux_list = (".aux", ".log", ".out", ".synctex.gz")
 
-    tex_path = f"{tex.options['document']['path']}"
-    tex_file = f"{tex.options['document']['name']}.tex"
+    tex_path = f"{tex.document['path']}"
+    tex_file = f"{tex.document['name']}.tex"
 
     loader = Loader(
         "Building your report...",
-        f"Report generated at {style.announce}{tex_path}{outfile}.pdf{style.end}\n",
+        f"Report generated at {Style.announce}{tex_path}{outfile}.pdf{Style.end}\n",
         0.05,
     ).start()
 
@@ -42,7 +42,7 @@ def build(
     )
 
     for _ in range(1 if quick else 3):
-        subprocess.run(shell_cmd)
+        subprocess.run(shell_cmd, check=False)
 
     if not projectiles:
         for _file in os.listdir(tex_path):

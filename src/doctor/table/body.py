@@ -13,7 +13,7 @@ class TableBody:
 
     def create(self) -> str:
         export: List[str] = []
-        for _, row in self.dataframe.iterrows():
+        for _, row in self.dataframe.iterrows():  # type: ignore
             export.append(
                 Formatting.TAB
                 + " & ".join(
