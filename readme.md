@@ -5,7 +5,7 @@
 
 # Doctor <img align="right" width="200" height="200" title="Doctor" src="https://raw.githubusercontent.com/ellsphillips/doctor/master/docs/img/doctor-logo.svg">
 
-An automated documentation assitant built in Python and TeX for procedural, data-driven reporting.
+An automated documentation assistant built in Python and TeX for procedural, data-driven reporting.
 
 Doctor simplifies the reporting build process through an intuitive Python API and customisable LaTeX class to responsively markup Pythonic data objects to professionally typeset lightweight documents.
 
@@ -13,19 +13,13 @@ Doctor simplifies the reporting build process through an intuitive Python API an
 
 ## Installation
 
-Clone the repo
+Install the package directly through GitHub.
 
 ```bash
-$ git clone https://github.com/ellsphillips/doctor.git
-
-$ cd doctor
+$ pip install git+https://github.com/ellsphillips/doctor
 ```
 
-Install the requirements
-
-```bash
-$ pip install -r requirements.txt
-```
+Doctor will be available for installation through PyPI in future releases.
 
 ## Usage
 
@@ -35,8 +29,6 @@ Once installed, you readily have access to Doctor's `table` and `plot` builder m
   import doctor as dr
 
   def main() -> None:
-
-    cfg = dr.read_config("./doctor/config/config.yaml")
 
     tabular = dr.table(
         dr.data.table(
