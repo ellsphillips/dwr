@@ -1,0 +1,109 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "dwr"
+version = "0.1.0"
+description = "An automated documentation assistant built in Python and TeX for procedural, data-driven reporting."
+license = "MIT"
+authors = ["Elliott Phillips <elliott.phillips.dev@gmail.com>"]
+maintainers = ["Elliott Phillips <elliott.phillips.dev@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/ellsphillips/dwr"
+classifiers = [
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [
+    { include = "dwr", from = "src" }
+]
+exclude = [
+    ".github",
+    ".flake8",
+    ".pylintrc",
+    "mypy.ini",
+    ".coveragerc",
+    "Makefile",
+    "scripts",
+    "tests"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+tomlkit = "^0.11.4"
+
+[tool.poetry.dev-dependencies]
+pytest-cov = "^3.0.0"
+pre-commit = "^2.20.0"
+flake8 = "^5.0.4"
+mypy = "^0.971"
+isort = "^5.10.1"
+black = {version = "^22.6.0", allow-prereleases = true}
+
+[tool.poetry.plugins."console_scripts"]
+dwr = "dwr.cli.core:dispatcher"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+addopts = "--verbose --cov poeblix --color=yes --cov-report term-missing --cov-fail-under 80 --cov-branch"
+testpaths = ["test"]
+
+[tool.mypy]
+mypy_path = "dwr"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[tool.setuptools.package-data]
+dwr = "py.typed"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
