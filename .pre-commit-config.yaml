@@ -18,6 +18,9 @@ repos:
     rev: v0.971
     hooks:
       - id: mypy
+        verbose: true
+        args: [--show-error-codes]
+        additional_dependencies: ["types-PyYAML"]
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
     hooks:
