@@ -62,7 +62,7 @@ addopts = "--verbose --cov dwr --color=yes --cov-report term-missing --cov-fail-
 testpaths = ["tests/"]
 
 [tool.mypy]
-mypy_path = "dwr"
+mypy_path = "src/"
 check_untyped_defs = true
 disallow_any_generics = true
 ignore_missing_imports = true
