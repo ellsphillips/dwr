@@ -19,7 +19,8 @@ repos:
     hooks:
       - id: mypy
         verbose: true
-        args: [--show-error-codes]
+        args:
+          [--show-error-codes, --namespace-packages, --explicit-package-bases]
         additional_dependencies: ["types-PyYAML", "pandas-stubs"]
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
