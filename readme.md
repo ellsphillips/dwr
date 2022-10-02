@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/ellsphillips/dwr" rel="noopener" target="_blank"><img width="150" src="/assets/img/dwr.svg" alt="dwr logo"></a>
+  <a href="https://github.com/ellsphillips/dwr" rel="noopener" target="_blank"><img width="150" src="/assets/img/dwr-logo.svg" alt="dwr logo"></a>
 </p>
 
 <h1 align="center">dwr</h1>
