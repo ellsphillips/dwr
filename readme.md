@@ -4,15 +4,15 @@
 
 <h1 align="center">dwr</h1>
 
-<p align="center">
-<a href="https://pypi.org/project/dwr" target="_blank">
-  <img src="https://img.shields.io/pypi/v/dwr?label=version&logo=python&logoColor=%23fff&color=306998" alt="PyPI - Version">
-</a>
+<div align="center">
 
-<a href="https://pypi.org/project/dwr" target="_blank">
-  <img src="https://img.shields.io/pypi/pyversions/dwr.svg?logo=python&logoColor=%23fff&color=306998" alt="PyPI - Version">
-</a>
-</p>
+[![PyPI Version](https://img.shields.io/pypi/v/dwr?label=version&logo=python&logoColor=%23fff&color=306998)](https://github.com/ellsphillips/dwr/actions)
+[![Supported Python Versions](https://img.shields.io/pypi/pyversions/dwr.svg?logo=python&logoColor=%23fff&color=306998)](https://github.com/ellsphillips/dwr/actions)
+[![CI status](https://github.com/ellsphillips/dwr/actions/workflows/config.yml/badge.svg)](https://github.com/ellsphillips/dwr/actions)
+[![Tests status](https://github.com/ellsphillips/dwr/actions/workflows/tests.yml/badge.svg)](https://github.com/ellsphillips/dwr/actions)
+[![Formatter](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
+
+</div>
 
 Procedurally build data-driven documents with Python and TeX.
 
