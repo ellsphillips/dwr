@@ -1,8 +1,7 @@
 import os
 import subprocess
 
-from dwr.utils.cli import Loader, Style
-from dwr.utils.tex import TeXDefaults as tex
+CONFIG = {"path": "build/", "name": "report"}
 
 
 def build(
@@ -13,14 +12,8 @@ def build(
 ) -> None:
     aux_list = (".aux", ".log", ".out", ".synctex.gz")
 
-    tex_path = f"{tex.document['path']}"
-    tex_file = f"{tex.document['name']}.tex"
-
-    loader = Loader(
-        "Building your report...",
-        f"Report generated at {Style.announce}{tex_path}{outfile}.pdf{Style.end}\n",
-        0.05,
-    ).start()
+    tex_path = f"{CONFIG['path']}"
+    tex_file = f"{CONFIG['name']}.tex"
 
     shell_cmd = " ".join(
         [
@@ -40,5 +33,3 @@ def build(
         for _file in os.listdir(tex_path):
             if _file.endswith(aux_list):
                 os.remove(os.path.join(tex_path, _file))
-
-    loader.stop()
