@@ -20,7 +20,7 @@ repos:
       - id: mypy
         verbose: true
         args: [--show-error-codes]
-        additional_dependencies: ["types-PyYAML"]
+        additional_dependencies: ["types-PyYAML", "pandas-stubs"]
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
     hooks:

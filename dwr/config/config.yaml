@@ -1,0 +1,18 @@
+about:
+  author: Elliott Phillips
+  description: >
+    An automated documentation assitant built in Python
+    and TeX for procedural, data-driven reporting.
+  repository: >
+    https://github.com/ellsphillips/dwr
+paths:
+  report: path/to/report.pdf
+plot:
+  colours:
+    - orange
+    - purple
+    - yellow
+  opacities:
+    - 100
+    - 70
+    - 40

@@ -25,7 +25,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 packages = [
-    { include = "dwr", from = "src" }
+    { include = "dwr" },
 ]
 exclude = [
     ".github",
@@ -53,16 +53,13 @@ mypy = "^0.971"
 isort = "^5.10.1"
 black = {version = "^22.6.0", allow-prereleases = true}
 
-[tool.poetry.plugins."console_scripts"]
-dwr = "dwr.cli.core:dispatcher"
-
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
-addopts = "--verbose --cov poeblix --color=yes --cov-report term-missing --cov-fail-under 80 --cov-branch"
-testpaths = ["test"]
+addopts = "--verbose --cov dwr --color=yes --cov-report term-missing --cov-fail-under 80 --cov-branch"
+testpaths = ["tests/"]
 
 [tool.mypy]
 mypy_path = "dwr"
