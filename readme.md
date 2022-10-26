@@ -23,3 +23,16 @@ Procedurally build data-driven documents with Python and TeX.
 ```bash
   pip install dwr
 ```
+
+
+## Citing Dwr
+
+If you use Doctor in your research or as your reproting assistant, please use the following BibTeX entry:
+
+@Misc{EP2022Doctor,
+  author =       {Elliott Phillips},
+  title =        {Dwr - Automating data-driven reporting},
+  howpublished = {Github},
+  year =         {2022},
+  url =          {https://github.com/ellsphillips/dwr}
+}
